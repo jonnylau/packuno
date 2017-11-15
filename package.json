@@ -1,14 +1,7 @@
 {
-  "name": "webpack-app",
-  "version": "1.0.0",
+  "name": "",
+  "version": "",
   "description": "",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server",
-    "prebuild": "rimraf dist",
-    "build": "webpack -p"
-  },
-  "keywords": [],
   "author": "",
   "license": "",
   "engines": {
@@ -29,7 +22,6 @@
     "request": "^2.83.0",
     "sequelize": "^4.22.6"
   },
-
   "devDependencies": {
     "babel-cli": "^6.7.5",
     "babel-loader": "^7.1.2",
