@@ -1,0 +1,9 @@
+node_modules
+docs
+*.DS_STORE
+
+#Floobits
+.floo
+.floobit
+.floo
+.flooignore
