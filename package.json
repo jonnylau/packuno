@@ -11,6 +11,25 @@
   "keywords": [],
   "author": "",
   "license": "",
+  "engines": {
+    "node": ">=6.4.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "jquery": "^3.2.1",
+    "path": "^0.12.7",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "redux": "^3.7.2",
+    "request": "^2.83.0",
+    "sequelize": "^4.22.6"
+  },
+
   "devDependencies": {
     "babel-core": "6.17.0",
     "babel-loader": "6.2.5",
