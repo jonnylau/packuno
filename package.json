@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node server/index.js",
     "build": "webpack -p"
   },
   "keywords": [],
@@ -12,9 +12,6 @@
   "license": "",
   "engines": {
     "node": ">=6.4.0"
-  },
-  "scripts": {
-    "start": "node server/index.js"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

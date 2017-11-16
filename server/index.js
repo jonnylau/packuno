@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const $ = require('jquery');
 //FILL IN DATABASE FILE --> const database = require(../database/index.js);
 
 const app = express();
