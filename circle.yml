@@ -5,4 +5,4 @@ deployment:
       appname: packuno-staging
 test:
   override: 
-    - echo "done"
+    - echo 'done'
