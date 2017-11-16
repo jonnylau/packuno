@@ -4,10 +4,9 @@
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  -Luis 
+  -Christina
+  -Elena
 
 ## Table of Contents
 
