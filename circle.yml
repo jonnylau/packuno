@@ -1,0 +1,8 @@
+deployment:
+  staging:
+    branch: master
+    heroku:
+      appname: packuno-staging
+test:
+  override: 
+    - echo "done"
