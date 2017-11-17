@@ -20,6 +20,15 @@ export const togglePacked = (id) => {
 };
 
 
+export const setPackedFilter = (filter) => {
+  return {
+    type: 'SET_PACKED_FILTER',
+    filter
+  }
+};
+
+
+
 export const setCatFilter = (selectedCategory) => {
   return {
     type: 'SET_CAT_FILTER',

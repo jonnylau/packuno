@@ -23,6 +23,12 @@ const packingItem = (state, action) => {
   } else if (action.type === 'SET_CAT_FILTER') {
 
     return action.filter;
+
+  } 
+  
+  } else if (action.type === 'SET_PACKED_FILTER') {
+
+    return action.filter;
     
   } else {
     return state;
