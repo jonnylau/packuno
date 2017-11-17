@@ -6,7 +6,7 @@ const packingList = (state, action) => {
       {
         id: action.id, 
         item: action.item, 
-        category: action.category;
+        category: action.category,
         packed:false
       }]
 
@@ -18,13 +18,11 @@ const packingList = (state, action) => {
 
       return Object.assign( {}, packingItem, {packed: !packingItem.packed});
 
-    });
+    })
 
   } else if (action.type === 'SET_CAT_FILTER') {
 
-    return action.filter;
-
-  } 
+    return action.filter; 
   
   } else if (action.type === 'SET_PACKED_FILTER') {
 

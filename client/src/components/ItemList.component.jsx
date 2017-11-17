@@ -1,11 +1,13 @@
-const ItemList = ({ packingItems, onItemClick }) => {
-  if (packingItems.length === 0) {
+import React from 'react'
+
+const ItemList = ({ items, onItemClick }) => {
+  if (items.length === 0) {
     return <div>Add Items</div>
   }
 
   return (
     <ul>
-      { packingItems.map( (item) => {
+      { items.map( (item) => {
         <Item key={ item.id } {...item} onClick={ () => onItemClick(item.id) } />
       })}
     </ul>

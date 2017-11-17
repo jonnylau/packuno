@@ -1,6 +1,8 @@
+import React from 'react'
+
 import { connect } from 'react-redux'
-import { setPackedFilter } from '../actions'
-import Link from '../components/Link.component'
+import { setPackedFilter } from '../actions/home.actions.jsx'
+import Link from '../components/Link.component.jsx'
 
 const mapStateToProps = (state, ownProps) => {
   return {

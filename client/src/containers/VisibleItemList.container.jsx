@@ -1,6 +1,8 @@
+import React from 'react'
+
 import { connect } from 'react-redux'
-import { togglePacked } from '../actions'
-import ItemList from '../components/ItemList.component'
+import { togglePacked } from '../actions/home.actions.jsx'
+import ItemList from '../components/ItemList.component.jsx'
 
 const getVisibleItems = (items, filter) => {
   switch (filter) {
