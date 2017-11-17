@@ -1,5 +1,5 @@
 
-const packingItem = (state, action) => {
+const packingList = (state, action) => {
 
   if (action.type === 'ADD_ITEM') {
     return [...state,
@@ -35,3 +35,5 @@ const packingItem = (state, action) => {
 
   }
 };
+
+export default packingList;
