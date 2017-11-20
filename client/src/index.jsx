@@ -10,7 +10,6 @@ import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 import Weather from './components/Weather.component';
 
-
 let store = createStore(packunoApp);
 window.store = store;
 
