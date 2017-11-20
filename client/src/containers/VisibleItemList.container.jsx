@@ -4,7 +4,6 @@ import { togglePacked } from '../actions/home.actions.jsx';
 import ItemList from '../components/ItemList.component.jsx';
 
 const getVisibleItems = (items = [], filter) => {
-  console.log('getVisibleItems running, items:', items);
   if (filter === 'SHOW_ALL') {
     return items;
   }
@@ -18,7 +17,6 @@ const getVisibleItems = (items = [], filter) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log('mapStateToProps in VisibleItemList container running, state:', state);
   return {
     items: getVisibleItems(state.packingList, state.visibilityFilter),
   };

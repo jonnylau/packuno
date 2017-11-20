@@ -3599,7 +3599,7 @@ function isPlainObject(value) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(console) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -3610,7 +3610,6 @@ var itemID = 0;
 var addItem = exports.addItem = function addItem(item) {
   var category = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-  console.log('addItem action triggered', item, category);
   return {
     type: 'ADD_ITEM',
     id: itemID += 1,
@@ -3640,7 +3639,6 @@ var setVisibilityFilter = exports.setVisibilityFilter = function setVisibilityFi
 //     selectedCategory,
 //   };
 // };
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
 /* 105 */
@@ -31733,9 +31731,13 @@ var ItemList = function ItemList(_ref) {
   var items = _ref.items,
       onItemClick = _ref.onItemClick;
 
-  // if (items.length === 0) {
-  //   return <div>Add Items</div>;
-  // }
+  if (items.length === 0) {
+    return _react2.default.createElement(
+      'div',
+      null,
+      'Add Items'
+    );
+  }
 
   return _react2.default.createElement(
     'ul',
@@ -31836,7 +31838,7 @@ exports.default = visibilityFilter;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(console) {
+
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -31860,7 +31862,6 @@ var getVisibleItems = function getVisibleItems() {
   var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var filter = arguments[1];
 
-  console.log('getVisibleItems running, items:', items);
   if (filter === 'SHOW_ALL') {
     return items;
   }
@@ -31878,7 +31879,6 @@ var getVisibleItems = function getVisibleItems() {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-  console.log('mapStateToProps in VisibleItemList container running, state:', state);
   return {
     items: getVisibleItems(state.packingList, state.visibilityFilter)
   };
@@ -31895,7 +31895,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 var VisibleItemList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ItemListComponent2.default);
 
 exports.default = VisibleItemList;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(23)))
 
 /***/ }),
 /* 413 */

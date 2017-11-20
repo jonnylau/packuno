@@ -2,7 +2,6 @@
 let itemID = 0;
 
 export const addItem = (item, category = '') => {
-  console.log('addItem action triggered', item, category);
   return {
     type: 'ADD_ITEM',
     id: itemID += 1,

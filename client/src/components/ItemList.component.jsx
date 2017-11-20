@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import Item from '../components/Item.component.jsx';
 
 const ItemList = ({ items, onItemClick }) => {
-  // if (items.length === 0) {
-  //   return <div>Add Items</div>;
-  // }
+  if (items.length === 0) {
+    return <div>Add Items</div>;
+  }
 
   return (
     <ul>
