@@ -29,18 +29,15 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
     ],
   },
-<<<<<<< HEAD
- //  resolve: {
- //    extensions: ['.js', '.jsx']
- // },
-=======
+  resolve: {
+    extensions: ['.js', '.jsx']
+ },
   node: {
     console: true,
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
   },
->>>>>>> implemented weather app in React
 };
 
 
