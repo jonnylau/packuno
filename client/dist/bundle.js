@@ -14151,29 +14151,29 @@ var _redux = __webpack_require__(164);
 
 var _reactRouterDom = __webpack_require__(566);
 
-var _indexReducers = __webpack_require__(592);
+var _index = __webpack_require__(592);
 
-var _indexReducers2 = _interopRequireDefault(_indexReducers);
+var _index2 = _interopRequireDefault(_index);
 
-var _HomeComponent = __webpack_require__(1145);
+var _Home = __webpack_require__(1145);
 
-var _HomeComponent2 = _interopRequireDefault(_HomeComponent);
+var _Home2 = _interopRequireDefault(_Home);
 
-var _AppComponent = __webpack_require__(828);
+var _App = __webpack_require__(828);
 
-var _AppComponent2 = _interopRequireDefault(_AppComponent);
+var _App2 = _interopRequireDefault(_App);
 
-var _DashboardComponent = __webpack_require__(829);
+var _Dashboard = __webpack_require__(829);
 
-var _DashboardComponent2 = _interopRequireDefault(_DashboardComponent);
+var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
-var _WeatherContainer = __webpack_require__(255);
+var _Weather = __webpack_require__(826);
 
-var _WeatherContainer2 = _interopRequireDefault(_WeatherContainer);
+var _Weather2 = _interopRequireDefault(_Weather);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_indexReducers2.default);
+var store = (0, _redux.createStore)(_index2.default);
 window.store = store;
 
 (0, _reactDom.render)(_react2.default.createElement(
@@ -14203,7 +14203,7 @@ window.store = store;
           _react2.default.createElement(
             _reactRouterDom.Link,
             { to: '/dashboard' },
-            'Topics'
+            'Dashboard'
           )
         ),
         _react2.default.createElement(
@@ -14226,10 +14226,10 @@ window.store = store;
         )
       ),
       _react2.default.createElement('hr', null),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _AppComponent2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/dashboard', component: _DashboardComponent2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/trip', component: _HomeComponent2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/weather', component: _WeatherContainer2.default })
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _App2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/dashboard', component: _Dashboard2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/trip', component: _Home2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/weather', component: _Weather2.default })
     )
   )
 ), document.getElementById('app'));
