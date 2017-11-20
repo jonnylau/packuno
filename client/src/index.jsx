@@ -8,7 +8,7 @@ import packunoApp from './reducers/index.reducers.jsx';
 import Home from './components/Home.component.jsx';
 import App from './components/App.component.jsx';
 import Dashboard from './components/Dashboard.component.jsx';
-import Weather from './components/Weather.component.jsx';
+import Weather from './containers/Weather.container.jsx';
 
 
 
@@ -23,7 +23,7 @@ render(
   <Provider store={store}>
     <Router>
       <div>
-
+     <h2>Hello</h2>
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/dashboard">Topics</Link></li>

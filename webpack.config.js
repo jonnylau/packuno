@@ -10,12 +10,6 @@ module.exports = {
     path: DIST_DIR,
   },
   watch: true,
-  node: {
-    console: true,
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-  },
   module: {
     loaders: [
       {
@@ -29,9 +23,9 @@ module.exports = {
       { test: /\.json$/, loader: 'json-loader' },
     ],
   },
-  resolve: {
-    extensions: ['.js', '.jsx']
- },
+ //  resolve: {
+ //    extensions: ['.js', '.jsx']
+ // },
   node: {
     console: true,
     fs: 'empty',

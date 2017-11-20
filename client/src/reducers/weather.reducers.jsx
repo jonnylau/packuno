@@ -4,3 +4,5 @@ const weatherWidget = (state = 'HISTORICAL', action) => {
   }
   return state;
 };
+
+export default weatherWidget;
