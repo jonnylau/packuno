@@ -1,1 +1,75 @@
-!function(m){function e(r){if(n[r])return n[r].exports;var t=n[r]={i:r,l:!1,exports:{}};return m[r].call(t.exports,t,t.exports,e),t.l=!0,t.exports}var n={};e.m=m,e.c=n,e.d=function(m,n,r){e.o(m,n)||Object.defineProperty(m,n,{configurable:!1,enumerable:!0,get:r})},e.n=function(m){var n=m&&m.__esModule?function(){return m.default}:function(){return m};return e.d(n,"a",n),n},e.o=function(m,e){return Object.prototype.hasOwnProperty.call(m,e)},e.p="",e(e.s=315)}({315:function(m,e){throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (40:2)\n\n[0m [90m 38 | [39m    [33m<[39m[33m/[39m[33mRouter[39m[33m>[39m\n [90m 39 | [39m  [33m<[39m[33m/[39m[33mProvider[39m[33m>[39m\n[31m[1m>[22m[39m[90m 40 | [39m  document[33m.[39mgetElementById([32m'app'[39m)\n [90m    | [39m  [31m[1m^[22m[39m\n [90m 41 | [39m)[33m;[39m[0m\n")}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 325);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ 325:
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (40:2)\n\n\u001b[0m \u001b[90m 38 | \u001b[39m    \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mRouter\u001b[39m\u001b[33m>\u001b[39m\n \u001b[90m 39 | \u001b[39m  \u001b[33m<\u001b[39m\u001b[33m/\u001b[39m\u001b[33mProvider\u001b[39m\u001b[33m>\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 40 | \u001b[39m  document\u001b[33m.\u001b[39mgetElementById(\u001b[32m'app'\u001b[39m)\n \u001b[90m    | \u001b[39m  \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 41 | \u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n");
+
+/***/ })
+
+/******/ });
