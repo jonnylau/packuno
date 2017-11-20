@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 import AddItemForm from '../components/AddItemForm.component.jsx';
 import { addItem } from '../actions/home.actions.jsx';
 

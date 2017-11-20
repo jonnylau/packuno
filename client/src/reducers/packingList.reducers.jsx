@@ -13,10 +13,9 @@ const packingList = (state = [], action) => {
         ? { ...packingItem, packed: !packingItem.packed }
         : packingItem;
     });
-  } else if (action.type === 'SET_VISIBILITY_FILTER') {
-    return action.filter;
   }
   return state;
 };
+
 
 export default packingList;

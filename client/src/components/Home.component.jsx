@@ -1,14 +1,14 @@
 import React from 'react';
-import FilterLink from '../containers/FilterLink.container.jsx';
+import Footer from '../components/Footer.component.jsx';
 import AddItem from '../containers/AddItem.container.jsx';
-import VisibleItemList from '../containers/VisibleItemListContainer.jsx';
+import VisibleItemList from '../containers/VisibleItemList.container.jsx';
 
 const Home = () => (
   <div>
     <AddItem />
     <VisibleItemList />
-    <FilterLink />
+    <Footer />
   </div>
-)
+);
 
 export default Home;

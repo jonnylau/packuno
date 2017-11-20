@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { togglePacked } from '../actions/home.actions.jsx';
 import ItemList from '../components/ItemList.component.jsx';
 
-const getVisibleItems = (items = [], filter = 'SHOW_ALL') => {
+const getVisibleItems = (items = [], filter) => {
+  console.log('getVisibleItems running, items:', items);
   if (filter === 'SHOW_ALL') {
     return items;
   }
@@ -13,11 +14,13 @@ const getVisibleItems = (items = [], filter = 'SHOW_ALL') => {
   if (filter === 'SHOW_UNPACKED') {
     return items.filter(item => !item.packed);
   }
+  return items;
 };
 
 const mapStateToProps = (state) => {
+  console.log('mapStateToProps in VisibleItemList container running, state:', state);
   return {
-    items: getVisibleItems(state.items, state.visibilityFilter),
+    items: getVisibleItems(state.packingList, state.visibilityFilter),
   };
 };
 

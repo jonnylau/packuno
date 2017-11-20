@@ -8,6 +8,7 @@ import Home from './components/Home.component.jsx';
 
 
 let store = createStore(packunoApp);
+window.store = store;
 
 
 render(
@@ -15,4 +16,4 @@ render(
     <Home />
   </Provider>,
   document.getElementById('home')
-)
+);
