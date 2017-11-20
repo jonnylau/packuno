@@ -1,7 +1,7 @@
-import React from 'react'
-import FilterLink from '../containers/FilterLink.container.jsx'
-import AddItem from '../containers/AddItem.container.jsx'
-import VisibleItemList from '../containers/VisibleItemList.container.jsx'
+import React from 'react';
+import FilterLink from '../containers/FilterLink.container.jsx';
+import AddItem from '../containers/AddItem.container.jsx';
+import VisibleItemList from '../containers/VisibleItemListContainer.jsx';
 
 const Home = () => (
   <div>

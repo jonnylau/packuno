@@ -5540,9 +5540,9 @@ var _reactRedux = __webpack_require__(365);
 
 var _redux = __webpack_require__(144);
 
-var _homeReducers = __webpack_require__(394);
+var _indexReducers = __webpack_require__(405);
 
-var _homeReducers2 = _interopRequireDefault(_homeReducers);
+var _indexReducers2 = _interopRequireDefault(_indexReducers);
 
 var _HomeComponent = __webpack_require__(395);
 
@@ -5550,7 +5550,7 @@ var _HomeComponent2 = _interopRequireDefault(_HomeComponent);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_homeReducers2.default);
+var store = (0, _redux.createStore)(_indexReducers2.default);
 
 (0, _reactDom.render)(_react2.default.createElement(
   _reactRedux.Provider,
@@ -30072,49 +30072,7 @@ function verifySubselectors(mapStateToProps, mapDispatchToProps, mergeProps, dis
 }
 
 /***/ }),
-/* 394 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-var packingList = function packingList(state, action) {
-
-  if (action.type === 'ADD_ITEM') {
-    return [].concat(_toConsumableArray(state), [{
-      id: action.id,
-      item: action.item,
-      category: action.category,
-      packed: false
-    }]);
-  } else if (action.type === 'TOGGLE_PACKED') {
-    return state.map(function (packingItem) {
-      if (packingItem.id !== action.id) {
-        return packingItem;
-      }
-
-      return Object.assign({}, packingItem, { packed: !packingItem.packed });
-    });
-  } else if (action.type === 'SET_CAT_FILTER') {
-
-    return action.filter;
-  } else if (action.type === 'SET_PACKED_FILTER') {
-
-    return action.filter;
-  } else {
-    return state;
-  }
-};
-
-exports.default = packingList;
-
-/***/ }),
+/* 394 */,
 /* 395 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30137,7 +30095,7 @@ var _AddItemContainer = __webpack_require__(396);
 
 var _AddItemContainer2 = _interopRequireDefault(_AddItemContainer);
 
-var _VisibleItemListContainer = __webpack_require__(397);
+var _VisibleItemListContainer = __webpack_require__(404);
 
 var _VisibleItemListContainer2 = _interopRequireDefault(_VisibleItemListContainer);
 
@@ -30166,15 +30124,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _react = __webpack_require__(48);
-
-var _react2 = _interopRequireDefault(_react);
+var _reactRedux = __webpack_require__(365);
 
 var _AddItemFormComponent = __webpack_require__(398);
 
 var _AddItemFormComponent2 = _interopRequireDefault(_AddItemFormComponent);
-
-var _reactRedux = __webpack_require__(365);
 
 var _homeActions = __webpack_require__(400);
 
@@ -30193,64 +30147,7 @@ var AddItem = (0, _reactRedux.connect)(null, mapDispatchToProps)(_AddItemFormCom
 exports.default = AddItem;
 
 /***/ }),
-/* 397 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _react = __webpack_require__(48);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _reactRedux = __webpack_require__(365);
-
-var _homeActions = __webpack_require__(400);
-
-var _ItemListComponent = __webpack_require__(399);
-
-var _ItemListComponent2 = _interopRequireDefault(_ItemListComponent);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var getVisibleItems = function getVisibleItems(items, filter) {
-  switch (filter) {
-    case 'SHOW_ALL':
-      return items;
-    case 'SHOW_PACKED':
-      return items.filter(function (t) {
-        return t.packed;
-      });
-    case 'SHOW_UNPACKED':
-      return items.filter(function (t) {
-        return !t.packed;
-      });
-  }
-};
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    items: getVisibleItems(state.items, state.visibilityFilter)
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onItemClick: function onItemClick(id) {
-      dispatch((0, _homeActions.togglePacked)(id));
-    }
-  };
-};
-
-var VisibleItemList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ItemListComponent2.default);
-
-exports.default = VisibleItemList;
-
-/***/ }),
+/* 397 */,
 /* 398 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30261,47 +30158,104 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(48);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var AddItemForm = function AddItemForm(_ref) {
-  var _onSubmit = _ref.onSubmit;
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-  var item_input = void 0;
-  var category_input = void 0;
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-  return _react2.default.createElement(
-    "div",
-    null,
-    _react2.default.createElement(
-      "form",
-      { onSubmit: function onSubmit(e) {
-          _onSubmit(item_input.value, category_input.value);
-        } },
-      _react2.default.createElement(
-        "label",
+var AddItemForm = function (_React$Component) {
+  _inherits(AddItemForm, _React$Component);
+
+  function AddItemForm(props) {
+    _classCallCheck(this, AddItemForm);
+
+    var _this = _possibleConstructorReturn(this, (AddItemForm.__proto__ || Object.getPrototypeOf(AddItemForm)).call(this, props));
+
+    _this.state = {
+      item_input: '',
+      category_input: ''
+    };
+    return _this;
+  }
+
+  _createClass(AddItemForm, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _state = this.state,
+          item_input = _state.item_input,
+          category_input = _state.category_input;
+
+      return _react2.default.createElement(
+        'div',
         null,
-        "Item"
-      ),
-      _react2.default.createElement("input", { type: "text", ref: function ref(input) {
-          undefined.item_input = input;
-        } }),
-      _react2.default.createElement(
-        "label",
-        null,
-        "Category"
-      ),
-      _react2.default.createElement("input", { type: "text", ref: function ref(input) {
-          undefined.category_input = input;
-        } }),
-      _react2.default.createElement("button", null)
-    )
-  );
-};
+        _react2.default.createElement(
+          'form',
+          { onSubmit: function onSubmit() {
+              return _this2.props.onSubmit(item_input, category_input);
+            } },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Item'
+          ),
+          _react2.default.createElement('input', { type: 'text', value: this.state.item_input, onChange: function onChange(e) {
+              return _this2.setState({ item_input: e.target.value });
+            } }),
+          _react2.default.createElement(
+            'label',
+            null,
+            'Category'
+          ),
+          _react2.default.createElement('input', { type: 'text', value: this.state.category_input, onChange: function onChange(e) {
+              return _this2.setState({ category_input: e.target.value });
+            } }),
+          _react2.default.createElement(
+            'button',
+            null,
+            'Add'
+          )
+        )
+      );
+    }
+  }]);
+
+  return AddItemForm;
+}(_react2.default.Component);
+
+// AddItemForm.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+// };
+
+
+// const AddItemForm = ({ onSubmit }) => {
+
+//   let item_input = '';
+//   let category_input = '';
+
+//   return (
+//     <div>
+//       <form onSubmit={(e) => { onSubmit(item_input.value, category_input.value);}} >
+//         <label>Item</label>
+//         <input type="text" ref={input => this.item_input = input} />
+//         <label>Category</label>
+//         <input type="text" ref={input => this.category_input = input} />
+//         <button></button>
+//       </form>
+//     </div>
+//   );
+// };
+
 
 exports.default = AddItemForm;
 
@@ -30322,6 +30276,10 @@ var _react = __webpack_require__(48);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _ItemComponent = __webpack_require__(403);
+
+var _ItemComponent2 = _interopRequireDefault(_ItemComponent);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var ItemList = function ItemList(_ref) {
@@ -30340,7 +30298,7 @@ var ItemList = function ItemList(_ref) {
     'ul',
     null,
     items.map(function (item) {
-      _react2.default.createElement(Item, _extends({ key: item.id }, item, { onClick: function onClick() {
+      return _react2.default.createElement(_ItemComponent2.default, _extends({ key: item.id }, item, { onClick: function onClick() {
           return onItemClick(item.id);
         } }));
     })
@@ -30363,9 +30321,10 @@ Object.defineProperty(exports, "__esModule", {
 var itemID = 0;
 
 var addItem = exports.addItem = function addItem(item, category) {
+  console.log('addItem action triggered', item, category);
   return {
     type: 'ADD_ITEM',
-    id: itemID++,
+    id: itemID += 1,
     item: item,
     category: category,
     packed: false
@@ -30379,19 +30338,19 @@ var togglePacked = exports.togglePacked = function togglePacked(id) {
   };
 };
 
-var setPackedFilter = exports.setPackedFilter = function setPackedFilter(filter) {
+var setVisibilityFilter = exports.setVisibilityFilter = function setVisibilityFilter(filter) {
   return {
-    type: 'SET_PACKED_FILTER',
+    type: 'SET_VISIBILITY_FILTER',
     filter: filter
   };
 };
 
-var setCatFilter = exports.setCatFilter = function setCatFilter(selectedCategory) {
-  return {
-    type: 'SET_CAT_FILTER',
-    selectedCategory: selectedCategory
-  };
-};
+// export const setCatFilter = (selectedCategory) => {
+//   return {
+//     type: 'SET_CAT_FILTER',
+//     selectedCategory,
+//   };
+// };
 
 /***/ }),
 /* 401 */
@@ -30475,6 +30434,140 @@ var Link = function Link(_ref) {
 };
 
 exports.default = Link;
+
+/***/ }),
+/* 403 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(48);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var Item = function Item(_ref) {
+  var onClick = _ref.onClick,
+      completed = _ref.completed,
+      text = _ref.text;
+  return _react2.default.createElement(
+    'li',
+    {
+      onClick: onClick,
+      style: {
+        textDecoration: completed ? 'line-through' : 'none'
+      }
+    },
+    text
+  );
+};
+
+// Item.propTypes = {
+//   onClick: PropTypes.func.isRequired,
+//   completed: PropTypes.bool.isRequired,
+//   text: PropTypes.string.isRequired,
+// };
+
+exports.default = Item;
+
+/***/ }),
+/* 404 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(48);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRedux = __webpack_require__(365);
+
+var _homeActions = __webpack_require__(400);
+
+var _ItemListComponent = __webpack_require__(399);
+
+var _ItemListComponent2 = _interopRequireDefault(_ItemListComponent);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var getVisibleItems = function getVisibleItems() {
+  var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var filter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'SHOW_ALL';
+
+  if (filter === 'SHOW_ALL') {
+    return items;
+  }
+  if (filter === 'SHOW_PACKED') {
+    return items.filter(function (item) {
+      return item.packed;
+    });
+  }
+  if (filter === 'SHOW_UNPACKED') {
+    return items.filter(function (item) {
+      return !item.packed;
+    });
+  }
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    items: getVisibleItems(state.items, state.visibilityFilter)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onItemClick: function onItemClick(id) {
+      dispatch((0, _homeActions.togglePacked)(id));
+    }
+  };
+};
+
+var VisibleItemList = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_ItemListComponent2.default);
+
+exports.default = VisibleItemList;
+
+/***/ }),
+/* 405 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _redux = __webpack_require__(144);
+
+var _packingListReducers = __webpack_require__(406);
+
+var _packingListReducers2 = _interopRequireDefault(_packingListReducers);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var packunoApp = (0, _redux.combineReducers)({
+  packingList: _packingListReducers2.default
+});
+
+exports.default = packunoApp;
+
+/***/ }),
+/* 406 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token (13:12)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m    \u001b[36mreturn\u001b[39m state\u001b[33m.\u001b[39mmap((packingItem) \u001b[33m=>\u001b[39m {\n \u001b[90m 12 | \u001b[39m      \u001b[36mreturn\u001b[39m (packingItem\u001b[33m.\u001b[39mid \u001b[33m!==\u001b[39m action\u001b[33m.\u001b[39mid)\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m        \u001b[33m?\u001b[39m { \u001b[33m...\u001b[39mpackingItem\u001b[33m,\u001b[39m packed\u001b[33m:\u001b[39m \u001b[33m!\u001b[39mpackingItem\u001b[33m.\u001b[39mpacked }\n \u001b[90m    | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 | \u001b[39m        \u001b[33m:\u001b[39m packingItem\u001b[33m;\u001b[39m\n \u001b[90m 15 | \u001b[39m    })\u001b[33m;\u001b[39m\n \u001b[90m 16 | \u001b[39m  } \u001b[36melse\u001b[39m \u001b[36mif\u001b[39m (action\u001b[33m.\u001b[39mtype \u001b[33m===\u001b[39m \u001b[32m'SET_VISIBILITY_FILTER'\u001b[39m) {\u001b[0m\n");
 
 /***/ })
 /******/ ]);
