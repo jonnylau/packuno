@@ -8,7 +8,7 @@ import packunoApp from './reducers/index.reducers';
 import Home from './components/Home.component';
 import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
-import Weather from './components/Weather.component';
+import Weather from './containers/Weather.container';
 
 let store = createStore(packunoApp);
 window.store = store;
