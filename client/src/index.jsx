@@ -23,7 +23,7 @@ render(
   <Provider store={store}>
     <Router>
       <div>
-     <h2>Hello</h2>
+    
         <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/dashboard">Topics</Link></li>
