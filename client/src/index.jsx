@@ -3,12 +3,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import packunoApp from './reducers/index.reducers.jsx';
-import Home from './components/Home.component.jsx';
-import App from './components/App.component.jsx';
-import Dashboard from './components/Dashboard.component.jsx';
-import Weather from './containers/Weather.container.jsx';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import packunoApp from './reducers/index.reducers';
+import Home from './components/Home.component';
+import App from './components/App.component';
+import Dashboard from './components/Dashboard.component';
+import Weather from './components/Weather.component';
 
 
 let store = createStore(packunoApp);
@@ -27,7 +27,7 @@ render(
           <li><Link to="/weather">Weather</Link></li>
         </ul>
 
-        <hr/>
+        <hr />
 
         <Route path="/" component={App} />
         <Route path="/dashboard" component={Dashboard} />
