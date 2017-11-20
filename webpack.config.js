@@ -10,6 +10,12 @@ module.exports = {
     path: DIST_DIR,
   },
   watch: true,
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
   module: {
     loaders: [
       {
@@ -17,9 +23,15 @@ module.exports = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015'],
+          presets: ['react', 'es2015', 'stage-2'],
         },
       },
     ],
   },
+ //  resolve: {
+ //    extensions: ['.js', '.jsx']
+ // },
 };
+
+
+
