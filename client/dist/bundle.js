@@ -36351,19 +36351,125 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var Dashboard = function Dashboard() {
-  return _react2.default.createElement(
-    'div',
-    null,
-    'Dashboard pages goes here'
-  );
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var handleClick = function handleClick() {
+  document.getElementById("sidebar").style.display = "none";
+  document.getElementById("content").style.marginLeft = "0%";
+  document.getElementById("openButton").innerHTML = "&equiv;";
 };
+
+var handleOpen = function handleOpen() {
+  document.getElementById("sidebar").style.display = "block";
+  document.getElementById("content").style.marginLeft = "25%";
+  document.getElementById("openButton").innerHTML = "";
+};
+
+//When App renders, do a get request to our database to get the name and dates of 
+//an upcoming trip for the logged in user
+//For each upcoming trip, do a get request to the Flickr API to render new pictures
+//https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+//rest endpoint: https://api.flickr.com/services/rest/
+
+//When App renders, do a get request to our database to get the name and dates of 
+//past trips for the logged in user. 
+//For each old trip, do a get request to the Flickr API to render new pictures
+
+//When user clicks "Create Trip", app reroutes to trip.html, with new trip info rendered onto trip.html
+
+var Dashboard = function (_React$Component) {
+  _inherits(Dashboard, _React$Component);
+
+  function Dashboard(props) {
+    _classCallCheck(this, Dashboard);
+
+    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Dashboard, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "div",
+        null,
+        _react2.default.createElement(
+          "div",
+          { id: "sidebar" },
+          _react2.default.createElement(
+            "button",
+            { id: "closeButton", onClick: handleClick },
+            "\u2261"
+          ),
+          _react2.default.createElement(
+            "h1",
+            null,
+            " Packuno "
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "h2",
+            null,
+            " Upcoming Trips "
+          )
+        ),
+        _react2.default.createElement(
+          "div",
+          { id: "content" },
+          _react2.default.createElement("button", { id: "openButton", onClick: handleOpen }),
+          _react2.default.createElement(
+            "h1",
+            null,
+            " Create New Trip "
+          ),
+          _react2.default.createElement("br", null),
+          "1. ",
+          _react2.default.createElement("input", { type: "text", className: "destination", placeholder: "Enter destination" }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          "2. ",
+          _react2.default.createElement("input", { type: "date", className: "departureDate", value: "2017-11-29" }),
+          _react2.default.createElement(
+            "text",
+            null,
+            " to "
+          ),
+          _react2.default.createElement("input", { type: "date", className: "returnDate", value: "2018-01-01" }),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          "3. Copy Packing List from Past Trips",
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement(
+            "button",
+            { type: "submit", className: "submitButton" },
+            " Create Trip "
+          ),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null),
+          _react2.default.createElement("br", null)
+        )
+      );
+    }
+  }]);
+
+  return Dashboard;
+}(_react2.default.Component);
 
 exports.default = Dashboard;
 
