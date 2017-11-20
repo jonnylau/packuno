@@ -67,6 +67,7 @@
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ ({
 
 /***/ 325:
@@ -104,6 +105,12 @@ var Empty = function () { /* empty */ };
 >>>>>>> Fix index.jsx so the link says Dashboard instead of Topics
 
 <<<<<<< HEAD
+=======
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+>>>>>>> Updated server to serve a get request when navigating to our URLs using React Router
 var global = __webpack_require__(6);
 var core = __webpack_require__(42);
 var hide = __webpack_require__(30);
@@ -63857,6 +63864,7 @@ webpackContext.id = 1266;
 
 /***/ })
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ ]);
 =======
 <<<<<<< HEAD
@@ -98635,4 +98643,10 @@ exports.default = Weather;
 >>>>>>> Moved Dashboard code to Dashboard component file
 >>>>>>> Moved Dashboard code to Dashboard component file
 >>>>>>> Moved Dashboard code to Dashboard component file
+<<<<<<< HEAD
 >>>>>>> Moved Dashboard code to Dashboard component file
+=======
+=======
+/******/ ]);
+>>>>>>> Updated server to serve a get request when navigating to our URLs using React Router
+>>>>>>> Updated server to serve a get request when navigating to our URLs using React Router
