@@ -38,6 +38,6 @@ render(
         <Route path="/weather" component={Weather} />
       </div>
     </Router>
-  </Provider>
+  </Provider>,
   document.getElementById('app')
 );
