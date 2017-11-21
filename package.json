@@ -39,7 +39,11 @@
     "request-promise": "^4.2.2",
     "sequelize": "^4.22.6",
     "sequelize-cli": "^3.0.0",
+<<<<<<< HEAD
     "sinon": "^4.1.2"
+=======
+    "vue-loader": "^13.5.0"
+>>>>>>> configured changesto buundle.js, fixed broken source link in weather container
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",

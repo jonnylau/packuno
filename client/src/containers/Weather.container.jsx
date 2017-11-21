@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import isoCode from '../utils/weatherHelper.js';
+=======
+import isoCode from '../../utils/weatherHelper.js';
+>>>>>>> configured changesto buundle.js, fixed broken source link in weather container
 import Promise from 'bluebird';
 import Weather from '../components/Weather.component.jsx'
 
