@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item from '../components/Item.component.jsx';
+import Item from '../components/Item.component';
 
 const ItemList = ({ items, onItemClick }) => {
   if (items.length === 0) {

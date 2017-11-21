@@ -1,8 +1,32 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import MenuItem from 'material-ui/Menu/MenuItem';
+import TextField from 'material-ui/TextField';
+import Button from 'material-ui/Button';
 
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200,
+  },
+  menu: {
+    width: 200,
+  },
+  button: {
+    margin: theme.spacing.unit,
+  },
+});
 
 class AddItemForm extends React.Component {
-  constructor(props) {    super(props);
+  constructor(props) {
+    super(props);
     this.state = {
       item_input: '',
       category_input: '',
@@ -10,43 +34,42 @@ class AddItemForm extends React.Component {
   }
 
   render() {
+    const { classes } = this.props;
     const { item_input, category_input } = this.state;
     return (
       <div>
-        <form onSubmit={() => this.props.onSubmit(item_input, category_input)} >
-          <label>Item</label>
-          <input type="text" value={this.state.item_input} onChange={e => this.setState({ item_input: e.target.value })} />
-          <label>Category</label>
-          <input type="text" value={this.state.category_input} onChange={e => this.setState({ category_input: e.target.value })} />
-          <button>Add</button>
+        <form
+          onSubmit={() => this.props.onSubmit(item_input, category_input)}
+          className={classes.container}
+        >
+          <TextField
+            value={this.state.item_input}
+            onChange={e => this.setState({ item_input: e.target.value })}
+            label="Item"
+            className="textField"
+            margin="normal"
+          />
+          <TextField
+            value={this.state.category_input}
+            onChange={e => this.setState({ category_input: e.target.value })}
+            label="Category"
+            className={classes.textField}
+            margin="normal"
+          />
+          <Button color="primary" className={classes.button}>
+            Add
+          </Button>
          </form>
       </div>
     );
   }
 }
 
-// AddItemForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-// };
+
+AddItemForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+};
 
 
-// const AddItemForm = ({ onSubmit }) => {
-
-//   let item_input = '';
-//   let category_input = '';
-
-//   return (
-//     <div>
-//       <form onSubmit={(e) => { onSubmit(item_input.value, category_input.value);}} >
-//         <label>Item</label>
-//         <input type="text" ref={input => this.item_input = input} />
-//         <label>Category</label>
-//         <input type="text" ref={input => this.category_input = input} />
-//         <button></button>
-//       </form>
-//     </div>
-//   );
-// };
-
-
-export default AddItemForm;
+export default withStyles(styles)(AddItemForm);
