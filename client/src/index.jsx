@@ -16,9 +16,6 @@ let store = createStore(packunoApp);
 window.store = store;
 
 
-
-
-
 render(
   <Provider store={store}>
     <Router>
@@ -39,42 +36,6 @@ render(
         <Route path="/weather" component={Weather} />
       </div>
     </Router>
-  </Provider>,
+  </Provider>
   document.getElementById('app')
 );
-
-
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-  render() {
-    return (
-      <div>
-        <div id="sidebar">
-          <button id="closeButton" onClick={handleClick}>&equiv;</button>
-          <h1> Packuno </h1>
-          <br />
-          <h2> Upcoming Trips </h2>
-        </div>
-        <div id="content">
-          <button id="openButton" onClick={handleOpen} />
-          <h1> Create New Trip </h1>
-          <br />
-          1. <input type="text" className="destination" placeholder="Enter destination" />
-          <br /><br />
-          2. <input type="date" className="departureDate" value="2017-11-29" />
-          <text> to </text>
-          <input type="date" className="returnDate" value="2018-01-01" />
-          <br /><br />
-          3. Copy Packing List from Past Trips
-          <br /><br />
-          <button type="submit" className="submitButton"> Create Trip </button>
-          <br /><br /><br /><br />
-        </div>
-      </div>)
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('app'));
