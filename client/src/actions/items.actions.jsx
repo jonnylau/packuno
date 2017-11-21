@@ -1,5 +1,5 @@
 
-let itemID = 0;
+let itemID = 4;
 
 export const addItem = (item, category = '') => {
   return {
