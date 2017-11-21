@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { togglePacked } from '../actions/home.actions.jsx';
-import ItemList from '../components/ItemList.component.jsx';
+import { togglePacked } from '../actions/packingList.actions';
+import ItemList from '../components/ItemList.component';
 
 const getVisibleItems = (items = [], filter) => {
   if (filter === 'SHOW_ALL') {
