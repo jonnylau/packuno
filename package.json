@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/index.js",
     "build": "webpack -p",
-    "test": "mocha —-compilers js:babel-core/register —-colors ./spec/spec.jsx"
+    "test": "mocha --compilers js:babel-core/register ./specs/specs.jsx"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "enzyme": "^3.2.0",
+    "enzyme-adapter-react-16": "^1.1.0",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
     "jsdom": "^11.4.0",
@@ -37,7 +38,8 @@
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "sequelize": "^4.22.6",
-    "sequelize-cli": "^3.0.0"
+    "sequelize-cli": "^3.0.0",
+    "sinon": "^4.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
@@ -57,7 +59,7 @@
   },
   "babel": {
     "presets": [
-      "es2015"
+      "es2015", "react", "stage-2"
     ]
   }
 }
