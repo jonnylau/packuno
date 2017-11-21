@@ -8423,6 +8423,10 @@ var _index = __webpack_require__(592);
 
 var _index2 = _interopRequireDefault(_index);
 
+var _seedState = __webpack_require__(596);
+
+var _seedState2 = _interopRequireDefault(_seedState);
+
 var _Trip = __webpack_require__(597);
 
 var _Trip2 = _interopRequireDefault(_Trip);
@@ -8441,7 +8445,7 @@ var _Weather2 = _interopRequireDefault(_Weather);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var store = (0, _redux.createStore)(_index2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+var store = (0, _redux.createStore)(_index2.default, _seedState2.default, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 window.store = store;
 
 (0, _reactDom.render)(_react2.default.createElement(
@@ -36024,16 +36028,11 @@ exports.default = weatherWidget;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _byId;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var seedState = {
   currentUserId: 1,
   currentTripId: 1,
   trips: {
-    byId: (_byId = {
+    byId: {
       1: {
         id: 1,
         destination: 'Mexico City',
@@ -36045,23 +36044,20 @@ var seedState = {
         destination: 'Hong Kong',
         departureDate: '2017-9-29',
         returnDate: '2017-11-01'
+      },
+      3: {
+        id: 3,
+        destination: 'Greenland',
+        departureDate: '2018-06-15',
+        returnDate: '2018-07-01'
+      },
+      4: {
+        id: 4,
+        destination: 'Tokyo',
+        departureDate: '2018-08-13',
+        returnDate: '2018-08-29'
       }
-    }, _defineProperty(_byId, '2', {
-      id: 2,
-      destination: 'Mexico City',
-      departureDate: '2018-01-07',
-      returnDate: '2018-01-16'
-    }), _defineProperty(_byId, 3, {
-      id: 3,
-      destination: 'Greenland',
-      departureDate: '2018-06-15',
-      returnDate: '2018-07-01'
-    }), _defineProperty(_byId, 4, {
-      id: 4,
-      destination: 'Tokyo',
-      departureDate: '2018-08-13',
-      returnDate: '2018-08-29'
-    }), _byId),
+    },
     allIds: [1, 2, 3, 4]
   },
   items: {

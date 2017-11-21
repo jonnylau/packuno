@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import reducer from './reducers/index.reducers';
+import seedState from './seedState';
 import Trip from './components/Trip.component';
 import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
@@ -12,6 +13,7 @@ import Weather from './containers/Weather.container';
 
 let store = createStore(
   reducer,
+  seedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 window.store = store;

@@ -15,12 +15,6 @@ const seedState = {
         departureDate: '2017-9-29',
         returnDate: '2017-11-01',
       },
-      2: {
-        id: 2,
-        destination: 'Mexico City',
-        departureDate: '2018-01-07',
-        returnDate: '2018-01-16',
-      },
       3: {
         id: 3,
         destination: 'Greenland',
