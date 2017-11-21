@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setVisibilityFilter } from '../actions/packingList.actions';
+import { setVisibilityFilter } from '../actions/items.actions';
 import Link from '../components/Link.component';
 
 const mapStateToProps = (state, ownProps) => {

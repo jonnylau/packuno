@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import AddItemForm from '../components/AddItemForm.component';
-import { addItem } from '../actions/packingList.actions';
+import { addItem } from '../actions/items.actions';
 
 
 const mapDispatchToProps = (dispatch) => {

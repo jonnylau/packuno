@@ -4,14 +4,14 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import packunoApp from './reducers/index.reducers';
+import reducer from './reducers/index.reducers';
 import Trip from './components/Trip.component';
 import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 import Weather from './containers/Weather.container';
 
 let store = createStore(
-  packunoApp,
+  reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
 window.store = store;
