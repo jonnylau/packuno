@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 // FILL IN DATABASE FILE --> const database = require(../database/index.js);
 
 const app = express();
-app.use(express.static(__dirname + '/../client/dist/'));
+app.use(express.static(__dirname + '/../client/dist'));
 
 const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
