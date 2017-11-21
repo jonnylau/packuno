@@ -28,10 +28,7 @@
     "path": "^0.12.7",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
-<<<<<<< HEAD
     "prop-types": "^15.6.0",
-=======
->>>>>>> a7c7629d0a4ae7cb19ec82727d7584feda098148
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
@@ -39,10 +36,7 @@
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "request": "^2.83.0",
-<<<<<<< HEAD
     "request-promise": "^4.2.2",
-=======
->>>>>>> a7c7629d0a4ae7cb19ec82727d7584feda098148
     "sequelize": "^4.22.6",
     "sequelize-cli": "^3.0.0",
     "sinon": "^4.1.2"
