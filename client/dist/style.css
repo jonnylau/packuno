@@ -61,3 +61,41 @@ h2 {
 .returnDate {
   font-size: 15px;
 }
+
+#upcoming ul li { 
+  padding: 15px 0px; 
+}
+
+#menu {
+   float: left;
+   width: 100%;
+   overflow: hidden;
+   position: relative;
+}
+
+#menu ul {
+   clear: left;
+   float: left;
+   position: relative;
+   text-align: center;
+}
+
+#menu ul li {
+   display: block;
+   float: left;
+   position: relative;
+}
+
+#menu ul li a {
+   display: block;
+   margin: 0 0 0 1px;
+   padding: 5px 20px;
+   color: #000;
+   text-decoration: none;
+}
+
+#menu ul li a.active: hover {
+   color: #fff;
+   background: #000;
+   font-weight: bold;
+}
