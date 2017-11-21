@@ -40,10 +40,14 @@
     "sequelize": "^4.22.6",
     "sequelize-cli": "^3.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "sinon": "^4.1.2"
 =======
     "vue-loader": "^13.5.0"
 >>>>>>> configured changesto buundle.js, fixed broken source link in weather container
+=======
+    "vue-loader": "^13.5.0"
+>>>>>>> 9829e14f113ed698845ff9ae76d24a5faf238f3a
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
