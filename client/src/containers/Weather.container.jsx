@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
-import isoCode from '../utils/weatherHelper.js';
+import isoCode from '../../utils/weatherHelper.js';
 import Promise from 'bluebird';
 import Weather from '../components/Weather.component.jsx'
 
