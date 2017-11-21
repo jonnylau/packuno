@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node server/index.js",
-    "build": "webpack -p"
+    "build": "webpack -p",
+    "test": "mocha —-compilers js:babel-core/register —-colors ./spec/spec.jsx”
   },
   "keywords": [],
   "author": "",
@@ -17,8 +18,12 @@
     "babel-preset-stage-2": "^6.24.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
+    "chai": "^4.1.2",
+    "enzyme": "^3.2.0",
     "express": "^4.16.2",
     "jquery": "^3.2.1",
+    "jsdom": "^11.4.0",
+    "mocha": "^4.0.1",
     "path": "^0.12.7",
     "pg": "^7.4.0",
     "pg-hstore": "^2.3.2",
@@ -26,8 +31,8 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "react-router-redux": "^4.0.8",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",

@@ -6,7 +6,7 @@ import Promise from 'bluebird';
 import Weather from '../components/Weather.component.jsx'
 
 
-class WeatherContainer extends React.Component {
+export class WeatherContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
