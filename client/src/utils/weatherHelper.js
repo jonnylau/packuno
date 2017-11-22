@@ -11,12 +11,14 @@ const grabWeather = isoCode => new Promise((resolve, reject) => {
   };
   rp(options).then(result => result).then((result) => {
     const countryWeatherInfo = JSON.parse(result);
-    const farenheit = countryWeatherInfo.map(item => Math.round((((item.data * 1.8) + 32) * 100) / 100));
+    console.log(result);
+    const farenheit = countryWeatherInfo.map(item =>
+      Math.round((((item.data * 1.8) + 32) * 100) / 100));
     resolve(farenheit);
   });
 }).then((result) => {
   const weatherWidget = [];
-  for (let i = 0; i < result.length; i++) {
+  for (let i = 0; i < result.length; i + 1) {
     const weatherElement = [];
     weatherElement.push(result[i]);
     weatherElement.push(picture);
@@ -25,10 +27,8 @@ const grabWeather = isoCode => new Promise((resolve, reject) => {
   return weatherWidget;
 });
 
-
 const isoCode = (name) => {
   const splitName = name.split(' ');
-
   const correctedName = splitName.map((item) => {
     if (item !== 'of' || item !== 'and') {
       return item[0].toUpperCase() + item.slice(1, item.length).toLowerCase();
@@ -36,9 +36,8 @@ const isoCode = (name) => {
     return item;
   }).join(' ');
   const countryInfo = countries.countries[correctedName];
-
   return grabWeather(countryInfo);
 };
 
 
-export default isoCode;
+module.exports.isoCode = isoCode;
