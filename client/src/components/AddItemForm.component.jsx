@@ -56,10 +56,10 @@ class AddItemForm extends React.Component {
             className={classes.textField}
             margin="normal"
           />
-          <Button color="primary" className={classes.button}>
+          <Button color="primary" type="submit" className={classes.button}>
             Add
           </Button>
-         </form>
+        </form>
       </div>
     );
   }

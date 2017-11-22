@@ -22,6 +22,7 @@ const mapStateToProps = (state) => {
       state.items.allIds.map(id => state.items.byId[id]),
       state.visibilityFilter,
     ),
+    categories: state.items.categories,
   };
 };
 

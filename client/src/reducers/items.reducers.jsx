@@ -1,6 +1,9 @@
+import _ from 'underscore';
+
 const defaultState = {
   byId: {},
   allIds: [],
+  categories: [],
 };
 
 const items = (state = defaultState, action) => {
@@ -17,9 +20,10 @@ const items = (state = defaultState, action) => {
         },
       },
       allIds: [...state.allIds, action.id],
+      categories: _.uniq([...state.categories, action.category]),
     };
   } else if (action.type === 'TOGGLE_PACKED') {
-    let item = state.byId[action.id];
+    let item = state.byId[action.id]; 
     return {
       ...state,
       byId: {

@@ -58,6 +58,7 @@ const seedState = {
       },
     },
     allIds: [1, 2, 3, 4],
+    categories: ['Toiletries', 'Clothes', 'Accessories'],
   },
   visibilityFilter: 'SHOW_ALL',
   weatherWidget: 'HISTORICAL',
