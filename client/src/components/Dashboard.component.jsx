@@ -79,6 +79,15 @@ class Dashboard extends React.Component {
   offHover(event){
     event.target.style.background = 'Transparent';
   }
+  componentDidMount() {
+    this.state.data.trips.allIds.forEach((element) => {
+      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+        const newArr = this.state.pictures;
+        newArr[element] = data;
+        this.setState({pictures: newArr});
+      });
+    });
+  }
 
   newPhotos(country, cb) {
     const xhr = new XMLHttpRequest();
@@ -101,7 +110,6 @@ class Dashboard extends React.Component {
     };
 
     xhr.send();
-
   };
 
   //fetch old trip data from database;

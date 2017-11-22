@@ -5,6 +5,7 @@ const pg = require('pg');
 // FILL IN DATABASE FILE --> const connectionString = process.env.DATABASE_URL
 
 const app = express();
+
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 app.get('/*', (req, res) => {
