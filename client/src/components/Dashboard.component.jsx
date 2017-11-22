@@ -23,9 +23,44 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       data: seedState,
+      images: '',
+      pictures: [],
     };
   }
+  componentDidMount() {
+    this.state.data.trips.allIds.forEach((element) => {
+      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+        const newArr = this.state.pictures;
+        newArr[element] = data;
+        this.setState({pictures: newArr});
+      });
+    });
+  }
 
+  newPhotos(country, cb) {
+    const xhr = new XMLHttpRequest();
+    if (!('withCredentials' in xhr)) {
+      alert('Browser does not support CORS.');
+      return;
+    };
+
+    xhr.open('GET', `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=59703335c51dcee9041f936cfa665b9f&tags=${country}, city, landmark&page=1&per_page=1&tag_mode=all`);
+
+    xhr.onload = () => {
+      const data = xhr.response;
+      const photoid = data.substring(data.indexOf('photo id') + 10, data.indexOf('" owner'));
+      const farmid = data.substring(data.indexOf('farm') + 6, data.indexOf('" title'));
+      const serverid = data.substring(data.indexOf('server') + 8, data.indexOf('farm=') - 2);
+      const secret = data.substring(data.indexOf('secret') + 8, data.indexOf(' server=') - 1);
+      const url = `https://farm${farmid}.staticflickr.com/${serverid}/${photoid}_${secret}.jpg`;
+      this.setState({images: url});
+      cb(url);
+    };
+
+    xhr.send();
+  };
+
+  //fetch old trip data from database;
   // fetchTrips() {
     // $.get('/alltrips', (err, data) => {
     //  if (err) {
@@ -82,6 +117,8 @@ class Dashboard extends React.Component {
               const dateLimit = Moment(this.state.data.trips.byId[element].returnDate);
               if (this.state.data.trips.byId[element].returnDate != null && now.isAfter(dateLimit)) {
                 return <li><a href="#">
+                  <img src={this.state.pictures[element]} className="image"/>
+                  <br /><br />
                   {this.state.data.trips.byId[element].destination}
                   <br /><br />
                   From: {this.state.data.trips.byId[element].departureDate}

@@ -11,15 +11,11 @@ import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 import Weather from './containers/Weather.container';
 
-<<<<<<< HEAD
-let store = createStore(packunoApp);
-=======
 let store = createStore(
   reducer,
   seedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
->>>>>>> 9a7129f1a80b451c7886b0f899efce44a4b9fb3d
 window.store = store;
 
 render(
@@ -41,12 +37,6 @@ render(
         <Route path="/weather" component={Weather} />
       </div>
     </Router>
-<<<<<<< HEAD
   </Provider>
   , document.getElementById('app')
 );
-=======
-  </Provider>,
-  document.getElementById('app')
-);
->>>>>>> 9a7129f1a80b451c7886b0f899efce44a4b9fb3d
