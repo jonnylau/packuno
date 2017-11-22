@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { togglePacked } from '../actions/home.actions.jsx';
-import ItemList from '../components/ItemList.component.jsx';
+import { togglePacked } from '../actions/items.actions';
+import ItemList from '../components/ItemList.component';
 
-const getVisibleItems = (items = [], filter) => {
+const getVisibleItems = (items, filter) => {
   if (filter === 'SHOW_ALL') {
     return items;
   }
@@ -18,7 +18,10 @@ const getVisibleItems = (items = [], filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    items: getVisibleItems(state.packingList, state.visibilityFilter),
+    items: getVisibleItems(
+      state.items.allIds.map(id => state.items.byId[id]),
+      state.visibilityFilter,
+    ),
   };
 };
 
