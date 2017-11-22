@@ -1,15 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from 'material-ui/styles';
+import { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
 
-const Item = ({ onClick, item, category, packed }) => (
-  <li
+const Item = ({ onClick, item, category, packed, classes }) => (
+  <ListItem
+    key={item}
+    dense={true}
+    button
+    disableRipple
     onClick={onClick}
-    style={{
-      textDecoration: packed ? 'line-through' : 'none',
-    }}
+    className={classes.listItem}
   >
-    {item}, {category}
-  </li>
+    <Checkbox
+      checked={packed}
+      disableRipple
+    />
+    <ListItemText primary={`${item}, ${category}`} />
+  </ListItem>
 );
 
 Item.propTypes = {
@@ -19,4 +28,4 @@ Item.propTypes = {
   category: PropTypes.string.isRequired,
 };
 
-export default Item;
+export default withStyles()(Item);
