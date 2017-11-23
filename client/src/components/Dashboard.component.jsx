@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import Moment from 'moment';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import seedState from '../seedState.js';
 
 
@@ -37,7 +37,63 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.state.data.trips.allIds.forEach((element) => {
+    this.state.data.trips.allIDs.forEach((element) => {
+      this.newPhotos(this.state.data.trips.byID[element].destination, (data) => {
+        const newArr = this.state.pictures;
+        newArr[element] = data;
+        this.setState({pictures: newArr});
+      });
+    });
+  }
+
+  handleChange(key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      this.setState(state);
+    }.bind(this);
+  }
+
+  handleSubmit(event) {
+    console.log('Destination', this.state.destination, 'Departure Date', this.state.departureDate, 'Return Date', this.state.returnDate, 'ID of Old Trip Selected', this.state.oldTripID);
+    //send a post request to the server to submit the above information
+    //$.post('url of server', {
+    //  destination: this.state.destination,
+    //  departureDate: this.state.departureDate,
+    //  returnDate: this.state.returnDate },
+    //  (err, data) => {
+    //  if (err) {
+    //    console.log('error fetching old trips', err);
+    //  }
+    //  console.log('success fetching old trips', data);
+    //  }, 'json')
+  }
+
+  identifyPicture(key, event){
+    this.setState({oldTripID: key});
+    if (this.state.oldTripSelected) {
+      event.target.style.background = 'Transparent';
+      console.log('CLICKED', event.target);
+    } else {
+      event.target.style.background = 'grey';
+    }
+    this.setState({oldTripSelected: !this.state.oldTripSelected});
+  }
+
+  onHover(event){
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'grey';
+    }
+  }
+
+  offHover(event){
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'Transparent';
+    }
+  }
+
+  componentDidMount() {
+    this.state.data.trips.allIDs.forEach((element) => {
       this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
         const newArr = this.state.pictures;
         newArr[element] = data;
@@ -93,63 +149,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.state.data.trips.allIds.forEach((element) => {
-      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
-        const newArr = this.state.pictures;
-        newArr[element] = data;
-        this.setState({pictures: newArr});
-      });
-    });
-  }
-
-  handleChange(key) {
-    return function (e) {
-      var state = {};
-      state[key] = e.target.value;
-      this.setState(state);
-    }.bind(this);
-  }
-
-  handleSubmit(event) {
-    console.log('Destination', this.state.destination, 'Departure Date', this.state.departureDate, 'Return Date', this.state.returnDate, 'ID of Old Trip Selected', this.state.oldTripID);
-    //send a post request to the server to submit the above information
-    //$.post('url of server', {
-    //  destination: this.state.destination,
-    //  departureDate: this.state.departureDate,
-    //  returnDate: this.state.returnDate },
-    //  (err, data) => {
-    //  if (err) {
-    //    console.log('error fetching old trips', err);
-    //  }
-    //  console.log('success fetching old trips', data);
-    //  }, 'json')
-  }
-
-  identifyPicture(key, event){
-    this.setState({oldTripID: key});
-    if (this.state.oldTripSelected) {
-      event.target.style.background = 'Transparent';
-      console.log('CLICKED', event.target);
-    } else {
-      event.target.style.background = 'grey';
-    }
-    this.setState({oldTripSelected: !this.state.oldTripSelected});
-  }
-
-  onHover(event){
-    if(this.state.oldTripSelected === false) {
-      event.target.style.background = 'grey';
-    }
-  }
-
-  offHover(event){
-    if(this.state.oldTripSelected === false) {
-      event.target.style.background = 'Transparent';
-    }
-  }
-
-  componentDidMount() {
-    this.state.data.trips.allIds.forEach((element) => {
+    this.state.data.trips.allIDs.forEach((element) => {
       this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
         const newArr = this.state.pictures;
         newArr[element] = data;
@@ -202,7 +202,7 @@ class Dashboard extends React.Component {
           <h2> Upcoming Trips </h2>
           <div id="upcoming">
             <ul>
-              {this.state.data.trips.allIds.map (element => {
+              {this.state.data.trips.allIDs.map (element => {
               const dateLimit = Moment(this.state.data.trips.byId[element].returnDate);
               if (this.state.data.trips.byId[element].returnDate
                 != null && now.isBefore(dateLimit)) {
