@@ -11,11 +11,15 @@ import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 import Weather from './containers/Weather.container';
 
+<<<<<<< HEAD
 let store = createStore(
   reducer,
   seedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
 );
+=======
+let store = createStore(packunoApp);
+>>>>>>> Updated server to serve a get request when navigating to our URLs using React Router
 window.store = store;
 
 render(
