@@ -19,7 +19,6 @@ export class WeatherContainer extends React.Component {
     if (this.props.historical.length < 1 && this.props.forecast.length < 1) {
       return (<div>Loading</div>);
     }
-    console.log('it went here');
     return (<Weather weatherFilter={this.props.weatherFilter} historical={this.props.historical} forecast={this.props.forecast}/>);
   }
 

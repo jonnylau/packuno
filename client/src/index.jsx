@@ -16,10 +16,6 @@ import thunk from 'redux-thunk';
 let store = createStore(packunoApp, applyMiddleware(thunk));
 window.store = store;
 
-
-
-
-
 render(
   <Provider store={store}>
     <Router>

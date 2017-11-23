@@ -21,6 +21,7 @@ app.get('/weather/', (req, res) => {
     const startMonth = Number(tripStart.slice(4, 6)) - 1;
     const endMonth = Number(tripEnd.slice(4, 6)) - 1;
     const rendered = [[months[startMonth], result[startMonth]], [months[endMonth], result[endMonth]]];
+    console.log(rendered);
     res.body = JSON.stringify(rendered);
     res.send(res.body);
   });

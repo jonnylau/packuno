@@ -6,10 +6,7 @@ const Historical = props => (
       <div className="weather-item">
         <h2>{item[0]}</h2>
         <div className="temp">
-          {item[1][0] += '\u00B0'}
-        </div>
-        <div className="weather-pic">
-          <img src={item[1][1]} />
+          {item[1] += '\u00B0'}
         </div>
       </div>))}
   </div>

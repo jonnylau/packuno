@@ -1,4 +1,4 @@
-const weatherWidget = (state = 'SHOW_CURRENT', action) => {
+const weatherWidget = (state = 'HISTORICAL', action) => {
   if (action.type === 'SHOW_CURRENT') {
     return 'SHOW_CURRENT';
   }

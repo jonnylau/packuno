@@ -11,20 +11,12 @@ const grabWeather = isoCode => new Promise((resolve, reject) => {
   };
   rp(options).then(result => result).then((result) => {
     const countryWeatherInfo = JSON.parse(result);
-    console.log(result);
     const farenheit = countryWeatherInfo.map(item =>
       Math.round((((item.data * 1.8) + 32) * 100) / 100));
     resolve(farenheit);
   });
 }).then((result) => {
-  const weatherWidget = [];
-  for (let i = 0; i < result.length; i + 1) {
-    const weatherElement = [];
-    weatherElement.push(result[i]);
-    weatherElement.push(picture);
-    weatherWidget.push(weatherElement);
-  }
-  return weatherWidget;
+  return result;
 });
 
 const isoCode = (name) => {
