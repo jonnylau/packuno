@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import isoCode from '../../utils/weatherHelper.js';
 import Promise from 'bluebird';
-import Weather from '../components/Weather.component.jsx'
+import Weather from '../components/Weather.component';
 
 
 export class WeatherContainer extends React.Component {
