@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import items from './items.reducers';
+import packingList from './packingList.reducers';
 import visibilityFilter from './visibilityFilter.reducers';
 import weatherWidget from './weather.reducers';
 
-const reducer = combineReducers({
-  items,
+const packunoApp = combineReducers({
+  packingList,
   visibilityFilter,
   weatherWidget,
 });
