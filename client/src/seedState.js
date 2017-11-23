@@ -59,7 +59,7 @@ const seedState = {
     },
     allIds: [1, 2, 3, 4],
     categories: ['Toiletries', 'Clothes', 'Accessories'],
-    pastItems: {
+    pastItemsWCat: {
       'Shampoo': 'Toiletries',
       'Conditioner': 'Toiletries',
       'Socks': 'Clothes',

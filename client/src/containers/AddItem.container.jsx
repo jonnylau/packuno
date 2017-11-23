@@ -5,6 +5,12 @@ import { withStyles } from 'material-ui/styles';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 
+const mapStateToProps = (state) => {
+  return {
+    pastItemsWCat: state.items.pastItemsWCat,
+    categories: state.items.categories,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -14,6 +20,9 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-const AddItem = connect(null, mapDispatchToProps)(AddItemForm);
+const AddItem = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(AddItemForm);
 
 export default AddItem;

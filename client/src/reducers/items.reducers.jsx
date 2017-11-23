@@ -21,7 +21,7 @@ const items = (state = defaultState, action) => {
       },
       allIds: [...state.allIds, action.id],
       categories: _.uniq([...state.categories, action.category]),
-      pastItems: { ...state.pastItems, [action.item]: action.category },
+      pastItemsWCat: { ...state.pastItemsWCat, [action.item]: action.category },
     };
   } else if (action.type === 'TOGGLE_PACKED') {
     let item = state.byId[action.id]; 

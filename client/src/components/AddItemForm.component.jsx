@@ -1,9 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Autosuggest from 'react-autosuggest';
 import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
+import { MenuItem } from 'material-ui/Menu';
+import match from 'autosuggest-highlight/match';
+import parse from 'autosuggest-highlight/parse';
+import AutocompleteField from '../components/AutocompleteField.component';
 
 
 const styles = theme => ({
@@ -34,7 +39,7 @@ class AddItemForm extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { pastItemsByCat, categories, classes } = this.props;
     const { item_input, category_input } = this.state;
     return (
       <div>
@@ -60,6 +65,9 @@ class AddItemForm extends React.Component {
             Add
           </Button>
         </form>
+
+        <AutocompleteField suggestions={categories} ></AutocompleteField>
+
       </div>
     );
   }

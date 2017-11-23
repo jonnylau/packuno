@@ -15,6 +15,7 @@
     "node": ">=6.4.0"
   },
   "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
     "babel-preset-stage-2": "^6.24.1",
     "bluebird": "^3.5.1",
     "body-parser": "^1.18.2",
@@ -32,6 +33,7 @@
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
@@ -42,8 +44,8 @@
     "sequelize": "^4.22.6",
     "sequelize-cli": "^3.0.0",
     "sinon": "^4.1.2",
-    "vue-loader": "^13.5.0",
-    "underscore": "^1.8.3"
+    "underscore": "^1.8.3",
+    "vue-loader": "^13.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
