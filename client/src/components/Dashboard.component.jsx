@@ -101,20 +101,6 @@ class Dashboard extends React.Component {
       });
     });
   }
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    this.state.data.trips.allIds.forEach((element) => {
-      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
-        const newArr = this.state.pictures;
-        newArr[element] = data;
-        this.setState({pictures: newArr});
-      });
-    });
-  }
 
   handleChange(key) {
     return function (e) {
@@ -139,16 +125,37 @@ class Dashboard extends React.Component {
     //  }, 'json')
   }
 
-  identifyPicture(key){
+  identifyPicture(key, event){
     this.setState({oldTripID: key});
+    if (this.state.oldTripSelected) {
+      event.target.style.background = 'Transparent';
+      console.log('CLICKED', event.target);
+    } else {
+      event.target.style.background = 'grey';
+    }
+    this.setState({oldTripSelected: !this.state.oldTripSelected});
   }
 
   onHover(event){
-    event.target.style.background = 'grey';
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'grey';
+    }
   }
 
   offHover(event){
-    event.target.style.background = 'Transparent';
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'Transparent';
+    }
+  }
+
+  componentDidMount() {
+    this.state.data.trips.allIds.forEach((element) => {
+      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+        const newArr = this.state.pictures;
+        newArr[element] = data;
+        this.setState({pictures: newArr});
+      });
+    });
   }
 
   newPhotos(country, cb) {
