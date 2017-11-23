@@ -30,6 +30,7 @@ class Dashboard extends React.Component {
       departureDate: '',
       returnDate: '',
       oldTripID: '',
+      oldTripSelected: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -68,17 +69,29 @@ class Dashboard extends React.Component {
     //  }, 'json')
   }
 
-  identifyPicture(key){
+  identifyPicture(key, event){
     this.setState({oldTripID: key});
+    if (this.state.oldTripSelected) {
+      event.target.style.background = 'Transparent';
+      console.log('CLICKED', event.target);
+    } else {
+      event.target.style.background = 'grey';
+    }
+    this.setState({oldTripSelected: !this.state.oldTripSelected});
   }
 
   onHover(event){
-    event.target.style.background = 'grey';
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'grey';
+    }
   }
 
   offHover(event){
-    event.target.style.background = 'Transparent';
+    if(this.state.oldTripSelected === false) {
+      event.target.style.background = 'Transparent';
+    }
   }
+
   componentDidMount() {
     this.state.data.trips.allIds.forEach((element) => {
       this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
@@ -168,7 +181,7 @@ class Dashboard extends React.Component {
               {this.state.data.trips.allIds.map (element => {
               const dateLimit = Moment(this.state.data.trips.byId[element].returnDate);
               if (this.state.data.trips.byId[element].returnDate != null && now.isAfter(dateLimit)) {
-                return <li onClick={()=>this.identifyPicture(element)} onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.offHover.bind(this)}><a href="#" value={element}>
+                return <li onClick={()=>this.identifyPicture(element, event)} onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.offHover.bind(this)}><a href="#" value={element}>
                   <img key={element} src={this.state.pictures[element]} className="image" />
                   <br /><br />
                   {this.state.data.trips.byId[element].destination}
@@ -180,7 +193,7 @@ class Dashboard extends React.Component {
                 }
               }
             )}
-           <li onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.offHover.bind(this)} onClick={()=>this.identifyPicture(0)}><a href="#"> <br /> (None) <br /><br /></a></li>
+           <li onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.offHover.bind(this)} onClick={()=>this.identifyPicture(0, event)}><a href="#"> <br /> (None) <br /><br /></a></li>
             </ul>
           </div>
           <br /><br />
