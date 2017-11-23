@@ -13,16 +13,9 @@ import AutocompleteField from '../components/AutocompleteField.component';
 
 const styles = theme => ({
   container: {
+    width: 500,
     display: 'flex',
     flexWrap: 'wrap',
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200,
-  },
-  menu: {
-    width: 200,
   },
   button: {
     margin: theme.spacing.unit,
@@ -33,41 +26,49 @@ class AddItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      item_input: '',
-      category_input: '',
+      itemInput: '',
+      categoryInput: '',
     };
   }
 
+  handleItemInputChange = (value) => {
+    this.setState({
+      itemInput: value,
+      categoryInput: this.props.pastItemsWCat[value] || '',
+    });
+  }
+
+  handleCategoryInputChange = (value) => {
+    this.setState({
+      categoryInput: value,
+    });
+  }
+
   render() {
-    const { pastItemsByCat, categories, classes } = this.props;
-    const { item_input, category_input } = this.state;
+    const { pastItemsWCat, categories, classes } = this.props;
+    const { itemInput, categoryInput } = this.state;
     return (
       <div>
         <form
-          onSubmit={() => this.props.onSubmit(item_input, category_input)}
+          onSubmit={() => this.props.onSubmit(itemInput, categoryInput)}
           className={classes.container}
         >
-          <TextField
-            value={this.state.item_input}
-            onChange={e => this.setState({ item_input: e.target.value })}
-            label="Item"
-            className="textField"
-            margin="normal"
+          <AutocompleteField
+            placeholderText="Item"
+            suggestions={Object.keys(pastItemsWCat)}
+            updateInput={this.handleItemInputChange}
+            defaultVal={itemInput}
           />
-          <TextField
-            value={this.state.category_input}
-            onChange={e => this.setState({ category_input: e.target.value })}
-            label="Category"
-            className={classes.textField}
-            margin="normal"
+          <AutocompleteField
+            placeholderText="Category"
+            suggestions={categories}
+            updateInput={this.handleCategoryInputChange}
+            defaultVal={categoryInput}
           />
           <Button color="primary" type="submit" className={classes.button}>
             Add
           </Button>
         </form>
-
-        <AutocompleteField suggestions={categories} ></AutocompleteField>
-
       </div>
     );
   }
@@ -75,9 +76,12 @@ class AddItemForm extends React.Component {
 
 
 AddItemForm.propTypes = {
+  pastItemsWCat: PropTypes.object.isRequired,
+  categories: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
+
 
 
 export default withStyles(styles)(AddItemForm);

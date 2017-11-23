@@ -63,9 +63,9 @@ const renderSuggestionsContainer = (options) => {
   );
 };
 
-// function getSuggestionValue(suggestion) {
-//   return suggestion.label;
-// }
+const getSuggestionValue = (suggestion) => {
+  return suggestion;
+};
 
 function getSuggestions(suggestions, value) {
   const inputValue = value.trim().toLowerCase();
@@ -91,10 +91,10 @@ function getSuggestions(suggestions, value) {
 
 const styles = theme => ({
   container: {
-    width: 200,
     flexGrow: 1,
     position: 'relative',
-    height: 200,
+    height: '100%',
+    margin: 10,
   },
   suggestionsContainerOpen: {
     position: 'absolute',
@@ -102,6 +102,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 3,
     left: 0,
     right: 0,
+    zIndex: 2,
   },
   suggestion: {
     display: 'block',
@@ -128,7 +129,6 @@ class AutocompleteField extends React.Component {
   }
 
   handleSuggestionsFetchRequested = ({ value }) => {
-    console.log(getSuggestions(this.props.suggestions, value));
     this.setState({
       suggestions: getSuggestions(this.props.suggestions, value),
     });
@@ -141,18 +141,21 @@ class AutocompleteField extends React.Component {
   }
 
   handleChange = (event, { newValue }) => {
+    this.props.updateInput(newValue);
     this.setState({
       value: newValue,
     });
   }
 
   render() {
-    const { classes } = this.props;
+
+    const { placeholderText, classes } = this.props;
 
     return (
       <Autosuggest
         theme={{
           container: classes.container,
+          suggestionsContainer: classes.suggestionsContainer,
           suggestionsContainerOpen: classes.suggestionsContainerOpen,
           suggestionsList: classes.suggestionsList,
           suggestion: classes.suggestion,
@@ -162,12 +165,13 @@ class AutocompleteField extends React.Component {
         onSuggestionsFetchRequested={this.handleSuggestionsFetchRequested}
         onSuggestionsClearRequested={this.handleSuggestionsClearRequested}
         renderSuggestionsContainer={renderSuggestionsContainer}
+        getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
         inputProps={{
           autoFocus: true,
           classes,
-          placeholder: 'Item',
-          value: this.state.value,
+          placeholder: placeholderText,
+          value: this.state.value || this.props.defaultVal,
           onChange: this.handleChange,
         }}
       />
@@ -178,6 +182,9 @@ class AutocompleteField extends React.Component {
 
 AutocompleteField.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  updateInput: PropTypes.func.isRequired,
+  defaultVal: PropTypes.string,
+  placeholderText: PropTypes.string.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
