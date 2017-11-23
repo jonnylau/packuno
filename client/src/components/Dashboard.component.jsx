@@ -101,6 +101,55 @@ class Dashboard extends React.Component {
       });
     });
   }
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.state.data.trips.allIds.forEach((element) => {
+      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+        const newArr = this.state.pictures;
+        newArr[element] = data;
+        this.setState({pictures: newArr});
+      });
+    });
+  }
+
+  handleChange(key) {
+    return function (e) {
+      var state = {};
+      state[key] = e.target.value;
+      this.setState(state);
+    }.bind(this);
+  }
+
+  handleSubmit(event) {
+    console.log('Destination', this.state.destination, 'Departure Date', this.state.departureDate, 'Return Date', this.state.returnDate, 'ID of Old Trip Selected', this.state.oldTripID);
+    //send a post request to the server to submit the above information
+    //$.post('url of server', {
+    //  destination: this.state.destination,
+    //  departureDate: this.state.departureDate,
+    //  returnDate: this.state.returnDate },
+    //  (err, data) => {
+    //  if (err) {
+    //    console.log('error fetching old trips', err);
+    //  }
+    //  console.log('success fetching old trips', data);
+    //  }, 'json')
+  }
+
+  identifyPicture(key){
+    this.setState({oldTripID: key});
+  }
+
+  onHover(event){
+    event.target.style.background = 'grey';
+  }
+
+  offHover(event){
+    event.target.style.background = 'Transparent';
+  }
 
   newPhotos(country, cb) {
     const xhr = new XMLHttpRequest();
