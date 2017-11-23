@@ -1,18 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Item from '../components/Item.component.jsx';
+import _ from 'underscore';
+import ItemsByCat from '../components/ItemsByCat.component';
+import { withStyles } from 'material-ui/styles';
+import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
+import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
 
-const ItemList = ({ items, onItemClick }) => {
+const styles = theme => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    background: theme.palette.background.paper,
+  },
+});
+
+const ItemList = ({ items, categories, onItemClick, classes }) => {
+
   if (items.length === 0) {
     return <div>Add Items</div>;
   }
 
   return (
-    <ul>
-      { items.map(item => (
-        <Item key={item.id} item={item.item} category={item.category} packed={item.packed} onClick={() => onItemClick(item.id)} />
-      ))}
-    </ul>
+    <div className={classes.root}>
+      <List dense={true} disablePadding={true} >
+        {categories.map(cat => (
+          <ItemsByCat
+            category={cat}
+            items={items}
+            onItemClick={onItemClick}
+          />
+        ))}
+      </List>
+    </div>
   );
 };
 
@@ -25,7 +45,20 @@ ItemList.propTypes = {
       category: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   onItemClick: PropTypes.func.isRequired,
 };
 
-export default ItemList;
+export default withStyles(styles)(ItemList);
+
+
+// { items.map(item => (
+//           <Item
+//             key={item.id}
+//             item={item.item}
+//             className={classes.listItem}
+//             category={item.category}
+//             packed={item.packed}
+//             onClick={() => onItemClick(item.id)}
+//           />
+//         ))}
