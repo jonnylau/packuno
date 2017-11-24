@@ -11,6 +11,7 @@ import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 import Weather from './containers/Weather.container';
 
+
 let store = createStore(
   reducer,
   seedState,
@@ -37,6 +38,6 @@ render(
         <Route path="/weather" component={Weather} />
       </div>
     </Router>
-  </Provider>,
-  document.getElementById('app')
+  </Provider>
+  , document.getElementById('app')
 );
