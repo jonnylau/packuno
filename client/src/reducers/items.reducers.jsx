@@ -16,6 +16,7 @@ const items = (state = defaultState, action) => {
           id: action.id,
           item: action.item,
           category: action.category,
+          quantity: action.quantity,
           packed: false,
         },
       },

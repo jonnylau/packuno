@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'underscore';
-import ItemsByCat from '../components/ItemsByCat.component';
 import { withStyles } from 'material-ui/styles';
 import List from 'material-ui/List';
+import ItemsByCat from '../components/ItemsByCat.component';
 
 const styles = theme => ({
   root: {
@@ -42,8 +41,8 @@ ItemList.propTypes = {
       packed: PropTypes.bool.isRequired,
       item: PropTypes.string.isRequired,
       category: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+      quantity: PropTypes.number,
+    })).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   onItemClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,

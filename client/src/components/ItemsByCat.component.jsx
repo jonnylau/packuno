@@ -14,7 +14,7 @@ const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) =>
   if (catItems.length > 0) {
     return (
       <div>
-        <ListSubheader>{category}</ListSubheader>
+        <ListSubheader disableSticky={true} >{category}</ListSubheader>
         {catItems.map(item => (
           <ListItem
             key={item.id}
@@ -28,7 +28,7 @@ const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) =>
               checked={item.packed}
               disableRipple
             />
-            <ListItemText primary={item.item} />
+            <ListItemText primary={(item.quantity) ? `${item.quantity} ${item.item}` : item.item} />
             <ListItemSecondaryAction >
               <IconButton
                 aria-label="Delete"
@@ -46,7 +46,14 @@ const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) =>
 };
 
 ItemsByCat.propTypes = {
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      packed: PropTypes.bool.isRequired,
+      item: PropTypes.string.isRequired,
+      category: PropTypes.string.isRequired,
+      quantity: PropTypes.number,
+    })).isRequired,
   category: PropTypes.string.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,

@@ -1,12 +1,13 @@
 
 let itemID = 4;
 
-export const addItem = (item, category = '') => {
+export const addItem = (item, category = 'Other', quantity = 0) => {
   return {
     type: 'ADD_ITEM',
     id: itemID += 1,
     item,
     category,
+    quantity,
     packed: false,
   };
 };

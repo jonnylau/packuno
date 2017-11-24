@@ -102,11 +102,11 @@ h2 {
 
 /*** Packing list ***/
 
-.MuiListItem-container-88 button{
+ div[class*="MuiListItem-container"] button{
   visibility: hidden;
 }
 
-.MuiListItem-container-88:hover button{
+ div[class*="MuiListItem-container"]:hover button{
   visibility: visible;
 }
 

@@ -94,7 +94,7 @@ const styles = theme => ({
     flexGrow: 1,
     position: 'relative',
     height: '100%',
-    margin: 10,
+    margin: theme.spacing.unit * 2,
   },
   suggestionsContainerOpen: {
     position: 'absolute',
@@ -171,7 +171,7 @@ class AutocompleteField extends React.Component {
           autoFocus: true,
           classes,
           placeholder: placeholderText,
-          value: this.state.value || this.props.defaultVal,
+          value: this.props.defaultVal,
           onChange: this.handleChange,
         }}
       />
