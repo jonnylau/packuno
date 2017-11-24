@@ -23,7 +23,7 @@ const items = (state = defaultState, action) => {
       categories: _.uniq([...state.categories, action.category]),
     };
   } else if (action.type === 'TOGGLE_PACKED') {
-    let item = state.byId[action.id]; 
+    let item = state.byId[action.id];
     return {
       ...state,
       byId: {

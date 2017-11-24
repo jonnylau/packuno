@@ -13,11 +13,15 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
+  devtool: '#eval-source-map',
   node: {
     console: true,
     fs: 'empty',
     net: 'empty',
     tls: 'empty',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
   },
   module: {
     loaders: [
@@ -33,6 +37,3 @@ module.exports = {
     ],
   },
 };
-
-
-

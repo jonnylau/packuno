@@ -13,7 +13,8 @@ import Trip from './components/Trip.component';
 import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 
-const store = createStore(
+
+let store = createStore(
   reducer,
   seedState,
   compose(
@@ -40,6 +41,6 @@ render(
         <Route path="/trip" component={Trip} />
       </div>
     </Router>
-  </Provider>,
-  document.getElementById('app')
+  </Provider>
+  , document.getElementById('app')
 );
