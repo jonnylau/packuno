@@ -5,6 +5,7 @@ import Forecast from './Forecast.component.jsx';
 
 const Weather = (props) => {
   const renderWeather = () => {
+    console.log(props.weatherFilter, 'filter');
     if (props.weatherFilter === 'HISTORICAL') {
       return <Historical weather={props.historical} />;
     }

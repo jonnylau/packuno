@@ -18,7 +18,8 @@ export const setHistoricalAsync = () => (dispatch, getState) => {
     type: 'GET',
     uri: 'http://localhost:3000/weather',
   };
-  return rp(options).then((result) => {
+  const attack = rp(options);
+  return attack.then((result) => {
     dispatch(setHistorical(result));
   });
 };
@@ -33,7 +34,8 @@ export const setForecastAsync = () => (dispatch, getState) => {
     type: 'GET',
     uri: 'http://localhost:3000/forecast',
   };
-  return rp(options).then((result) => {
+  const attack = rp(options);
+  return attack.then((result) => {
     const forecast = JSON.parse(result);
     const txtForecast = forecast.forecast.txt_forecast.forecastday;
     const finalForecast = txtForecast.filter((item, i) => i % 2 === 0);

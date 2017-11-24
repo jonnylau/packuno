@@ -61,7 +61,7 @@ const seedState = {
     categories: ['Toiletries', 'Clothes', 'Accessories'],
   },
   visibilityFilter: 'SHOW_ALL',
-  weatherWidget: 'HISTORICAL',
+  weatherWidget: 'SHOW_CURRENT',
   historicalWeather: [],
   forecastWeather: [],
 };
