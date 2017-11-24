@@ -12,7 +12,7 @@ const styles = theme => ({
   },
 });
 
-const ItemList = ({ items, categories, onItemClick, onDeleteClick, classes }) => {
+const ItemList = ({ items, categories, onItemClick, onDeleteClick, onEditClick, classes }) => {
 
   if (items.length === 0) {
     return <div>Add Items</div>;
@@ -27,6 +27,7 @@ const ItemList = ({ items, categories, onItemClick, onDeleteClick, classes }) =>
             items={items}
             onItemClick={onItemClick}
             onDeleteClick={onDeleteClick}
+            onEditClick={onEditClick}
           />
         ))}
       </List>
@@ -46,6 +47,7 @@ ItemList.propTypes = {
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   onItemClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ItemList);

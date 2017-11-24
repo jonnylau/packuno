@@ -27,6 +27,16 @@ export const deleteItem = (id) => {
   };
 };
 
+export const editItem = (id, item, category, quantity) => {
+  return {
+    type: 'EDIT_ITEM',
+    id,
+    item,
+    category,
+    quantity,
+  };
+};
+
 
 export const setVisibilityFilter = (filter) => {
   return {

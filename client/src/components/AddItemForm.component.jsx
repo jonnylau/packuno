@@ -31,10 +31,31 @@ class AddItemForm extends React.Component {
     };
   }
 
+  componentWillReceiveProps = (nextProps) => {
+    const { itemToEdit } = nextProps;
+
+    if (itemToEdit) {
+      this.setState({
+        itemInput: itemToEdit.item,
+        categoryInput: itemToEdit.category,
+        quantityInput: itemToEdit.quantity,
+      });
+    }
+  }
+
+
   onFormSubmit = (e) => {
     const { itemInput, categoryInput, quantityInput } = this.state;
+    const { onSubmit, onEditSubmit, exitEditItemMode, itemToEdit } = this.props;
     e.preventDefault();
-    this.props.onSubmit(itemInput, categoryInput || 'Other', quantityInput);
+
+    if (itemToEdit) {
+      onEditSubmit(itemToEdit.id, itemInput, categoryInput || 'Other', quantityInput);
+      exitEditItemMode();
+    } else {
+      onSubmit(itemInput, categoryInput || 'Other', quantityInput);
+    }
+
     this.setState({
       itemInput: '',
       categoryInput: '',
@@ -63,7 +84,7 @@ class AddItemForm extends React.Component {
 
 
   render() {
-    const { pastItemsWCat, categories, classes } = this.props;
+    const { pastItemsWCat, categories, classes, itemToEdit } = this.props;
     const { itemInput, categoryInput } = this.state;
     return (
       <div>
@@ -96,7 +117,7 @@ class AddItemForm extends React.Component {
             defaultVal={categoryInput}
           />
           <Button color="primary" type="submit" className={classes.button}>
-            Add
+            { (itemToEdit) ? 'Save' : 'Add' }
           </Button>
         </form>
       </div>
@@ -108,7 +129,10 @@ class AddItemForm extends React.Component {
 AddItemForm.propTypes = {
   pastItemsWCat: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
+  itemToEdit: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
+  onEditSubmit: PropTypes.func.isRequired,
+  exitEditItemMode: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

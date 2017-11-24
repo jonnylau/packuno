@@ -6,8 +6,9 @@ import ListSubheader from 'material-ui/List/ListSubheader';
 import Checkbox from 'material-ui/Checkbox';
 import IconButton from 'material-ui/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
+import EditIcon from 'material-ui-icons/Edit';
 
-const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) => {
+const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, onEditClick, classes }) => {
 
   const catItems = items.filter(item => item.category === category);
 
@@ -30,6 +31,12 @@ const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) =>
             />
             <ListItemText primary={(item.quantity) ? `${item.quantity} ${item.item}` : item.item} />
             <ListItemSecondaryAction >
+            <IconButton
+                aria-label="Edit"
+                onClick={() => onEditClick(item.id)}
+              >
+                <EditIcon />
+              </IconButton>
               <IconButton
                 aria-label="Delete"
                 onClick={() => onDeleteClick(item.id)}
@@ -57,6 +64,7 @@ ItemsByCat.propTypes = {
   category: PropTypes.string.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
+  onEditClick: PropTypes.func.isRequired,
 };
 
 

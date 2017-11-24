@@ -7,6 +7,7 @@ const defaultState = {
 };
 
 const items = (state = defaultState, action) => {
+
   if (action.type === 'ADD_ITEM') {
     return {
       ...state,
@@ -24,12 +25,34 @@ const items = (state = defaultState, action) => {
       categories: _.uniq([...state.categories, action.category]),
       pastItemsWCat: { ...state.pastItemsWCat, [action.item]: action.category },
     };
-  } else if (action.type === 'DELETE_ITEM') {
+  }
+
+  if (action.type === 'DELETE_ITEM') {
     const newState = { ...state };
     delete newState.byId[action.id];
     newState.allIds = _.without(newState.allIds, action.id);
+    newState.categories = _.uniq(newState.allIds.map(id => newState.byId[id].category));
     return newState;
-  } else if (action.type === 'TOGGLE_PACKED') {
+  }
+
+  if (action.type === 'EDIT_ITEM') {
+    return {
+      ...state,
+      byId: {
+        ...state.byId,
+        [action.id]: {
+          ...state.byId[action.id],
+          id: action.id,
+          item: action.item,
+          category: action.category,
+          quantity: action.quantity,
+        },
+      },
+      categories: _.uniq(state.allIds.map(id => state.byId[id].category).concat([action.category])),
+    };
+  }
+
+  if (action.type === 'TOGGLE_PACKED') {
     const item = state.byId[action.id];
     return {
       ...state,

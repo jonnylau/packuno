@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { togglePacked, deleteItem } from '../actions/items.actions';
+import { enterEditItemMode } from '../actions/editMode.actions';
 import ItemList from '../components/ItemList.component';
 
 const getVisibleItems = (items, filter) => {
@@ -33,6 +34,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDeleteClick: (id) => {
       dispatch(deleteItem(id));
+    },
+    onEditClick: (id) => {
+      dispatch(enterEditItemMode(id));
     },
   };
 };
