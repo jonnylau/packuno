@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import _ from 'underscore';
 import ItemsByCat from '../components/ItemsByCat.component';
 import { withStyles } from 'material-ui/styles';
-import List, { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
-import Checkbox from 'material-ui/Checkbox';
-import IconButton from 'material-ui/IconButton';
+import List from 'material-ui/List';
 
 const styles = theme => ({
   root: {
@@ -15,7 +13,7 @@ const styles = theme => ({
   },
 });
 
-const ItemList = ({ items, categories, onItemClick, classes }) => {
+const ItemList = ({ items, categories, onItemClick, onDeleteClick, classes }) => {
 
   if (items.length === 0) {
     return <div>Add Items</div>;
@@ -29,6 +27,7 @@ const ItemList = ({ items, categories, onItemClick, classes }) => {
             category={cat}
             items={items}
             onItemClick={onItemClick}
+            onDeleteClick={onDeleteClick}
           />
         ))}
       </List>
@@ -47,18 +46,8 @@ ItemList.propTypes = {
   ).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
   onItemClick: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ItemList);
 
-
-// { items.map(item => (
-//           <Item
-//             key={item.id}
-//             item={item.item}
-//             className={classes.listItem}
-//             category={item.category}
-//             packed={item.packed}
-//             onClick={() => onItemClick(item.id)}
-//           />
-//         ))}

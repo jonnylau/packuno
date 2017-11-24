@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { togglePacked } from '../actions/items.actions';
+import { togglePacked, deleteItem } from '../actions/items.actions';
 import ItemList from '../components/ItemList.component';
 
 const getVisibleItems = (items, filter) => {
@@ -30,6 +30,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onItemClick: (id) => {
       dispatch(togglePacked(id));
+    },
+    onDeleteClick: (id) => {
+      dispatch(deleteItem(id));
     },
   };
 };

@@ -4,38 +4,52 @@ import { withStyles } from 'material-ui/styles';
 import { ListItem, ListItemSecondaryAction, ListItemText } from 'material-ui/List';
 import ListSubheader from 'material-ui/List/ListSubheader';
 import Checkbox from 'material-ui/Checkbox';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from 'material-ui-icons/Delete';
 
-const ItemsByCat = ({ onItemClick, items, category, classes }) => {
+const ItemsByCat = ({ items, category, onItemClick, onDeleteClick, classes }) => {
 
   const catItems = items.filter(item => item.category === category);
 
-  return (
-    <div>
-      <ListSubheader>{category}</ListSubheader>
-      {catItems.map(item => (
-        <ListItem
-          key={item.id}
-          dense={true}
-          button
-          disableRipple
-          onClick={() => onItemClick(item.id)}
-          className={classes.listItem}
-        >
-          <Checkbox
-            checked={item.packed}
+  if (catItems.length > 0) {
+    return (
+      <div>
+        <ListSubheader>{category}</ListSubheader>
+        {catItems.map(item => (
+          <ListItem
+            key={item.id}
+            dense={true}
+            button
             disableRipple
-          />
-          <ListItemText primary={item.item} />
-        </ListItem>
-        ))}
-    </div>
-  );
+            onClick={() => onItemClick(item.id)}
+            className={classes.listItem}
+          >
+            <Checkbox
+              checked={item.packed}
+              disableRipple
+            />
+            <ListItemText primary={item.item} />
+            <ListItemSecondaryAction >
+              <IconButton
+                aria-label="Delete"
+                onClick={() => onDeleteClick(item.id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
+          ))}
+      </div>
+    );
+  }
+  return null;
 };
 
 ItemsByCat.propTypes = {
-  onItemClick: PropTypes.func.isRequired,
   items: PropTypes.array.isRequired,
   category: PropTypes.string.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  onDeleteClick: PropTypes.func.isRequired,
 };
 
 

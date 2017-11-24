@@ -19,6 +19,13 @@ export const togglePacked = (id) => {
   };
 };
 
+export const deleteItem = (id) => {
+  return {
+    type: 'DELETE_ITEM',
+    id,
+  };
+};
+
 
 export const setVisibilityFilter = (filter) => {
   return {
@@ -26,12 +33,3 @@ export const setVisibilityFilter = (filter) => {
     filter,
   };
 };
-
-
-// export const setCatFilter = (selectedCategory) => {
-//   return {
-//     type: 'SET_CAT_FILTER',
-//     selectedCategory,
-//   };
-// };
-

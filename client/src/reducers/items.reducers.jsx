@@ -23,8 +23,13 @@ const items = (state = defaultState, action) => {
       categories: _.uniq([...state.categories, action.category]),
       pastItemsWCat: { ...state.pastItemsWCat, [action.item]: action.category },
     };
+  } else if (action.type === 'DELETE_ITEM') {
+    const newState = { ...state };
+    delete newState.byId[action.id];
+    newState.allIds = _.without(newState.allIds, action.id);
+    return newState;
   } else if (action.type === 'TOGGLE_PACKED') {
-    let item = state.byId[action.id]; 
+    const item = state.byId[action.id];
     return {
       ...state,
       byId: {
@@ -42,30 +47,3 @@ const items = (state = defaultState, action) => {
 
 
 export default items;
-
-
-
-
-// Old version for reference (for now)
-
-// const packingList = (state = [], action) => {
-//   if (action.type === 'ADD_ITEM') {
-//     return [...state,
-//       {
-//         id: action.id,
-//         item: action.item,
-//         category: action.category,
-//         packed: false,
-//       }];
-//   } else if (action.type === 'TOGGLE_PACKED') {
-//     return state.map((packingItem) => {
-//       return (packingItem.id !== action.id)
-//         ? { ...packingItem, packed: !packingItem.packed }
-//         : packingItem;
-//     });
-//   }
-//   return state;
-// };
-
-
-// export default packingList;
