@@ -14,7 +14,7 @@ import App from './components/App.component';
 import Dashboard from './components/Dashboard.component';
 
 
-let store = createStore(
+const store = createStore(
   reducer,
   seedState,
   compose(

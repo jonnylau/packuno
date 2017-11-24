@@ -13,6 +13,7 @@ export class WeatherContainer extends React.Component {
   componentWillMount() {
     this.props.Forecast();    
     this.props.Historical();
+    console.log(store.getState());
     
   }
 

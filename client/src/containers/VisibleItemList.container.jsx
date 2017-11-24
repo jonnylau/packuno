@@ -19,7 +19,7 @@ const getVisibleItems = (items, filter) => {
 const mapStateToProps = (state) => {
   return {
     items: getVisibleItems(
-      state.items.allIds.map(id => state.items.byId[id]),
+      state.items.allIds.map(id => state.items.byID[id]),
       state.visibilityFilter,
     ),
     categories: state.items.categories,
