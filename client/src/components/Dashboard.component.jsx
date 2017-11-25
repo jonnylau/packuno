@@ -94,7 +94,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.state.data.trips.allIDs.forEach((element) => {
-      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+      this.newPhotos(this.state.data.trips.byID[element].destination, (data) => {
         const newArr = this.state.pictures;
         newArr[element] = data;
         this.setState({pictures: newArr});
@@ -150,7 +150,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.state.data.trips.allIDs.forEach((element) => {
-      this.newPhotos(this.state.data.trips.byId[element].destination, (data) => {
+      this.newPhotos(this.state.data.trips.byID[element].destination, (data) => {
         const newArr = this.state.pictures;
         newArr[element] = data;
         this.setState({pictures: newArr});
@@ -203,15 +203,15 @@ class Dashboard extends React.Component {
           <div id="upcoming">
             <ul>
               {this.state.data.trips.allIDs.map (element => {
-              const dateLimit = Moment(this.state.data.trips.byId[element].returnDate);
-              if (this.state.data.trips.byId[element].returnDate
+              const dateLimit = Moment(this.state.data.trips.byID[element].returnDate);
+              if (this.state.data.trips.byID[element].returnDate
                 != null && now.isBefore(dateLimit)) {
-                return (<li key={this.state.data.trips.byId[element].id}>
-                  {this.state.data.trips.byId[element].destination}
+                return (<li key={this.state.data.trips.byID[element].id}>
+                  {this.state.data.trips.byID[element].destination}
                   <br />
-                  From: {this.state.data.trips.byId[element].departureDate}
+                  From: {this.state.data.trips.byID[element].departureDate}
                   <br />
-                  To: {this.state.data.trips.byId[element].returnDate}
+                  To: {this.state.data.trips.byID[element].returnDate}
                   <br /></li>
                   );
               }
@@ -234,17 +234,17 @@ class Dashboard extends React.Component {
           <br /><br />
           <div id="menu">
             <ul>
-              {this.state.data.trips.allIds.map (element => {
-              const dateLimit = Moment(this.state.data.trips.byId[element].returnDate);
-              if (this.state.data.trips.byId[element].returnDate != null && now.isAfter(dateLimit)) {
+              {this.state.data.trips.allIDs.map (element => {
+              const dateLimit = Moment(this.state.data.trips.byID[element].returnDate);
+              if (this.state.data.trips.byID[element].returnDate != null && now.isAfter(dateLimit)) {
                 return <li onClick={()=>this.identifyPicture(element, event)} onMouseEnter={this.onHover.bind(this)} onMouseLeave={this.offHover.bind(this)}><a href="#" value={element}>
                   <img key={element} src={this.state.pictures[element]} className="image" />
                   <br /><br />
-                  {this.state.data.trips.byId[element].destination}
+                  {this.state.data.trips.byID[element].destination}
                   <br /><br />
-                  From: {this.state.data.trips.byId[element].departureDate}
+                  From: {this.state.data.trips.byID[element].departureDate}
                   <br /><br />
-                  To: {this.state.data.trips.byId[element].returnDate}
+                  To: {this.state.data.trips.byID[element].returnDate}
                   </a></li>;
                 }
               }
