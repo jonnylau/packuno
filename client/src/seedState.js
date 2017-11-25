@@ -2,7 +2,7 @@ const seedState = {
   currentUserId: 1,
   currentTripId: 1,
   trips: {
-    byID: {
+    byId: {
       1: {
         id: 1,
         destination: 'Hong Kong',
@@ -28,7 +28,7 @@ const seedState = {
         returnDate: '2018-08-29',
       },
     },
-    allIDs: [1, 2, 3, 4],
+    allIds: [1, 2, 3, 4],
   },
   items: {
     byId: {
