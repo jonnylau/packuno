@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    destination: DataTypes.STRING,
+    Destination: DataTypes.STRING,
     start_date: {
       type: DataTypes.DATE,
       allowNull: false,

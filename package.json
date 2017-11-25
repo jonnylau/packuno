@@ -31,7 +31,7 @@
     "material-ui-icons": "^1.0.0-beta.17",
     "mocha": "^4.0.1",
     "path": "^0.12.7",
-    "pg": "^7.4.0",
+    "pg": "6.4.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",

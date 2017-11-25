@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
 const rp = require('request-promise');
+const itemsHelper = require('../database/itemsHelpers');
 
 // FILL IN DATABASE FILE --> const database = require(../database/index.js);
 const path = require('path');
@@ -25,6 +26,10 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
+app.get('/items', (req, res) => {
+  itemsHelper.add('Conditioner', 'Toiletries');
+  // itemsHelper.newUser();
+});
 
 
 //Response to client get request for trips in database
