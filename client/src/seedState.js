@@ -1,6 +1,7 @@
 const seedState = {
   currentUserId: 1,
   currentTripId: 1,
+// ID of old trip selected in dashboard
   trips: {
     byID: {
       1: {
@@ -29,6 +30,7 @@ const seedState = {
       },
     },
     allIDs: [1, 2, 3, 4],
+    oldTripId: '',
   },
   items: {
     byID: {
