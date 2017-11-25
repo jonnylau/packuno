@@ -1,11 +1,16 @@
 import React from 'react';
 import Historical from './Historical.jsx';
 import PropTypes from 'prop-types';
+import Forecast from './Forecast.component.jsx';
 
 const Weather = (props) => {
   const renderWeather = () => {
+    console.log(props.weatherFilter, 'filter');
     if (props.weatherFilter === 'HISTORICAL') {
       return <Historical weather={props.historical} />;
+    }
+    if (props.weatherFilter === 'SHOW_CURRENT') {
+      return <Forecast weather={props.forecast} />;
     }
     return (<h2>Weather</h2>);
   };

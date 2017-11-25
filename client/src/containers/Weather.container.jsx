@@ -3,44 +3,44 @@ import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import isoCode from '../utils/weatherHelper';
 import Promise from 'bluebird';
-import Weather from '../components/Weather.component';
-
+import Weather from '../components/Weather.component.jsx';
+import { setHistoricalAsync as Historical, setForecastAsync as Forecast } from '../actions/weather.actions.jsx';
 
 export class WeatherContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      historical: [],
-      current: [],
-      weatherFilter: 'HISTORICAL',
-      tripStart: '20170827',
-      tripEnd: '20170905',
-    };
   }
 
   componentWillMount() {
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    return isoCode('france').then((result) => {
-      console.log(result);
-      const startMonth = Number(this.state.tripStart.slice(4, 6)) - 1;
-      const endMonth = Number(this.state.tripEnd.slice(4, 6)) - 1;
-      const rendered = [[months[startMonth], result[startMonth]], [months[endMonth], result[endMonth]]];
-      this.setState({
-        historical: rendered,
-      });
-    });
+    this.props.Forecast();    
+    this.props.Historical();
+    console.log(store.getState());
+    
   }
 
-render() {
-    return (<Weather weatherFilter={this.state.weatherFilter} historical={this.state.historical} current={this.state.current} />);
+  renderComponents() {
+    if (this.props.historical.length < 1 && this.props.forecast.length < 1) {
+      return (<div>Loading</div>);
+    }
+    return (<Weather weatherFilter={this.props.weatherFilter} historical={this.props.historical} forecast={this.props.forecast}/>);
+  }
+
+  render() {
+    return (<div>{this.renderComponents()}</div>);
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { weatherFilter: state.weatherFilter, historial: state.historical, current: state.current };
-};
+const mapStateToProps = (state, ownProps) => ({ weatherFilter: state.weatherWidget, historical: state.setHistorical, forecast: state.setForecast });
 
-const WeatherCont = connect(mapStateToProps, null)(WeatherContainer);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  Historical: () => {
+    dispatch(Historical());
+  },
+  Forecast: () => {
+    dispatch(Forecast());
+  },
+});
 
+const WeatherCont = connect(mapStateToProps, mapDispatchToProps)(WeatherContainer);
 export default WeatherCont;
 

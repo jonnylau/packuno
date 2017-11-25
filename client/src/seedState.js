@@ -74,7 +74,7 @@ const seedState = {
     },
   },
   visibilityFilter: 'SHOW_ALL',
-  weatherWidget: 'HISTORICAL',
+  weatherWidget: 'SHOW_CURRENT',
   historicalWeather: [],
   forecastWeather: [],
 };

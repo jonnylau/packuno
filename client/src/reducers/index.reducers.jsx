@@ -1,4 +1,8 @@
 import { combineReducers } from 'redux';
+import visibilityFilter from './visibilityFilter.reducers.jsx';
+import weatherWidget from './weather.reducers.jsx';
+import setHistorical from './historical.reducers.jsx';
+import setForecast from './forecast.reducers.jsx';
 import items from './items.reducers';
 import editItemMode from './editItemMode.reducers';
 import visibilityFilter from './visibilityFilter.reducers';
@@ -9,6 +13,8 @@ const reducer = combineReducers({
   editItemMode,
   visibilityFilter,
   weatherWidget,
+  setHistorical,
+  setForecast,
 });
 
 export default reducer;
