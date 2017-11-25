@@ -27,8 +27,18 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/items', (req, res) => {
-  itemsHelper.add('Conditioner', 'Toiletries');
-  // itemsHelper.newUser();
+  itemsHelper.add('Conditioner', 'Liquids');
+});
+
+app.get('/userItems', (req, res) => {
+  itemsHelper.getUserItems()
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.get('/:tripId/items', (req, res) => {
+  itemsHelper.getTripItems('Conditioner', 'Toiletries');
 });
 
 

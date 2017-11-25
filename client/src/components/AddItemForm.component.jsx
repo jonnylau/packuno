@@ -31,6 +31,10 @@ class AddItemForm extends React.Component {
     };
   }
 
+  componentDidMount = () => {
+    this.props.fetchUserItems();
+  }
+
   componentWillReceiveProps = (nextProps) => {
     const { itemToEdit } = nextProps;
 
@@ -66,7 +70,7 @@ class AddItemForm extends React.Component {
   handleItemInputChange = (value) => {
     this.setState({
       itemInput: value,
-      categoryInput: this.props.pastItemsWCat[value] || '',
+      categoryInput: this.props.userItems[value] || '',
     });
   }
 
@@ -84,7 +88,7 @@ class AddItemForm extends React.Component {
 
 
   render() {
-    const { pastItemsWCat, categories, classes, itemToEdit } = this.props;
+    const { userItems, categories, classes, itemToEdit } = this.props;
     const { itemInput, categoryInput } = this.state;
     return (
       <div>
@@ -106,7 +110,7 @@ class AddItemForm extends React.Component {
           />
           <AutocompleteField
             placeholderText="Item"
-            suggestions={Object.keys(pastItemsWCat)}
+            suggestions={Object.keys(userItems)}
             updateInput={this.handleItemInputChange}
             defaultVal={itemInput}
           />
@@ -127,12 +131,13 @@ class AddItemForm extends React.Component {
 
 
 AddItemForm.propTypes = {
-  pastItemsWCat: PropTypes.object.isRequired,
+  userItems: PropTypes.object.isRequired,
   categories: PropTypes.array.isRequired,
   itemToEdit: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   onEditSubmit: PropTypes.func.isRequired,
   exitEditItemMode: PropTypes.func.isRequired,
+  fetchUserItems: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

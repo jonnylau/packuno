@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import AddItemForm from '../components/AddItemForm.component';
 import { addItem, editItem } from '../actions/items.actions';
 import { exitEditItemMode } from '../actions/editMode.actions';
+import { userItemsFetchData } from '../actions/loadItems.actions';
 
 const getItemToEdit = (state) => {
 
@@ -15,9 +16,9 @@ const getItemToEdit = (state) => {
 
 const mapStateToProps = (state) => {
   return {
-    pastItemsWCat: state.items.pastItemsWCat,
     categories: state.items.categories,
     itemToEdit: getItemToEdit(state),
+    userItems: state.userItems,
   };
 };
 
@@ -31,6 +32,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     exitEditItemMode: () => {
       dispatch(exitEditItemMode());
+    },
+    fetchUserItems: () => {
+      dispatch(userItemsFetchData());
     },
   };
 };
