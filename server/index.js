@@ -5,7 +5,8 @@ const request = require('request');
 const rp = require('request-promise');
 const itemsHelper = require('../database/itemsHelpers');
 
-// FILL IN DATABASE FILE --> const database = require(../database/index.js);
+// FILL IN DATABASE FILE --> 
+const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
 // FILL IN DATABASE FILE --> const connectionString = process.env.DATABASE_URL
@@ -27,18 +28,21 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.get('/items', (req, res) => {
-  itemsHelper.add('Conditioner', 'Liquids');
+  itemsHelper.add('Socks', 'Clothes');
 });
 
-app.get('/userItems', (req, res) => {
-  itemsHelper.getUserItems()
+app.get('/:userId/userItems', (req, res) => {
+  return itemsHelper.getUserItems(req.params.userId)
     .then((results) => {
       res.send(results);
     });
 });
 
-app.get('/:tripId/items', (req, res) => {
-  itemsHelper.getTripItems('Conditioner', 'Toiletries');
+app.get('/:tripId/tripItems', (req, res) => {
+  return itemsHelper.getTripItems(req.params.tripId)
+    .then((results) => {
+      res.send(results);
+    });
 });
 
 

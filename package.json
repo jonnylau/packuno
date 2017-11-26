@@ -30,6 +30,7 @@
     "material-ui": "^1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.17",
     "mocha": "^4.0.1",
+    "mysql2": "^1.5.1",
     "path": "^0.12.7",
     "pg": "6.4.2",
     "pg-hstore": "^2.3.2",

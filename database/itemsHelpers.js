@@ -1,13 +1,32 @@
 const db = require('../models/index.js');
 
-const add = (item, category, quantity = 2, packed = false, user_id = '832b2ce1-edd7-4a93-9486-08a8be021ed4', tripId = 'c1849906-fa28-414c-929f-f47755cd483d') => {
-  db.Item.findOrCreate({ where: { item, category } })
+const getUserItems = userId => (
+  db.Item.findAll({
+    attributes: ['item', 'category'],
+    where: { userId },
+  })
+);
+
+const getTripItems = tripId => (
+  db.TripItem.findAll({
+    where: { tripId },
+    include: [db.Item],
+  })
+);
+
+const add = (item, category, quantity = 4, packed = false, userId = 1, tripId = '099ef2ab-a05b-4a5d-b31e-ce6a3df19fb7') => {
+  db.Item.findOrCreate({ where: { item, category, userId } })
     .spread((newItem, created) => {
       console.log(newItem.get({
         plain: true,
       }));
       const itemId = newItem.get('id');
-      db.TripItem.create({ itemId, quantity, packed, tripId });
+      return db.TripItem.create({
+        itemId,
+        quantity,
+        packed,
+        tripId,
+      });
     })
     .then((tripItem) => {
       console.log(tripItem.get({
@@ -16,25 +35,23 @@ const add = (item, category, quantity = 2, packed = false, user_id = '832b2ce1-e
     });
 };
 
-
-const getUserItems = () => {
-  return db.Item.findAll({
-    attributes: ['item', 'category'],
-  });
+const deleteTripItem = (tripItemId) => {
+  db.TripItem.findById(tripItemId)
+    .then(tripItem => tripItem.destroy());
 };
 
-// Use when can get userIdd
-// const getUserItems = (userId) => {
 
-//   db.Item.findAll({
-//     attributes: ['item', 'category'],
-//     where: { userId },
-//   });
-// };
-
+  // db.Trip.update(
+  //   { destination: 'Mexico City' },
+  //   { where: { id: '099ef2ab-a05b-4a5d-b31e-ce6a3df19fb7' } },
+  // );
 
 // const newUser = () => {
-//   db.Trip.create({ Destination: 'London', start_date: '2017-11-25', end_date: '2018-01-13', userId: '832b2ce1-edd7-4a93-9486-08a8be021ed4' })
+//   db.Trip.create({
+//     destination: 'London',
+//     start_date: '2017-11-25',
+//     end_date: '2018-01-13',
+//     userId: '832b2ce1-edd7-4a93-9486-08a8be021ed4' })
 //     .then((user) => {
 //       console.log(user.get({
 //         plain: true,
@@ -42,6 +59,8 @@ const getUserItems = () => {
 //     });
 // };
 
-module.exports.add = add;
 module.exports.getUserItems = getUserItems;
+module.exports.getTripItems = getTripItems;
+module.exports.add = add;
+module.exports.deleteTripItem = deleteTripItem;
 // module.exports.newUser = newUser;
