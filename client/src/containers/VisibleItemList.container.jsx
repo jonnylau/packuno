@@ -1,6 +1,5 @@
-import React from 'react';
 import { connect } from 'react-redux';
-import { togglePacked, deleteItem } from '../actions/items.actions';
+import { itemsFetchData, togglePacked, deleteItem } from '../actions/items.actions';
 import { enterEditItemMode } from '../actions/editMode.actions';
 import ItemList from '../components/ItemList.component';
 
@@ -17,29 +16,31 @@ const getVisibleItems = (items, filter) => {
   return items;
 };
 
-const mapStateToProps = (state) => {
-  return {
-    items: getVisibleItems(
-      state.items.allIds.map(id => state.items.byId[id]),
-      state.visibilityFilter,
-    ),
-    categories: state.items.categories,
-  };
-};
+// Update trip when trip data added to redux state
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    onItemClick: (id) => {
-      dispatch(togglePacked(id));
-    },
-    onDeleteClick: (id) => {
-      dispatch(deleteItem(id));
-    },
-    onEditClick: (id) => {
-      dispatch(enterEditItemMode(id));
-    },
-  };
-};
+const mapStateToProps = state => ({
+  items: getVisibleItems(
+    state.items.allIds.map(id => state.items.byId[id]),
+    state.visibilityFilter,
+  ),
+  categories: state.items.categories,
+  tripId: state.currentTripId || '099ef2ab-a05b-4a5d-b31e-ce6a3df19fb7',
+});
+
+const mapDispatchToProps = dispatch => ({
+  onItemClick: (id) => {
+    dispatch(togglePacked(id));
+  },
+  onDeleteClick: (id) => {
+    dispatch(deleteItem(id));
+  },
+  onEditClick: (id) => {
+    dispatch(enterEditItemMode(id));
+  },
+  fetchItems: (tripId) => {
+    dispatch(itemsFetchData(tripId));
+  },
+});
 
 const VisibleItemList = connect(
   mapStateToProps,

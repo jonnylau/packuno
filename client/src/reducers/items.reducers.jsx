@@ -1,12 +1,33 @@
 import _ from 'underscore';
 
+
+export const itemsHasErrored = (state = false, action) => {
+  if (action.type === 'ITEMS_HAS_ERRORED') {
+    return action.hasErrored;
+  }
+  return state;
+};
+
+export const itemsIsLoading = (state = false, action) => {
+  if (action.type === 'ITEMS_IS_LOADING') {
+    return action.isLoading;
+  }
+  return state;
+};
+
+
 const defaultState = {
   byId: {},
   allIds: [],
   categories: [],
 };
 
-const items = (state = defaultState, action) => {
+
+export const items = (state = defaultState, action) => {
+
+  if (action.type === 'ITEMS_FETCH_DATA_SUCCESS') {
+    return action.items;
+  }
 
   if (action.type === 'ADD_ITEM') {
     return {
@@ -23,7 +44,6 @@ const items = (state = defaultState, action) => {
       },
       allIds: [...state.allIds, action.id],
       categories: _.uniq([...state.categories, action.category]),
-      pastItemsWCat: { ...state.pastItemsWCat, [action.item]: action.category },
     };
   }
 
@@ -68,6 +88,3 @@ const items = (state = defaultState, action) => {
 
   return state;
 };
-
-
-export default items;

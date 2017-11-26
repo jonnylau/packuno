@@ -12,28 +12,38 @@ const styles = theme => ({
   },
 });
 
-const ItemList = ({ items, categories, onItemClick, onDeleteClick, onEditClick, classes }) => {
+class ItemList extends React.Component {
 
-  if (items.length === 0) {
-    return <div>Add Items</div>;
+  componentDidMount() {
+    const { fetchItems, tripId } = this.props;
+    fetchItems(tripId);
   }
 
-  return (
-    <div className={classes.root}>
-      <List dense={true} disablePadding={true} >
-        {categories.map(cat => (
-          <ItemsByCat
-            category={cat}
-            items={items}
-            onItemClick={onItemClick}
-            onDeleteClick={onDeleteClick}
-            onEditClick={onEditClick}
-          />
-        ))}
-      </List>
-    </div>
-  );
-};
+  render() {
+    const { items, categories, onItemClick, onDeleteClick, onEditClick, classes } = this.props;
+
+    if (items.length === 0) {
+      return <div>Add Items</div>;
+    }
+
+    return (
+      <div className={classes.root}>
+        <List dense={true} disablePadding={true} >
+          {categories.map(category => (
+            <ItemsByCat
+              category={category}
+              items={items}
+              onItemClick={onItemClick}
+              onDeleteClick={onDeleteClick}
+              onEditClick={onEditClick}
+            />
+          ))}
+        </List>
+      </div>
+    );
+  }
+}
+
 
 ItemList.propTypes = {
   items: PropTypes.arrayOf(
@@ -45,9 +55,11 @@ ItemList.propTypes = {
       quantity: PropTypes.number,
     })).isRequired,
   categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  tripId: PropTypes.string.isRequired,
   onItemClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
   onEditClick: PropTypes.func.isRequired,
+  fetchItems: PropTypes.func.isRequired,
 };
 
 export default withStyles(styles)(ItemList);

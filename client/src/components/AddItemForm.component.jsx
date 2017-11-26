@@ -32,7 +32,7 @@ class AddItemForm extends React.Component {
   }
 
   componentDidMount = () => {
-    this.props.fetchUserItems();
+    this.props.fetchUserItems(this.props.userId);
   }
 
   componentWillReceiveProps = (nextProps) => {
@@ -138,6 +138,7 @@ AddItemForm.propTypes = {
   onEditSubmit: PropTypes.func.isRequired,
   exitEditItemMode: PropTypes.func.isRequired,
   fetchUserItems: PropTypes.func.isRequired,
+  // userId: PropTypes.integer.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

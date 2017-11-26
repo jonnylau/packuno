@@ -27,7 +27,7 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-app.get('/items', (req, res) => {
+app.post('/items', (req, res) => {
   itemsHelper.add('Socks', 'Clothes');
 });
 

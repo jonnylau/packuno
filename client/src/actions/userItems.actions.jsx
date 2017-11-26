@@ -1,8 +1,9 @@
-// const request = require('request');
 const axios = require('axios');
 
+
+// Get User's past items so they are available in autocomplete with the most recently used category
+
 export function userItemsHasErrored(bool) {
-  console.log('in userItemsHasErrored');
   return {
     type: 'USERITEMS_HAS_ERRORED',
     hasErrored: bool,
@@ -17,7 +18,6 @@ export function userItemsIsLoading(bool) {
 }
 
 export function userItemsFetchDataSuccess(data) {
-
   const userItems = {};
   data.forEach(userItem => userItems[userItem.item] = userItem.category);
 
@@ -27,15 +27,15 @@ export function userItemsFetchDataSuccess(data) {
   };
 }
 
-export function userItemsFetchData() {
+export function userItemsFetchData(userId) {
   return (dispatch) => {
     dispatch(userItemsIsLoading(true));
 
-    axios.get('/userItems')
+    axios.get(`/${userId}/userItems`)
       .then((response) => {
         dispatch(userItemsIsLoading(false));
         dispatch(userItemsFetchDataSuccess(response.data));
       })
-      .catch(err => dispatch(userItemsHasErrored(true)));
+      .catch(() => dispatch(userItemsHasErrored(true)));
   };
 }
