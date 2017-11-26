@@ -1,18 +1,16 @@
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
 
-
-let fs = require('fs');
-let path = require('path');
-let Sequelize = require('sequelize');
-
-let basename = path.basename(__filename);
-let env = process.env.NODE_ENV || 'development';
-let config = require(`${__dirname  }/../config/config.json`)[env];
-let db = {};
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(`${__dirname  }/../config/config.json`)[env];
+const db = {};
 
 if (config.use_env_variable) {
-  var sequelize = new Sequelize(process.env[config.use_env_variable]);
+  const sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  var sequelize = new Sequelize(config.database, config.username, config.password, config);
+  const sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs

@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
     id: {
@@ -8,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
     },
-    Destination: DataTypes.STRING,
+    destination: DataTypes.STRING,
     start_date: {
       type: DataTypes.DATE,
       allowNull: false,
@@ -17,17 +15,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-  }, {
-    classMethods: {
-      associate(models) {
-        Trip.belongsTo(models.User, {
-          foreignKey: 'userId',
-        });
-        Trip.hasMany(models.TripItem, {
-          foreignKey: 'tripId',
-        });
-      },
-    },
   });
+
+  Trip.associate = (models) => {
+    Trip.belongsTo(models.User, {
+      foreignKey: 'userId',
+    });
+    Trip.hasMany(models.TripItem, {
+      foreignKey: 'tripId',
+    });
+  };
   return Trip;
 };
