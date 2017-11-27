@@ -30,10 +30,6 @@ const add = (tripInfo) => {
     .then(tripItem => tripItem.get());
 };
 
-const deleteTripItem = id => (
-  db.TripItem.findById(id)
-    .then(tripItem => tripItem.destroy())
-);
 
 const updatePacked = id => (
   db.TripItem.findById(id)
@@ -43,28 +39,31 @@ const updatePacked = id => (
     })
 );
 
+const deleteTripItem = id => (
+  db.TripItem.findById(id)
+    .then(tripItem => tripItem.destroy())
+);
+
+const editTripItem = (editInfo) => {
+  const { id, item, category, quantity, itemId } = editInfo;
+
+  db.TripItem.findById(id)
+    .then(tripItem => tripItem.update({ quantity }));
+
+  return db.Item.findById(itemId)
+    .then(userItem => userItem.update({ item, category }));
+};
+
 
   // db.Trip.update(
   //   { destination: 'Mexico City' },
   //   { where: { id: '099ef2ab-a05b-4a5d-b31e-ce6a3df19fb7' } },
   // );
 
-// const newUser = () => {
-//   db.Trip.create({
-//     destination: 'London',
-//     start_date: '2017-11-25',
-//     end_date: '2018-01-13',
-//     userId: '832b2ce1-edd7-4a93-9486-08a8be021ed4' })
-//     .then((user) => {
-//       console.log(user.get({
-//         plain: true,
-//       }));
-//     });
-// };
 
 module.exports.getUserItems = getUserItems;
 module.exports.getTripItems = getTripItems;
 module.exports.add = add;
-module.exports.deleteTripItem = deleteTripItem;
 module.exports.updatePacked = updatePacked;
-// module.exports.newUser = newUser;
+module.exports.deleteTripItem = deleteTripItem;
+module.exports.editTripItem = editTripItem;

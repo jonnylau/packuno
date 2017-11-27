@@ -25,8 +25,8 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: (item, category, quantity, tripId, userId) => {
     dispatch(addItem(item, category, quantity, tripId, userId));
   },
-  onEditSubmit: (id, item, category, quantity) => {
-    dispatch(editItem(id, item, category, quantity));
+  onEditSubmit: (id, item, category, quantity, itemId) => {
+    dispatch(editItem(id, item, category, quantity, itemId));
   },
   exitEditItemMode: () => {
     dispatch(exitEditItemMode());

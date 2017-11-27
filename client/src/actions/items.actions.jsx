@@ -67,7 +67,7 @@ export const addItem = (item, category, quantity, userId, tripId) => (dispatch) 
     userId,
     tripId,
   })
-    .then(response => {
+    .then((response) => {
       dispatch({
         type: 'ADD_ITEM_SUCCESS',
         id: response.id,
@@ -77,7 +77,7 @@ export const addItem = (item, category, quantity, userId, tripId) => (dispatch) 
         packed: false,
         itemId: response.itemId,
       });
-  });
+    });
 };
 
 
@@ -99,13 +99,23 @@ export const deleteItem = (id) => {
   };
 };
 
-export const editItem = (id, item, category, quantity) => ({
-  type: 'EDIT_ITEM',
-  id,
-  item,
-  category,
-  quantity,
-});
+export const editItem = (id, item, category, quantity, itemId) => {
+  axios.patch(`/trip/items/${id}`, {
+    id,
+    item,
+    category,
+    quantity,
+    itemId,
+  });
+
+  return {
+    type: 'EDIT_ITEM',
+    id,
+    item,
+    category,
+    quantity,
+  };
+};
 
 
 export const setVisibilityFilter = filter => ({

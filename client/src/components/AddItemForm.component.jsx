@@ -54,7 +54,7 @@ class AddItemForm extends React.Component {
     e.preventDefault();
 
     if (itemToEdit) {
-      onEditSubmit(itemToEdit.id, itemInput, categoryInput, quantityInput);
+      onEditSubmit(itemToEdit.id, itemInput, categoryInput, quantityInput, itemToEdit.itemId);
       exitEditItemMode();
     } else {
       onSubmit(itemInput, categoryInput || 'Other', quantityInput || null, tripId, userId);

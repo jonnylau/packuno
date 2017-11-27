@@ -53,6 +53,14 @@ app.get('/trips/:tripId/items', (req, res) => {
     });
 });
 
+
+app.patch('/trip/items/:id/packed', (req, res) => {
+  itemsHelper.updatePacked(req.params.id)
+    .then(() => {
+      res.sendStatus(201);
+    });
+});
+
 app.delete('/trip/items/:id', (req, res) => {
   itemsHelper.deleteTripItem(req.params.id)
     .then(() => {
@@ -60,8 +68,8 @@ app.delete('/trip/items/:id', (req, res) => {
     });
 });
 
-app.patch('/trip/items/:id/packed', (req, res) => {
-  itemsHelper.updatePacked(req.params.id)
+app.patch('/trip/items/:id', (req, res) => {
+  itemsHelper.editTripItem(req.body)
     .then(() => {
       res.sendStatus(200);
     });
