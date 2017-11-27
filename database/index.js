@@ -6,14 +6,8 @@ const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
   dialect: 'postgres',
 });
 
-// sequelize.authenticate().then(() => {
-//   console.log('Success!');
-// }).catch((err) => {
-//   console.log(err);
-// });
 
-console.log('in database/index.js');
-
+// Uncomment sync line if you need to drop tables (i.e. if models change)
 sequelize.authenticate().then(() => {
   console.log('Success!');
   // db.sequelize.sync({force: true});
@@ -21,6 +15,8 @@ sequelize.authenticate().then(() => {
   console.log(err);
 });
 
+
+// Uncomment if seed data is needed
 
 // db.User.create({ email: 'test7email@gmail.com', first_name: 'Elena', last_name: 'Czubiak' }).then(user => user.get({
 //   plain: true,
