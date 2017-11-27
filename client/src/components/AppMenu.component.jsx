@@ -1,4 +1,6 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -14,14 +16,16 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import Trip from '../components/Trip.component';
+import Dashboard from '../components/Dashboard.component';
+import App from '../components/App.components';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     width: '100%',
-    height: 430,
-    marginTop: theme.spacing.unit * 3,
+    minHeight: 800,
     zIndex: 1,
     overflow: 'hidden',
   },
@@ -32,6 +36,7 @@ const styles = theme => ({
     height: '100%',
   },
   appBar: {
+    color: 'white',
     position: 'absolute',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -52,6 +57,7 @@ const styles = theme => ({
     marginRight: drawerWidth,
   },
   menuButton: {
+    color: 'white',
     marginLeft: 12,
     marginRight: 20,
   },
@@ -106,12 +112,74 @@ const styles = theme => ({
   'contentShift-right': {
     marginRight: 0,
   },
+  upcomingTripsContainer: {
+    padding: 10,
+  },
+  tripBox: {
+    width: 140,
+    height: 210,
+    margin: 5,
+    padding: 10,
+    textAlign: 'center',
+    '&:hover': {
+      background: '#eeeeee',
+    },
+  },
+  selectedTripBox: {
+    width: 80,
+    height: 150,
+    margin: 5,
+    padding: 10,
+    textAlign: 'center',
+    background: '#eeeeee',
+  },
+  photo: {
+    width: 60,
+    height: 60,
+    overflow: 'hidden',
+    borderRadius: '50%',
+  },
+  tripDetail: {
+    margin: 0,
+    lineHeight: '16px',
+  },
+  saveButton: {
+    color: 'white',
+    float: 'right',
+    position: 'relative',
+    margin: 10,
+  },
 });
 
 class PersistentDrawer extends React.Component {
   state = {
     open: false,
-    anchor: 'left',
+  };
+  
+  UpcomingTrips = () => {
+    const { trips, isLoggedIn, onTripClick, classes } = this.props;
+    if (isLoggedIn === 'true' && trips.allIds.length > 0) {
+      return (
+        <div className={classes.upcomingTripsContainer}>
+          <h3>Upcoming trips</h3>
+          {trips.allIds.map(tripId => (
+            <Link to="/trip">
+            <div
+              key={tripId}
+              onClick={() => this.handleTripClick(tripId)}
+              className={classes.tripBox}
+            >
+              <img src={ trips.byId[tripId].photoUrl} className={classes.photo} />
+              <h4>{ trips.byId[tripId].destination }</h4>
+              <span>{moment(trips.byId[tripId].startDate).format('MMMM YYYY')}</span>
+            </div>
+            </Link>
+            ))}
+        </div>
+      );
+    }
+
+    return null;
   };
 
   handleDrawerOpen = () => {
@@ -122,66 +190,23 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
-  handleChangeAnchor = event => {
-    this.setState({
-      anchor: event.target.value,
-    });
+  handleTripClick = (tripId) => {
+    this.props.onTripClick(tripId);
   };
 
-  render() {
+
+
+  render = () => {
     const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
-
-    const drawer = (
-      <Drawer
-        type="persistent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor={anchor}
-        open={open}
-      >
-        <div className={classes.drawerInner}>
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <List className={classes.list}>{mailFolderListItems}</List>
-          <Divider />
-          <List className={classes.list}>{otherMailFolderListItems}</List>
-        </div>
-      </Drawer>
-    );
-
-    let before = null;
-    let after = null;
-
-    if (anchor === 'left') {
-      before = drawer;
-    } else {
-      after = drawer;
-    }
+    const { open } = this.state;
 
     return (
       <div className={classes.root}>
-        <TextField
-          id="persistent-anchor"
-          select
-          label="Anchor"
-          value={anchor}
-          onChange={this.handleChangeAnchor}
-          margin="normal"
-        >
-          <MenuItem value="left">left</MenuItem>
-          <MenuItem value="right">right</MenuItem>
-        </TextField>
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
+              [classes[`appBarShift-left`]]: open,
             })}
           >
             <Toolbar disableGutters={!open}>
@@ -194,22 +219,39 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography type="title" color="inherit" noWrap>
-                Persistent drawer
+                Packuno
               </Typography>
             </Toolbar>
           </AppBar>
-          {before}
+           <Drawer
+            type="persistent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor='left'
+            open={open}
+          >
+            <div className={classes.drawerInner}>
+              <div className={classes.drawerHeader}>
+                <IconButton onClick={this.handleDrawerClose}>
+                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                </IconButton>
+              </div>
+              <Divider />
+              <div className={classes.createContainer} >
+                Create
+              </div>
+              {this.UpcomingTrips()}
+            </div>
+          </Drawer>
           <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
+            className={classNames(classes.content, classes[`content-left`], {
               [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
+              [classes[`contentShift-left`]]: open,
             })}
           >
-            <Typography type="body1">
-              {'You think water moves fast? You should see ice.'}
-            </Typography>
+            <App />
           </main>
-          {after}
         </div>
       </div>
     );
@@ -217,6 +259,9 @@ class PersistentDrawer extends React.Component {
 }
 
 PersistentDrawer.propTypes = {
+  trips: PropTypes.object,
+  isLoggedIn: PropTypes.bool.isRequired,
+  onTripClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };

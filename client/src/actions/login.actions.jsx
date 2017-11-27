@@ -6,23 +6,13 @@ export const loggedIn = bool => ({
   loggedIn: bool,
 });
 
-export const loggedInAsync = bool => (dispatch, getState) => {
-  const options = {
-    type: 'GET',
-    uri: 'http://localhost:3000/check/',
-  };
-  rp(options).then((result) => {
-    console.log('dispatch', result);
-    dispatch(loggedIn(result.toString()));
-  });
-};
 
 export const currentUser = userID => ({
   type: 'SET_CURRENT_USER',
   userId: userID,
 });
 
-export const currentUserAsync = userID => (dispatch, getState) => {
+export const currentUserAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
     uri: 'http://localhost:3000/user/',
@@ -35,3 +25,17 @@ export const currentUserAsync = userID => (dispatch, getState) => {
   });
 };
 
+export const loggedInAsync = bool => (dispatch, getState) => {
+  const options = {
+    type: 'GET',
+    uri: 'http://localhost:3000/check/',
+  };
+  rp(options)
+    .then((result) => {
+      console.log('dispatch', result);
+      dispatch(loggedIn(result.toString()));
+      if (result) {
+        dispatch(currentUserAsync())
+      }
+    });
+};

@@ -46,6 +46,7 @@ app.use(session({ secret: 'anything', resave: false, saveUninitialized: true }))
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(bodyParser.json());
 
 passport.serializeUser((user, done) => {
   console.log('serialize User');
@@ -107,11 +108,11 @@ app.get('/user', (req, res) => {
   });
 });
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', {
-    successRedirect: '/home',
+    successRedirect: '/dashboard',
     failureRedirect: '/login',
-  })
+  }),
 );
 
 

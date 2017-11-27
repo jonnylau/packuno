@@ -15,7 +15,7 @@ import seedState from './seedState';
 import Trip from './components/Trip.component';
 import Dashboard from './components/Dashboard.component';
 import LoginCont from './containers/Login.container';
-import App from './components/App.components';
+import Root from './components/Root.component';
 
 const store = createStore(
   reducer,
@@ -41,16 +41,10 @@ render(
   <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <Router>
-        <div>
-          <ul>
-            <li><Link to="/login"> Login </Link></li>
-            <li><Link to='/home'>Home</Link></li>
-          </ul>
-          <Route path="/home" component={App}/>
-          <Route path="/login" component={LoginCont}/>
-        </div>
+        <Route path="/" component={Root} />
       </Router>
     </MuiThemeProvider>
   </Provider>
   , document.getElementById('app'),
 );
+

@@ -21,8 +21,29 @@ export const tripsFetchDataSuccess = trips => {
 
 
 export const fetchPhotos = (trips) => {
-
   trips.allIds.forEach((tripId) => {
+    // const config = {
+    //   headers: { 'X-Requested-With': 'XMLHttpRequest' },
+    // };
+      
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=59703335c51dcee9041f936cfa665b9f&tags=${trips.byId[tripId].destination}, city, landmark&page=1&per_page=1&tag_mode=all`)
+      .then((data) => {
+        const photoid = data.substring(data.indexOf('photo id') + 10, data.indexOf('" owner'));
+        const farmid = data.substring(data.indexOf('farm') + 6, data.indexOf('" title'));
+        const serverid = data.substring(data.indexOf('server') + 8, data.indexOf('farm=') - 2);
+        const secret = data.substring(data.indexOf('secret') + 8, data.indexOf(' server=') - 1);
+        const photoUrl = `https://farm${farmid}.staticflickr.com/${serverid}/${photoid}_${secret}.jpg`;
+        console.log('photoUrl', photoUrl);
+        return {
+          type: 'UPDATE_PHOTO_URL',
+          id: tripId,
+          photoUrl,
+        };
+      })
+      .catch((err) => {
+        console.log('Error in fetching photos', err);
+      });
+
     // Make api call to get photo for destination (trips.byId[tripId].destination)
     // Once we get url, set it equal to photoUrl
 
@@ -38,6 +59,7 @@ export const fetchPhotos = (trips) => {
 // Async action creator for fetching a users's trips
 
 export const tripsFetchData = userId => (dispatch) => {
+  console.log('in tripsFetchData', userId);
   dispatch(tripsIsLoading(true));
 
   axios.get(`/users/${userId}/trips`)
@@ -64,7 +86,7 @@ export const tripsFetchData = userId => (dispatch) => {
       });
 
       dispatch(tripsFetchDataSuccess(trips));
-      // dispatch(fetchPhotos(trips));
+      dispatch(fetchPhotos(trips));
     })
     .catch(() => dispatch(tripsHasErrored(true)));
 };
@@ -99,3 +121,10 @@ export const addTrip = (destination, startDate, endDate, oldTripId, userId) => (
       }
     });
 };
+
+// Update current trip
+
+export const updateCurrentTrip = tripId => ({
+  type: 'UPDATE_CURRENT_TRIP',
+  tripId,
+});

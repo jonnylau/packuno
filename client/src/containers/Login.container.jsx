@@ -1,14 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
 import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
 import { loggedInAsync as LoggedIn } from '../actions/login.actions';
+import Button from 'material-ui/Button';
 
 const styles = theme => ({
   container: {
@@ -26,6 +23,9 @@ const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
   },
+  saveButton: {
+    color: 'white',
+  },
 });
 
 class Login extends React.Component {
@@ -41,11 +41,19 @@ class Login extends React.Component {
   }
 
   renderComponents() {
-    console.log(this.props.loggedIn);
-    if (this.props.isLoggedIn === 'true') {
+    const { isLoggedIn, loggedIn, classes } = this.props;
+    console.log(loggedIn);
+    if (isLoggedIn === 'true') {
       return (<h2>You've already logged in!</h2>);
     }
-    return <a href="/auth/google">Log In With Google</a>;
+    return (
+      <div>
+        <h3>Sign in to start packing</h3>
+        <Button href="/auth/google" raised color="primary" className={classes.saveButton} >
+          Log In With Google
+        </Button>
+      </div>
+    );
   }
 
 

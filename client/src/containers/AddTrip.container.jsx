@@ -9,7 +9,7 @@ const getRecent5Trips = state => (
 
 const mapStateToProps = state => ({
   trips: state.trips,
-  userId: state.currentUserId || 1,
+  userId: state.setUser || 1,
   recentTrips: getRecent5Trips(state),
 });
 
