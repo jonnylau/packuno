@@ -20,9 +20,9 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 passport.use(new GoogleStrategy(
   {
-    clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
-    clientSecret: process.env.google_clientID,
-    callbackURL: process.env.google_secret,
+    clientID: process.env.clientid,
+    clientSecret: process.env.googlesecret,
+    callbackURL: 'http://localhost:3000/auth/google/callback',
     passReqToCallBack: true,
   },
   ((accessToken, refreshToken, profile, done) => {
