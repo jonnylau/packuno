@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders login correctly 1`] = `
+<div>
+  <a
+    href="/auth/google"
+  >
+    Log In With Google
+  </a>
+</div>
+`;
+
+exports[`renders weather correctly 1`] = `
+<div>
+  <div
+    className="weather-widget"
+  />
+</div>
+`;
+
+exports[`should render components as pure functions renders login correctly 1`] = `
+<div>
+  <a
+    href="/auth/google"
+  >
+    Log In With Google
+  </a>
+</div>
+`;
