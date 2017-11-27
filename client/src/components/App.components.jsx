@@ -20,7 +20,13 @@ export class AppContainer extends React.Component {
   render() {
     if (this.props.isLoggedIn === 'true') {
       return (
-        <Dashboard />
+        <Router>
+           <div>
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/trip" component={Trip} />
+         </div>
+       </Router>
+
       );
     }
     return (

@@ -21,6 +21,10 @@ export const currentTripId = (state = null, action) => {
   if (action.type === 'ADD_TRIP_SUCCESS') {
     return action.id;
   }
+
+  if (action.type === 'UPDATE_CURRENT_TRIP') {
+    return action.tripId;
+  }
   return state;
 };
 

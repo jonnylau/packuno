@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -24,7 +25,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     width: '100%',
-    height: 800,
+    minHeight: 800,
     zIndex: 1,
     overflow: 'hidden',
   },
@@ -111,11 +112,74 @@ const styles = theme => ({
   'contentShift-right': {
     marginRight: 0,
   },
+  upcomingTripsContainer: {
+    padding: 10,
+  },
+  tripBox: {
+    width: 140,
+    height: 210,
+    margin: 5,
+    padding: 10,
+    textAlign: 'center',
+    '&:hover': {
+      background: '#eeeeee',
+    },
+  },
+  selectedTripBox: {
+    width: 80,
+    height: 150,
+    margin: 5,
+    padding: 10,
+    textAlign: 'center',
+    background: '#eeeeee',
+  },
+  photo: {
+    width: 60,
+    height: 60,
+    overflow: 'hidden',
+    borderRadius: '50%',
+  },
+  tripDetail: {
+    margin: 0,
+    lineHeight: '16px',
+  },
+  saveButton: {
+    color: 'white',
+    float: 'right',
+    position: 'relative',
+    margin: 10,
+  },
 });
 
 class PersistentDrawer extends React.Component {
   state = {
     open: false,
+  };
+  
+  UpcomingTrips = () => {
+    const { trips, isLoggedIn, onTripClick, classes } = this.props;
+    if (isLoggedIn === 'true' && trips.allIds.length > 0) {
+      return (
+        <div className={classes.upcomingTripsContainer}>
+          <h3>Upcoming trips</h3>
+          {trips.allIds.map(tripId => (
+            <Link to="/trip">
+            <div
+              key={tripId}
+              onClick={() => this.handleTripClick(tripId)}
+              className={classes.tripBox}
+            >
+              <img src={ trips.byId[tripId].photoUrl} className={classes.photo} />
+              <h4>{ trips.byId[tripId].destination }</h4>
+              <span>{moment(trips.byId[tripId].startDate).format('MMMM YYYY')}</span>
+            </div>
+            </Link>
+            ))}
+        </div>
+      );
+    }
+
+    return null;
   };
 
   handleDrawerOpen = () => {
@@ -126,7 +190,13 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
-  render() {
+  handleTripClick = (tripId) => {
+    this.props.onTripClick(tripId);
+  };
+
+
+
+  render = () => {
     const { classes, theme } = this.props;
     const { open } = this.state;
 
@@ -168,9 +238,10 @@ class PersistentDrawer extends React.Component {
                 </IconButton>
               </div>
               <Divider />
-              <List className={classes.list}>{['one', 'two', 'three']}</List>
-              <Divider />
-              <List className={classes.list}>{['one', 'two', 'three']}</List>
+              <div className={classes.createContainer} >
+                Create
+              </div>
+              {this.UpcomingTrips()}
             </div>
           </Drawer>
           <main
@@ -188,6 +259,9 @@ class PersistentDrawer extends React.Component {
 }
 
 PersistentDrawer.propTypes = {
+  trips: PropTypes.object,
+  isLoggedIn: PropTypes.bool.isRequired,
+  onTripClick: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
 };

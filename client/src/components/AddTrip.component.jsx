@@ -99,7 +99,7 @@ const styles = theme => ({
   saveButton: {
     color: 'white',
     float: 'right',
-    position: 'relative',
+    // position: 'relative',
     margin: 10,
   },
 });
@@ -213,6 +213,7 @@ class AddTrip extends React.Component {
                 </div>
                 ))}
             </div>
+            <br />
             <Button type="submit" raised color="primary" className={classes.saveButton}>
               Save
             </Button>

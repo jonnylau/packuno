@@ -1,24 +1,21 @@
 import { connect } from 'react-redux';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { updateCurrentTrip } from '../actions/trips.actions';
+import { loggedInAsync as LoggedIn } from '../actions/login.actions';
 import AppMenu from '../components/AppMenu.component';
 
 
-
-const getItemToEdit = (state) => {
-  if (state.editItemMode.inEditMode) {
-    return state.items.byId[state.editItemMode.id];
-  }
-  return null;
-};
-
-// Update userId when user data added to redux state
-
 const mapStateToProps = state => ({
-  trips: state.trips
+  trips: state.trips,
+  isLoggedIn: state.login,
 });
 
 const mapDispatchToProps = dispatch => ({
   onTripClick: (tripId) => {
     dispatch(updateCurrentTrip(tripId));
+  },
+  LoggedIn: () => {
+    dispatch(LoggedIn());
   },
 });
 

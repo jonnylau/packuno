@@ -4,7 +4,7 @@ const Forecast = props => (
   <div className="weather-widget">
     {props.weather.map(item => (
       <div className="weather-item">
-        <p>{item.title}</p>
+        <h3>{item.title}</h3>
         <div className="temp">
           {item.fcttext}
         </div>

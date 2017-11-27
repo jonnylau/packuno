@@ -38,35 +38,13 @@ const theme = createMuiTheme({
 });
 
 render(
- <Provider store={store}>
+  <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <Router>
         <Route path="/" component={Root} />
-    </Router>
+      </Router>
     </MuiThemeProvider>
   </Provider>
   , document.getElementById('app'),
 );
 
-// render(
-//  <Provider store={store}>
-//     <MuiThemeProvider theme={theme}>
-//       <Router>
-//         <div>
-//           <ul>
-//             <li><Link to="/">Home</Link></li>
-//             <li><Link to="/dashboard">Dashboard</Link></li>
-//             <li><Link to="/trip">Trip</Link></li>
-//           </ul>
-
-//           <hr />
-
-//           <Route path="/" component={App} />
-//           <Route path="/dashboard" component={Dashboard} />
-//           <Route path="/trip" component={Trip} />
-//         </div>
-//       </Router>
-//     </MuiThemeProvider>
-//   </Provider>
-//   , document.getElementById('app')
-// );
