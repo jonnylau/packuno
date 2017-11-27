@@ -14,6 +14,7 @@ const pg = require('pg');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
@@ -28,7 +29,10 @@ app.get('/dashboard', (req, res) => {
 });
 
 app.post('/items', (req, res) => {
-  itemsHelper.add('Socks', 'Clothes');
+  itemsHelper.add(req.body)
+    .then((results) => {
+      res.send(results);
+    });
 });
 
 app.get('/:userId/userItems', (req, res) => {
@@ -93,7 +97,6 @@ app.get('/forecast/', (req, res) => {
 
 
 const port = process.env.PORT || 3000;
-const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.listen(port, () => {

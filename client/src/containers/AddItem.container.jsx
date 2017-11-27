@@ -18,11 +18,12 @@ const mapStateToProps = state => ({
   itemToEdit: getItemToEdit(state),
   userItems: state.userItems,
   userId: state.currentUserId || 1,
+  tripId: state.currentUserId || 1,
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (item, category, quantity) => {
-    dispatch(addItem(item, category, quantity));
+  onSubmit: (item, category, quantity, tripId, userId) => {
+    dispatch(addItem(item, category, quantity, tripId, userId));
   },
   onEditSubmit: (id, item, category, quantity) => {
     dispatch(editItem(id, item, category, quantity));

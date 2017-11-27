@@ -1,11 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-    },
     destination: DataTypes.STRING,
     start_date: {
       type: DataTypes.DATE,

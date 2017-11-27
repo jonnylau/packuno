@@ -24,7 +24,7 @@ const mapStateToProps = state => ({
     state.visibilityFilter,
   ),
   categories: state.items.categories,
-  tripId: state.currentTripId || '099ef2ab-a05b-4a5d-b31e-ce6a3df19fb7',
+  tripId: state.currentTripId || 1,
 });
 
 const mapDispatchToProps = dispatch => ({

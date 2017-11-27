@@ -1,8 +1,4 @@
 const axios = require('axios');
-// const _ = require('underscore');
-
-
-let itemID = 4;
 
 
 // Load items for a particular trip to show in packing list
@@ -48,30 +44,41 @@ export const itemsFetchDataSuccess = (data) => {
   };
 };
 
-export const itemsFetchData = (tripId) => {
-  return (dispatch) => {
-    dispatch(itemsIsLoading(true));
+export const itemsFetchData = tripId => (dispatch) => {
+  dispatch(itemsIsLoading(true));
 
-    axios.get(`/${tripId}/tripItems`)
-      .then((response) => {
-        dispatch(itemsIsLoading(false));
-        dispatch(itemsFetchDataSuccess(response.data));
-      })
-      .catch(() => dispatch(itemsHasErrored(true)));
-  };
-}
+  axios.get(`/${tripId}/tripItems`)
+    .then((response) => {
+      dispatch(itemsIsLoading(false));
+      dispatch(itemsFetchDataSuccess(response.data));
+    })
+    .catch(() => dispatch(itemsHasErrored(true)));
+};
 
 
-// Packing list functionality
+// Add item
 
-export const addItem = (item, category = 'Other', quantity = 0) => ({
-  type: 'ADD_ITEM',
-  id: itemID += 1,
-  item,
-  category,
-  quantity,
-  packed: false,
-});
+export const addItem = (item, category, quantity, userId, tripId) => (dispatch) => {
+  axios.post('/items', {
+    item,
+    category,
+    quantity,
+    packed: false,
+    userId,
+    tripId,
+  })
+    .then(response => {
+      dispatch({
+        type: 'ADD_ITEM_SUCCESS',
+        id: response.id,
+        item,
+        category,
+        quantity,
+        packed: false,
+        itemId: response.itemId,
+      });
+  });
+};
 
 
 export const togglePacked = id => ({

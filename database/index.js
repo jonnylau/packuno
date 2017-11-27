@@ -25,7 +25,7 @@ sequelize.authenticate().then(() => {
 // db.User.create({ email: 'test7email@gmail.com', first_name: 'Elena', last_name: 'Czubiak' }).then(user => user.get({
 //   plain: true,
 // })).then((user) => {
-//   return db.Trip.create({ userId: user.id, start_date: new Date(), end_date: new Date() });
+//   return db.Trip.create({ destination: 'Mexico City', userId: user.id, start_date: new Date(), end_date: new Date() });
 // }).then((trip)=>{
 //   console.log(trip);
 // });

@@ -50,14 +50,14 @@ class AddItemForm extends React.Component {
 
   onFormSubmit = (e) => {
     const { itemInput, categoryInput, quantityInput } = this.state;
-    const { onSubmit, onEditSubmit, exitEditItemMode, itemToEdit } = this.props;
+    const { onSubmit, onEditSubmit, exitEditItemMode, itemToEdit, tripId, userId } = this.props;
     e.preventDefault();
 
     if (itemToEdit) {
-      onEditSubmit(itemToEdit.id, itemInput, categoryInput || 'Other', quantityInput);
+      onEditSubmit(itemToEdit.id, itemInput, categoryInput, quantityInput);
       exitEditItemMode();
     } else {
-      onSubmit(itemInput, categoryInput || 'Other', quantityInput);
+      onSubmit(itemInput, categoryInput || 'Other', quantityInput || null, tripId, userId);
     }
 
     this.setState({
@@ -90,7 +90,9 @@ class AddItemForm extends React.Component {
   render() {
     const { userItems, categories, classes, itemToEdit } = this.props;
     const { itemInput, categoryInput } = this.state;
+
     return (
+
       <div>
         <form
           onSubmit={this.onFormSubmit}
@@ -138,7 +140,8 @@ AddItemForm.propTypes = {
   onEditSubmit: PropTypes.func.isRequired,
   exitEditItemMode: PropTypes.func.isRequired,
   fetchUserItems: PropTypes.func.isRequired,
-  // userId: PropTypes.integer.isRequired,
+  userId: PropTypes.number.isRequired,
+  tripId: PropTypes.number.isRequired,
   classes: PropTypes.object.isRequired,
 };
 

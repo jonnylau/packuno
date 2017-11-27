@@ -29,21 +29,23 @@ export const items = (state = defaultState, action) => {
     return action.items;
   }
 
-  if (action.type === 'ADD_ITEM') {
+  if (action.type === 'ADD_ITEM_SUCCESS') {
+    const { id, item, category, quantity, packed, itemId } = action;
     return {
       ...state,
       byId: {
         ...state.byId,
-        [action.id]: {
-          id: action.id,
-          item: action.item,
-          category: action.category,
-          quantity: action.quantity,
-          packed: false,
+        [id]: {
+          id,
+          item,
+          category,
+          quantity,
+          packed,
+          itemId,
         },
       },
-      allIds: [...state.allIds, action.id],
-      categories: _.uniq([...state.categories, action.category]),
+      allIds: [...state.allIds, id],
+      categories: _.uniq([...state.categories, category]),
     };
   }
 
