@@ -1,5 +1,3 @@
-
-
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
     destination: DataTypes.STRING,

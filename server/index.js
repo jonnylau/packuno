@@ -7,6 +7,10 @@ const rp = require('request-promise');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require('passport');
 const Promise = require('bluebird');
+const itemsHelper = require('../database/itemsHelpers');
+
+// FILL IN DATABASE FILE --> 
+const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
 const db = require('../database/index.js');
@@ -63,6 +67,11 @@ app.get('/check/', (req, res) => {
 });
 
 app.get('/', isAuthenticated, (req, res) => {
+app.use(bodyParser.json());
+
+// App pages
+
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
@@ -92,6 +101,75 @@ app.get('/auth/google/callback',
     failureRedirect: '/',
   })
 );
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+
+// API Endpoints
+
+app.post('/items', (req, res) => {
+  itemsHelper.add(req.body)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.get('/users/:userId/items', (req, res) => {
+  itemsHelper.getUserItems(req.params.userId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.get('/trips/:tripId/items', (req, res) => {
+  itemsHelper.getTripItems(req.params.tripId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+
+app.patch('/trip/items/:id/packed', (req, res) => {
+  itemsHelper.updatePacked(req.params.id)
+    .then(() => {
+      res.sendStatus(201);
+    });
+});
+
+app.delete('/trip/items/:id', (req, res) => {
+  itemsHelper.deleteTripItem(req.params.id)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
+app.patch('/trip/items/:id', (req, res) => {
+  itemsHelper.editTripItem(req.body)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
+
+//  Response to client get request for trips in database
+//  app.get('/alltrips', (req, res) => {
+//   // Get a Postgres client from the connection pool
+//   pg.connect(connectionString, (err, client) => {
+//     // Handle connection errors
+//     if (err) {
+//       return res.status(500).json({success: false, data: err});
+//     }
+//     // SQL Query > Select Data
+//     const query = client.query('SELECT * FROM Trip ORDER BY start_date;', (err, data) => {
+//       if (err) {
+//         console.log('Error getting trips data from database');
+//       }
+//       console.log('Success getting data from database', data);
+//       res.status(200).send(data);
+//     });
+//   });
+// });
+
 
 app.get('/weather/', (req, res) => {
   const tripStart = '20170827';
@@ -117,6 +195,9 @@ app.get('/forecast/', (req, res) => {
   });
 });
 
+
+const port = process.env.PORT || 3000;
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.listen(port, () => {
   console.log(`Server running at port:${port}`);

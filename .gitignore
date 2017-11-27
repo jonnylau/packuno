@@ -9,3 +9,7 @@ bundle.js
 .floobit
 .floo
 .flooignore
+
+
+client/dist/bundle.js
+package-lock.json
