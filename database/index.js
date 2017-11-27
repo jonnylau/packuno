@@ -3,7 +3,7 @@ const db = require('../models/index.js');
 const Sequelize = require('sequelize');
 const pg = require('pg');
 
-const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
+const sequelize = new Sequelize(process.env.database, process.env.database, process.env.database, {
   dialect: 'postgres',
 });
 
@@ -13,7 +13,9 @@ sequelize.authenticate().then(() => {
   console.log(err);
 });
 
-const createUser = (email, firstName, lastName, googleId) => db.User.findOrCreate({
+db.sequelize.sync({force:true});
+const createUser = (email, firstName, lastName, googleId) => {
+return db.User.findOrCreate({
  where:
       {
  email,
@@ -22,6 +24,7 @@ const createUser = (email, firstName, lastName, googleId) => db.User.findOrCreat
         googleId,
       },
   }).spread((user, create) => { user.get({ plain: true }); });
+}
 
 const findUser = (googleId) => {
   return db.User.findOne({ where: { googleId: googleId } })

@@ -2,15 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import { loggedInAsync as LoggedIn } from '../actions/login.actions';
-import Trip from '../components/Trip.component';
-import Dashboard from '../components/Dashboard.component';
 
 const styles = theme => ({
   container: {
@@ -43,21 +41,12 @@ class Login extends React.Component {
   }
 
   renderComponents() {
+    console.log(this.props.loggedIn);
     if (this.props.isLoggedIn === 'true') {
-    return (<Router>
-      <div>
-        <ul>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/trip">Trip</Link></li>
-        </ul>
-        <Route path="/dashboard" component={Dashboard} />
-        <Route path="/trip" component={Trip} />
-      </div>
-    </Router>)
-  } 
+      return (<h2>You've already logged in!</h2>);
+    }
     return <a href="/auth/google">Log In With Google</a>;
-  
-}
+  }
 
 
   render() {

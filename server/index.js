@@ -13,7 +13,6 @@ const itemsHelper = require('../database/itemsHelpers');
 const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
-const db = require('../database/index.js');
 const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -22,22 +21,25 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 passport.use(new GoogleStrategy(
   {
     clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
-    clientSecret: 'NT4wXnxK6E8UBtEYopvP8M-h',
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    clientSecret: process.env.google_clientID,
+    callbackURL: process.env.google_secret,
     passReqToCallBack: true,
   },
   ((accessToken, refreshToken, profile, done) => {
-    db.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString());
-    done(null, profile);
+    return database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then((result) => {
+      done(null, profile);
+    });
   })
 ));
 
-const isAuthenticated=  (req, res, next) =>{
+const isAuthenticated =  (req, res, next) =>{
+  console.log(req.user);
   if(req.isAuthenticated()){
     return next();
   }
-  res.redirect('/login');
+  res.redirect('/');
 }
+
 const app = express();
 app.use(session({ secret: 'anything', resave: false, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
@@ -52,7 +54,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(function(id, done){
   return new Promise((resolve, reject) => {
   console.log('deserialize user');
-  resolve(db.findUser(id))
+  resolve(database.findUser(id))
   }).then((user) => {
   done(null, user.dataValues);
   });
@@ -66,8 +68,7 @@ app.get('/check/', (req, res) => {
   }
 });
 
-app.get('/', isAuthenticated, (req, res) => {
-app.use(bodyParser.json());
+
 
 // App pages
 
@@ -76,6 +77,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/trip', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+app.get('/trip#', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
@@ -87,8 +91,8 @@ app.get('/dashboard', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-app.post('/items', isAuthenticated, (req, res) => {
-  itemsHelper.add('Socks', 'Clothes');
+app.get('/home', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
 app.get('/auth/google', 
@@ -97,13 +101,11 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', {
-    successRedirect: '/login',
-    failureRedirect: '/',
+    successRedirect: '/home',
+    failureRedirect: '/login',
   })
 );
-app.get('/dashboard', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
-});
+
 
 // API Endpoints
 
@@ -150,27 +152,6 @@ app.patch('/trip/items/:id', (req, res) => {
     });
 });
 
-
-//  Response to client get request for trips in database
-//  app.get('/alltrips', (req, res) => {
-//   // Get a Postgres client from the connection pool
-//   pg.connect(connectionString, (err, client) => {
-//     // Handle connection errors
-//     if (err) {
-//       return res.status(500).json({success: false, data: err});
-//     }
-//     // SQL Query > Select Data
-//     const query = client.query('SELECT * FROM Trip ORDER BY start_date;', (err, data) => {
-//       if (err) {
-//         console.log('Error getting trips data from database');
-//       }
-//       console.log('Success getting data from database', data);
-//       res.status(200).send(data);
-//     });
-//   });
-// });
-
-
 app.get('/weather/', (req, res) => {
   const tripStart = '20170827';
   const tripEnd = '20170905';
@@ -195,10 +176,7 @@ app.get('/forecast/', (req, res) => {
   });
 });
 
-
-const port = process.env.PORT || 3000;
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 app.listen(port, () => {
   console.log(`Server running at port:${port}`);
 });
+
