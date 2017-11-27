@@ -8,7 +8,6 @@ import { userItems, userItemsHasErrored, userItemsIsLoading } from './userItems.
 import editItemMode from './editItemMode.reducers';
 import visibilityFilter from './visibilityFilter.reducers';
 import setUser from './user.reducers';
-import weatherWidget from './weather.reducers';
 import { trips, currentTripId, tripsHasErrored, tripsIsLoading } from './trips.reducers';
 
 const reducer = combineReducers({
