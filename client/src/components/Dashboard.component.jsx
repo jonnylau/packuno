@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import $ from 'jquery';
 import Moment from 'moment';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import AddTripContainer from '../containers/AddTrip.container';
+// import AddTripContainer from '../containers/AddTrip.container';
+import { connect } from 'react-redux';
 
+//Temporarily moved AddTrip.container to bottom of document
+import { addTrip } from '../actions/trips.actions';
+import { selectOldTrip } from '../actions/trips.actions';
+import seedState from '../seedState';
 
 //Styling-related functions
 const handleClick = () => {
@@ -17,16 +22,6 @@ const handleOpen = () => {
   document.getElementById("sidebar").style.display = "block";
   document.getElementById("content").style.marginLeft = "25%";
   document.getElementById("openButton").innerHTML = "";
-};
-
-const identifyPicture = (key, event) => {
-  this.props.onSelect(key);
-  if (this.state.oldTripSelected) {
-    event.target.style.background = 'Transparent';
-  } else {
-    event.target.style.background = 'grey';
-  }
-  this.setState({oldTripSelected: !this.state.oldTripSelected});
 };
 
 const onHover = (event) => {
@@ -52,6 +47,9 @@ class Dashboard extends React.Component {
       departureDate: '',
       returnDate: '',
       oldTripSelected: false,
+      data: seedState,
+      pictures: [],
+      trips: props.trips,
     };
   }
 
@@ -59,24 +57,23 @@ class Dashboard extends React.Component {
     const { destination, departureDate, returnDate } = this.state;
     return (
       <div>
-        <AddTripContainer />
         <div id="sidebar">
-          <button id="closeButton" onClick={handleClick}>&equiv;</button>
+        <button id="closeButton" onClick={handleClick}>&equiv;</button>
           <h1> Packuno </h1>
-          <br />
           <h2> Upcoming Trips </h2>
           <div id="upcoming">
             <ul>
-              {props.data.trips.allIDs.map (element => {
-              const dateLimit = Moment(props.data.trips.byID[element].returnDate);
-              if (props.data.trips.byID[element].returnDate
+              {console.log(this.state.trips)}
+              {this.state.data.trips.allIDs.map (element => {
+              const dateLimit = Moment(this.state.data.trips.byID[element].returnDate);
+              if (this.state.data.trips.byID[element].returnDate
                 != null && now.isBefore(dateLimit)) {
-                return (<li key={props.data.trips.byID[element].id}>
-                  {props.data.trips.byID[element].destination}
+                return (<li key={this.state.data.trips.byID[element].id}>
+                  {this.state.data.trips.byID[element].destination}
                   <br />
-                  From: {props.data.trips.byID[element].departureDate}
+                  From: {this.state.data.trips.byID[element].departureDate}
                   <br />
-                  To: {props.data.trips.byID[element].returnDate}
+                  To: {this.state.data.trips.byID[element].returnDate}
                   <br /></li>
                   );
               }
@@ -99,18 +96,20 @@ class Dashboard extends React.Component {
           <br /><br />
           <div id="menu">
             <ul>
-              {props.data.trips.allIDs.map (element => {
-              const dateLimit = Moment(props.data.trips.byID[element].returnDate);
-              if (props.data.trips.byID[element].returnDate != null && now.isAfter(dateLimit)) {
-                return <li onClick={()=>this.identifyPicture(element, event)} onMouseEnter={e => onHover(e)} onMouseLeave={e => offHover(e)}><a href="#" value={element}>
-                  <img key={element} src={props.pictures[element]} className="image" />
+              {this.state.data.trips.allIDs.map (element => {
+              const dateLimit = Moment(this.state.data.trips.byID[element].returnDate);
+              if (this.state.data.trips.byID[element].returnDate != null && now.isAfter(dateLimit)) {
+                return 
+                <li>
+                <a href="#" value={element}>
                   <br /><br />
-                  {props.data.trips.byID[element].destination}
+                  {this.state.data.trips.byID[element].destination}
                   <br /><br />
-                  From: {props.data.trips.byID[element].departureDate}
+                  From: {this.state.data.trips.byID[element].departureDate}
                   <br /><br />
-                  To: {props.data.trips.byID[element].returnDate}
-                  </a></li>;
+                  To: {this.state.data.trips.byID[element].returnDate}
+                </a>
+                </li>;
                 }
               }
             )}
@@ -126,9 +125,19 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onSelect: PropTypes.func.isRequired,
+const mapStateToProps = (state) => {({trips: state})};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSubmit: (destination, departureDate, returnDate) => {
+      dispatch(addTrip(destination, departureDate, returnDate));
+    },
+    onSelect: (oldTripId) => {
+      dispatch(selectOldTrip(oldTripId));
+    },
+  };
 };
 
-export default Dashboard;
+const AddTripContainer = connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+
+export default AddTripContainer;
