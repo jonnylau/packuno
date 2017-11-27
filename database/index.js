@@ -3,7 +3,7 @@ const db = require('../models/index.js');
 const Sequelize = require('sequelize');
 const pg = require('pg');
 
-const sequelize = new Sequelize(process.env.database, process.env.database, process.env.database, {
+const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
   dialect: 'postgres',
 });
 

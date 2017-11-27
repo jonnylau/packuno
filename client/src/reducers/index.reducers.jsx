@@ -7,6 +7,7 @@ import { items, itemsHasErrored, itemsIsLoading } from './items.reducers';
 import { userItems, userItemsHasErrored, userItemsIsLoading } from './userItems.reducers';
 import editItemMode from './editItemMode.reducers';
 import visibilityFilter from './visibilityFilter.reducers';
+import setUser from './user.reducers';
 
 const reducer = combineReducers({
   items,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   setHistorical,
   setForecast,
   login,
+  setUser,
 });
 
 export default reducer;

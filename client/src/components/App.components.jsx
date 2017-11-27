@@ -3,7 +3,7 @@ import Trip from '../components/Trip.component';
 import Dashboard from '../components/Dashboard.component';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { loggedInAsync as LoggedIn } from '../actions/login.actions';
+import { loggedInAsync as LoggedIn, currentUserAsync as setUser } from '../actions/login.actions';
 
 export class AppContainer extends React.Component {
   constructor(props) {
@@ -14,8 +14,12 @@ export class AppContainer extends React.Component {
     this.props.LoggedIn();
   }
 
+  componentDidMount(){
+    this.props.setUser();
+  }
+
   renderComponents() {
-    console.log(this.props.isLoggedIn);
+    console.log(this.props);
     if (this.props.isLoggedIn === 'true') {
       return (
       <Router>
@@ -40,12 +44,16 @@ export class AppContainer extends React.Component {
 const mapStateToProps = (state, ownProps) =>
   ({
     isLoggedIn: state.login,
+    currentUser: state.setUser,
   });
 
   const mapDispatchToProps = (dispatch, ownProps) => ({
     LoggedIn: () => {
       dispatch(LoggedIn());
     },
+    setUser: () => {
+      dispatch(setUser())
+    }
   });
 
 const App = connect(mapStateToProps, mapDispatchToProps)(AppContainer);

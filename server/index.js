@@ -20,14 +20,14 @@ const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 passport.use(new GoogleStrategy(
   {
-    clientID: process.env.clientid,
-    clientSecret: process.env.googlesecret,
+    clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
+    clientSecret: 'NT4wXnxK6E8UBtEYopvP8M-h',
     callbackURL: 'http://localhost:3000/auth/google/callback',
     passReqToCallBack: true,
   },
   ((accessToken, refreshToken, profile, done) => {
-    return database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then((result) => {
-      done(null, profile);
+    database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then(() => {
+    done(null, profile);
     });
   })
 ));
@@ -98,6 +98,13 @@ app.get('/home', isAuthenticated, (req, res) => {
 app.get('/auth/google', 
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
+
+app.get('/user', (req, res) => {
+  console.log('user', req.user.googleId);
+  database.findUser(req.user.googleId).then((user) => {
+    (res.send(user));
+  });
+});
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', {

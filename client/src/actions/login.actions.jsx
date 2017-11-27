@@ -16,3 +16,22 @@ export const loggedInAsync = bool => (dispatch, getState) => {
     dispatch(loggedIn(result.toString()));
   });
 };
+
+export const currentUser = userID => ({
+  type: 'SET_CURRENT_USER',
+  userId: userID,
+});
+
+export const currentUserAsync = userID => (dispatch, getState) => {
+  const options = {
+    type: 'GET',
+    uri: 'http://localhost:3000/user/',
+  };
+  rp(options).then((result) => {
+    const id = JSON.parse(result);
+    return id.id;
+  }).then((id) => {
+    dispatch(currentUser(id));
+  });
+};
+
