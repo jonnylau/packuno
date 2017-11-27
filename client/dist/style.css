@@ -1,4 +1,4 @@
-#sidebar {
+/*#sidebar {
     position: absolute;
     width: 21%;
     height: 100%;
@@ -15,14 +15,13 @@
     height: 100%;
     background-color: lightgrey;
     padding: 25px;
-}
+}*/
 
 body {
     margin:0;
-    padding: 20px;
     font-family: 'Roboto', sans-serif;
 }
-
+/*
 h2 {
   font-size: 20px;
 }
@@ -101,7 +100,7 @@ h2 {
   height: 200px;
   pointer-events: none;
 }
-
+*/
 /*** Packing list ***/
 
  div[class*="MuiListItem-container"] button{

@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
@@ -14,13 +15,15 @@ import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
+import Trip from '../components/Trip.component';
+import Dashboard from '../components/Dashboard.component';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     width: '100%',
-    height: 430,
+    height: '100%',
     marginTop: theme.spacing.unit * 3,
     zIndex: 1,
     overflow: 'hidden',
@@ -110,7 +113,7 @@ const styles = theme => ({
 
 class PersistentDrawer extends React.Component {
   state = {
-    open: false,
+    open: true,
     anchor: 'left',
   };
 
@@ -148,9 +151,9 @@ class PersistentDrawer extends React.Component {
             </IconButton>
           </div>
           <Divider />
-          <List className={classes.list}>{mailFolderListItems}</List>
+          <List className={classes.list}>{['one', 'two', 'three']}</List>
           <Divider />
-          <List className={classes.list}>{otherMailFolderListItems}</List>
+          <List className={classes.list}>{['one', 'two', 'three']}</List>
         </div>
       </Drawer>
     );
@@ -166,17 +169,6 @@ class PersistentDrawer extends React.Component {
 
     return (
       <div className={classes.root}>
-        <TextField
-          id="persistent-anchor"
-          select
-          label="Anchor"
-          value={anchor}
-          onChange={this.handleChangeAnchor}
-          margin="normal"
-        >
-          <MenuItem value="left">left</MenuItem>
-          <MenuItem value="right">right</MenuItem>
-        </TextField>
         <div className={classes.appFrame}>
           <AppBar
             className={classNames(classes.appBar, {
@@ -205,9 +197,19 @@ class PersistentDrawer extends React.Component {
               [classes[`contentShift-${anchor}`]]: open,
             })}
           >
-            <Typography type="body1">
-              {'You think water moves fast? You should see ice.'}
-            </Typography>
+            <Router>
+              <div>
+                <ul>
+                  <li><Link to="/dashboard">Dashboard</Link></li>
+                  <li><Link to="/trip">Trip</Link></li>
+                </ul>
+
+                <hr />
+
+                <Route path="/dashboard" component={Dashboard} />
+                <Route path="/trip" component={Trip} />
+              </div>
+            </Router>
           </main>
           {after}
         </div>

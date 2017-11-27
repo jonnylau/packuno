@@ -10,10 +10,7 @@ import lime from 'material-ui/colors/lime';
 import thunk from 'redux-thunk';
 import reducer from './reducers/index.reducers';
 import seedState from './seedState';
-import Trip from './components/Trip.component';
 import App from './components/App.component';
-import Dashboard from './components/Dashboard.component';
-
 
 const store = createStore(
   reducer,
@@ -36,24 +33,35 @@ const theme = createMuiTheme({
 });
 
 render(
-  <Provider store={store}>
+ <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <Router>
-        <div>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><Link to="/trip">Trip</Link></li>
-          </ul>
-
-          <hr />
-
-          <Route path="/" component={App} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/trip" component={Trip} />
-        </div>
-      </Router>
+        <Route path="/" component={App} />
+    </Router>
     </MuiThemeProvider>
   </Provider>
   , document.getElementById('app')
 );
+
+// render(
+//  <Provider store={store}>
+//     <MuiThemeProvider theme={theme}>
+//       <Router>
+//         <div>
+//           <ul>
+//             <li><Link to="/">Home</Link></li>
+//             <li><Link to="/dashboard">Dashboard</Link></li>
+//             <li><Link to="/trip">Trip</Link></li>
+//           </ul>
+
+//           <hr />
+
+//           <Route path="/" component={App} />
+//           <Route path="/dashboard" component={Dashboard} />
+//           <Route path="/trip" component={Trip} />
+//         </div>
+//       </Router>
+//     </MuiThemeProvider>
+//   </Provider>
+//   , document.getElementById('app')
+// );
