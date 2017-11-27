@@ -8,6 +8,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require('passport');
 const Promise = require('bluebird');
 const itemsHelper = require('../database/itemsHelpers');
+const tripsHelper = require('../database/tripsHelpers');
 
 // FILL IN DATABASE FILE --> 
 const database = require('../database/index.js');
@@ -115,6 +116,28 @@ app.get('/auth/google/callback',
 
 
 // API Endpoints
+
+app.get('/users/:userId/trips', (req, res) => {
+  tripsHelper.getTrips(req.params.userId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.post('/trips', (req, res) => {
+  tripsHelper.add(req.body)
+    .then((results) => {
+      res.send({ id: results });
+    });
+});
+
+app.post('/trips/items', (req, res) => {
+  tripsHelper.addItemsToTrip(req.body)
+    .then(() => {
+      res.sendStatus(201);
+    });
+});
+
 
 app.post('/items', (req, res) => {
   itemsHelper.add(req.body)

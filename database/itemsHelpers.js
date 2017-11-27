@@ -3,7 +3,7 @@ const db = require('../models/index.js');
 const getUserItems = userId => (
   db.Item.findAll({
     attributes: ['item', 'category'],
-    where: { userId },
+    where: { userId }, 
   })
 );
 
