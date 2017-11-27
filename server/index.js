@@ -3,8 +3,10 @@ const bodyParser = require('body-parser');
 const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
 const rp = require('request-promise');
+const itemsHelper = require('../database/itemsHelpers');
 
-// FILL IN DATABASE FILE --> const database = require(../database/index.js);
+// FILL IN DATABASE FILE --> 
+const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
 // FILL IN DATABASE FILE --> const connectionString = process.env.DATABASE_URL
@@ -12,13 +14,70 @@ const pg = require('pg');
 const app = express();
 
 app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(bodyParser.json());
+
+// App pages
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
 
 app.get('/trip', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-//Response to client get request for trips in database
-// app.get('/alltrips', (req, res) => {
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+
+// API Endpoints
+
+app.post('/items', (req, res) => {
+  itemsHelper.add(req.body)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.get('/users/:userId/items', (req, res) => {
+  itemsHelper.getUserItems(req.params.userId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.get('/trips/:tripId/items', (req, res) => {
+  itemsHelper.getTripItems(req.params.tripId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+
+app.patch('/trip/items/:id/packed', (req, res) => {
+  itemsHelper.updatePacked(req.params.id)
+    .then(() => {
+      res.sendStatus(201);
+    });
+});
+
+app.delete('/trip/items/:id', (req, res) => {
+  itemsHelper.deleteTripItem(req.params.id)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
+app.patch('/trip/items/:id', (req, res) => {
+  itemsHelper.editTripItem(req.body)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
+
+//  Response to client get request for trips in database
+//  app.get('/alltrips', (req, res) => {
 //   // Get a Postgres client from the connection pool
 //   pg.connect(connectionString, (err, client) => {
 //     // Handle connection errors
@@ -36,9 +95,6 @@ app.get('/trip', (req, res) => {
 //   });
 // });
 
-const port = process.env.PORT || 3000;
-const jsonParser = bodyParser.json();
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.get('/weather/', (req, res) => {
   const tripStart = '20170827';
@@ -64,6 +120,10 @@ app.get('/forecast/', (req, res) => {
     res.send(res.body);
   });
 });
+
+
+const port = process.env.PORT || 3000;
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 app.listen(port, () => {
   console.log(`Server running at port:${port}`);

@@ -31,5 +31,4 @@ const isoCode = (name) => {
   return grabWeather(countryInfo);
 };
 
-
 module.exports.isoCode = isoCode;

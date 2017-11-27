@@ -102,6 +102,16 @@ h2 {
   pointer-events: none;
 }
 
+/*** Packing list ***/
+
+ div[class*="MuiListItem-container"] button{
+  visibility: hidden;
+}
+
+ div[class*="MuiListItem-container"]:hover button{
+  visibility: visible;
+}
+
 .changeHover: hover {
    background: grey;
 }

@@ -1,29 +1,81 @@
 import _ from 'underscore';
 
+
+export const itemsHasErrored = (state = false, action) => {
+  if (action.type === 'ITEMS_HAS_ERRORED') {
+    return action.hasErrored;
+  }
+  return state;
+};
+
+export const itemsIsLoading = (state = false, action) => {
+  if (action.type === 'ITEMS_IS_LOADING') {
+    return action.isLoading;
+  }
+  return state;
+};
+
+
 const defaultState = {
   byId: {},
   allIds: [],
   categories: [],
 };
 
-const items = (state = defaultState, action) => {
-  if (action.type === 'ADD_ITEM') {
+
+export const items = (state = defaultState, action) => {
+
+  if (action.type === 'ITEMS_FETCH_DATA_SUCCESS') {
+    return action.items;
+  }
+
+  if (action.type === 'ADD_ITEM_SUCCESS') {
+    const { id, item, category, quantity, packed, itemId } = action;
+    return {
+      ...state,
+      byId: {
+        ...state.byId,
+        [id]: {
+          id,
+          item,
+          category,
+          quantity,
+          packed,
+          itemId,
+        },
+      },
+      allIds: [...state.allIds, id],
+      categories: _.uniq([...state.categories, category]),
+    };
+  }
+
+  if (action.type === 'DELETE_ITEM') {
+    const newState = { ...state };
+    delete newState.byId[action.id];
+    newState.allIds = _.without(newState.allIds, action.id);
+    newState.categories = _.uniq(newState.allIds.map(id => newState.byId[id].category));
+    return newState;
+  }
+
+  if (action.type === 'EDIT_ITEM') {
     return {
       ...state,
       byId: {
         ...state.byId,
         [action.id]: {
+          ...state.byId[action.id],
           id: action.id,
           item: action.item,
           category: action.category,
-          packed: false,
+          quantity: action.quantity,
         },
       },
-      allIds: [...state.allIds, action.id],
-      categories: _.uniq([...state.categories, action.category]),
+      categories: _.uniq(state.allIds.map(id => state.byId[id].category).concat([action.category])),
     };
-  } else if (action.type === 'TOGGLE_PACKED') {
-    let item = state.byId[action.id];
+  }
+
+  if (action.type === 'TOGGLE_PACKED') {
+    const item = state.byId[action.id];
     return {
       ...state,
       byId: {
@@ -38,34 +90,3 @@ const items = (state = defaultState, action) => {
 
   return state;
 };
-
-
-export default items;
-
-
-
-
-
-// Old version for reference (for now)
-
-// const packingList = (state = [], action) => {
-//   if (action.type === 'ADD_ITEM') {
-//     return [...state,
-//       {
-//         id: action.id,
-//         item: action.item,
-//         category: action.category,
-//         packed: false,
-//       }];
-//   } else if (action.type === 'TOGGLE_PACKED') {
-//     return state.map((packingItem) => {
-//       return (packingItem.id !== action.id)
-//         ? { ...packingItem, packed: !packingItem.packed }
-//         : packingItem;
-//     });
-//   }
-//   return state;
-// };
-
-
-// export default packingList;

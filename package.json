@@ -15,6 +15,7 @@
     "node": ">=6.4.0"
   },
   "dependencies": {
+    "autosuggest-highlight": "^3.1.1",
     "axios": "^0.17.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",
@@ -29,11 +30,13 @@
     "material-ui": "^1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.17",
     "mocha": "^4.0.1",
+    "mysql2": "^1.5.1",
     "path": "^0.12.7",
-    "pg": "^7.4.0",
+    "pg": "6.4.2",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",
+    "react-autosuggest": "^9.3.2",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",

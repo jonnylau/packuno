@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import isoCode from '../utils/weatherHelper';
 import Promise from 'bluebird';
 import Weather from '../components/Weather.component.jsx';
 import { setHistoricalAsync as Historical, setForecastAsync as Forecast } from '../actions/weather.actions.jsx';
