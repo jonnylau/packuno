@@ -4,6 +4,7 @@ const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
 const rp = require('request-promise');
 const itemsHelper = require('../database/itemsHelpers');
+const tripsHelper = require('../database/tripsHelpers');
 
 // FILL IN DATABASE FILE --> 
 const database = require('../database/index.js');
@@ -31,6 +32,28 @@ app.get('/dashboard', (req, res) => {
 });
 
 // API Endpoints
+
+app.get('/users/:userId/trips', (req, res) => {
+  tripsHelper.getTrips(req.params.userId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
+app.post('/trips', (req, res) => {
+  tripsHelper.add(req.body)
+    .then((results) => {
+      res.send({ id: results });
+    });
+});
+
+app.post('/trips/items', (req, res) => {
+  tripsHelper.addItemsToTrip(req.body)
+    .then(() => {
+      res.sendStatus(201);
+    });
+});
+
 
 app.post('/items', (req, res) => {
   itemsHelper.add(req.body)
@@ -74,26 +97,6 @@ app.patch('/trip/items/:id', (req, res) => {
       res.sendStatus(200);
     });
 });
-
-
-//  Response to client get request for trips in database
-//  app.get('/alltrips', (req, res) => {
-//   // Get a Postgres client from the connection pool
-//   pg.connect(connectionString, (err, client) => {
-//     // Handle connection errors
-//     if (err) {
-//       return res.status(500).json({success: false, data: err});
-//     }
-//     // SQL Query > Select Data
-//     const query = client.query('SELECT * FROM Trip ORDER BY start_date;', (err, data) => {
-//       if (err) {
-//         console.log('Error getting trips data from database');
-//       }
-//       console.log('Success getting data from database', data);
-//       res.status(200).send(data);
-//     });
-//   });
-// });
 
 
 app.get('/weather/', (req, res) => {
