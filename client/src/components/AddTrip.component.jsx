@@ -15,6 +15,7 @@ const styles = theme => ({
     background: theme.palette.background.paper,
     margin: 20,
     marginBottom: 40,
+    padding: 20,
   },
   textField: {
     marginLeft: 20,
@@ -98,6 +99,8 @@ const styles = theme => ({
   saveButton: {
     color: 'white',
     float: 'right',
+    position: 'relative',
+    margin: 10,
   },
 });
 
@@ -210,10 +213,11 @@ class AddTrip extends React.Component {
                 </div>
                 ))}
             </div>
-          </div>
             <Button type="submit" raised color="primary" className={classes.saveButton}>
               Save
             </Button>
+            <br />
+          </div>
         </form>
       </div>
       );

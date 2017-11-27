@@ -2,14 +2,8 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('TripItems', {
-    id: {
-      allowNull: false,
-      primaryKey: true,
-      type: Sequelize.UUID,
-      defaultValue: Sequelize.UUIDV4,
-    },
     tripId: {
-      type: Sequelize.UUID,
+      type: Sequelize.INTEGER,
       onDelete: 'CASCADE',
       references: {
         model: 'Trips',
@@ -17,7 +11,7 @@ module.exports = {
       },
     },
     itemId: {
-      type: Sequelize.UUID,
+      type: Sequelize.INTEGER,
       onDelete: 'CASCADE',
       references: {
         model: 'Items',

@@ -18,8 +18,8 @@ export const setHistoricalAsync = () => (dispatch, getState) => {
     type: 'GET',
     uri: 'http://localhost:3000/weather',
   };
-  const attack = rp(options);
-  return attack.then((result) => {
+  const weather = rp(options);
+  return weather.then((result) => {
     dispatch(setHistorical(result));
   });
 };

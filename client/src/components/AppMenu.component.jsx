@@ -17,14 +17,14 @@ import ChevronLeftIcon from 'material-ui-icons/ChevronLeft';
 import ChevronRightIcon from 'material-ui-icons/ChevronRight';
 import Trip from '../components/Trip.component';
 import Dashboard from '../components/Dashboard.component';
+import App from '../components/App.components';
 
 const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
     width: '100%',
-    height: '100%',
-    marginTop: theme.spacing.unit * 3,
+    height: 800,
     zIndex: 1,
     overflow: 'hidden',
   },
@@ -35,6 +35,7 @@ const styles = theme => ({
     height: '100%',
   },
   appBar: {
+    color: 'white',
     position: 'absolute',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -55,6 +56,7 @@ const styles = theme => ({
     marginRight: drawerWidth,
   },
   menuButton: {
+    color: 'white',
     marginLeft: 12,
     marginRight: 20,
   },
@@ -113,8 +115,7 @@ const styles = theme => ({
 
 class PersistentDrawer extends React.Component {
   state = {
-    open: true,
-    anchor: 'left',
+    open: false,
   };
 
   handleDrawerOpen = () => {
@@ -125,47 +126,9 @@ class PersistentDrawer extends React.Component {
     this.setState({ open: false });
   };
 
-  handleChangeAnchor = event => {
-    this.setState({
-      anchor: event.target.value,
-    });
-  };
-
   render() {
     const { classes, theme } = this.props;
-    const { anchor, open } = this.state;
-
-    const drawer = (
-      <Drawer
-        type="persistent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor={anchor}
-        open={open}
-      >
-        <div className={classes.drawerInner}>
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
-          <Divider />
-          <List className={classes.list}>{['one', 'two', 'three']}</List>
-          <Divider />
-          <List className={classes.list}>{['one', 'two', 'three']}</List>
-        </div>
-      </Drawer>
-    );
-
-    let before = null;
-    let after = null;
-
-    if (anchor === 'left') {
-      before = drawer;
-    } else {
-      after = drawer;
-    }
+    const { open } = this.state;
 
     return (
       <div className={classes.root}>
@@ -173,7 +136,7 @@ class PersistentDrawer extends React.Component {
           <AppBar
             className={classNames(classes.appBar, {
               [classes.appBarShift]: open,
-              [classes[`appBarShift-${anchor}`]]: open,
+              [classes[`appBarShift-left`]]: open,
             })}
           >
             <Toolbar disableGutters={!open}>
@@ -186,32 +149,38 @@ class PersistentDrawer extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography type="title" color="inherit" noWrap>
-                Persistent drawer
+                Packuno
               </Typography>
             </Toolbar>
           </AppBar>
-          {before}
+           <Drawer
+            type="persistent"
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            anchor='left'
+            open={open}
+          >
+            <div className={classes.drawerInner}>
+              <div className={classes.drawerHeader}>
+                <IconButton onClick={this.handleDrawerClose}>
+                  {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                </IconButton>
+              </div>
+              <Divider />
+              <List className={classes.list}>{['one', 'two', 'three']}</List>
+              <Divider />
+              <List className={classes.list}>{['one', 'two', 'three']}</List>
+            </div>
+          </Drawer>
           <main
-            className={classNames(classes.content, classes[`content-${anchor}`], {
+            className={classNames(classes.content, classes[`content-left`], {
               [classes.contentShift]: open,
-              [classes[`contentShift-${anchor}`]]: open,
+              [classes[`contentShift-left`]]: open,
             })}
           >
-            <Router>
-              <div>
-                <ul>
-                  <li><Link to="/dashboard">Dashboard</Link></li>
-                  <li><Link to="/trip">Trip</Link></li>
-                </ul>
-
-                <hr />
-
-                <Route path="/dashboard" component={Dashboard} />
-                <Route path="/trip" component={Trip} />
-              </div>
-            </Router>
+            <App />
           </main>
-          {after}
         </div>
       </div>
     );

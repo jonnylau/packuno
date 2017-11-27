@@ -16,10 +16,14 @@
     background-color: lightgrey;
     padding: 25px;
 }*/
+html {
+  min-height:100%;
+}
 
 body {
     margin:0;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
 }
 /*
 h2 {
