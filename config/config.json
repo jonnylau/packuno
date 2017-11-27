@@ -1,0 +1,19 @@
+{
+  "development": {
+     "use_env_variable" : "DATABASE_URL"
+  }
+  // "test": {
+  //   "username": process.env.database,
+  //   "password": process.env.database,
+  //   "database": process.env.database,
+  //   "host": "127.0.0.1",
+  //   "dialect": "postgres"
+  // },
+  // "production": {
+  //   "username": process.env.database,
+  //   "password": process.env.database,
+  //   "database": process.env.database,
+  //   "host": "127.0.0.1",
+  //   "dialect": "postgres"
+  // }
+}
