@@ -1,18 +1,33 @@
-// const Sequelize = require('sequelize');
-// const pg = require('pg');
+const db = require('../models/index.js');
 
-// const sequelize = new Sequelize('packuno', 'packuno', 'scoobywasmydog225', {
-//   dialect: 'postgres',
-// });
+const Sequelize = require('sequelize');
+const pg = require('pg');
 
-// sequelize.authenticate().then(() => {
-//   console.log('Success!');
-// }).catch((err) => {
-//   console.log(err);
-// });
+const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
+  dialect: 'postgres',
+});
 
-// const Project = sequelize.define('project', {
-//   title: Sequelize.STRING,
-//   description: Sequelize.STRING,
-// });
+sequelize.authenticate().then(() => {
+  console.log('Success!');
+}).catch((err) => {
+  console.log(err);
+});
+
+const createUser = (email, firstName, lastName, googleId) => db.User.findOrCreate({
+ where:
+      {
+ email,
+        first_name: firstName,
+        last_name: lastName,
+        googleId,
+      },
+  }).spread((user, create) => { user.get({ plain: true }); });
+
+const findUser = (googleId) => {
+  return db.User.findOne({ where: { googleId: googleId } })
+    .then(user => user);
+};
+
+module.exports.createUser = createUser;
+module.exports.findUser = findUser;
 

@@ -2,23 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import Promise from 'bluebird';
-import Weather from '../components/Weather.component.jsx';
-import { setHistoricalAsync as Historical, setForecastAsync as Forecast } from '../actions/weather.actions.jsx';
+import Weather from '../components/Weather.component';
+import { setHistoricalAsync as Historical, setForecastAsync as Forecast } from '../actions/weather.actions';
 
 export class WeatherContainer extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.Forecast();    
     this.props.Historical();
-    console.log(store.getState());
-    
   }
 
   renderComponents() {
-    if (this.props.historical.length < 1 && this.props.forecast.length < 1) {
+    if (this.props.historical === undefined && this.props.forecast === undefined) {
       return (<div>Loading</div>);
     }
     return (<Weather weatherFilter={this.props.weatherFilter} historical={this.props.historical} forecast={this.props.forecast}/>);
