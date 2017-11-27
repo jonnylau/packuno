@@ -30,10 +30,18 @@ const add = (tripInfo) => {
     .then(tripItem => tripItem.get());
 };
 
-const deleteTripItem = (tripItemId) => {
-  db.TripItem.findById(tripItemId)
-    .then(tripItem => tripItem.destroy());
-};
+const deleteTripItem = id => (
+  db.TripItem.findById(id)
+    .then(tripItem => tripItem.destroy())
+);
+
+const updatePacked = id => (
+  db.TripItem.findById(id)
+    .then((tripItem) => {
+      const packed = !tripItem.get('packed');
+      tripItem.update({ packed });
+    })
+);
 
 
   // db.Trip.update(
@@ -58,4 +66,5 @@ module.exports.getUserItems = getUserItems;
 module.exports.getTripItems = getTripItems;
 module.exports.add = add;
 module.exports.deleteTripItem = deleteTripItem;
+module.exports.updatePacked = updatePacked;
 // module.exports.newUser = newUser;

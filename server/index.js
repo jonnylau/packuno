@@ -16,6 +16,8 @@ const app = express();
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 app.use(bodyParser.json());
 
+// App pages
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
@@ -28,6 +30,8 @@ app.get('/dashboard', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
+// API Endpoints
+
 app.post('/items', (req, res) => {
   itemsHelper.add(req.body)
     .then((results) => {
@@ -35,23 +39,37 @@ app.post('/items', (req, res) => {
     });
 });
 
-app.get('/:userId/userItems', (req, res) => {
-  return itemsHelper.getUserItems(req.params.userId)
+app.get('/users/:userId/items', (req, res) => {
+  itemsHelper.getUserItems(req.params.userId)
     .then((results) => {
       res.send(results);
     });
 });
 
-app.get('/:tripId/tripItems', (req, res) => {
-  return itemsHelper.getTripItems(req.params.tripId)
+app.get('/trips/:tripId/items', (req, res) => {
+  itemsHelper.getTripItems(req.params.tripId)
     .then((results) => {
       res.send(results);
     });
 });
 
+app.delete('/trip/items/:id', (req, res) => {
+  itemsHelper.deleteTripItem(req.params.id)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
 
-//Response to client get request for trips in database
-// app.get('/alltrips', (req, res) => {
+app.patch('/trip/items/:id/packed', (req, res) => {
+  itemsHelper.updatePacked(req.params.id)
+    .then(() => {
+      res.sendStatus(200);
+    });
+});
+
+
+//  Response to client get request for trips in database
+//  app.get('/alltrips', (req, res) => {
 //   // Get a Postgres client from the connection pool
 //   pg.connect(connectionString, (err, client) => {
 //     // Handle connection errors

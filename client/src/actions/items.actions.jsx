@@ -47,7 +47,7 @@ export const itemsFetchDataSuccess = (data) => {
 export const itemsFetchData = tripId => (dispatch) => {
   dispatch(itemsIsLoading(true));
 
-  axios.get(`/${tripId}/tripItems`)
+  axios.get(`/trips/${tripId}/items`)
     .then((response) => {
       dispatch(itemsIsLoading(false));
       dispatch(itemsFetchDataSuccess(response.data));
@@ -56,7 +56,7 @@ export const itemsFetchData = tripId => (dispatch) => {
 };
 
 
-// Add item
+// Basic functionality
 
 export const addItem = (item, category, quantity, userId, tripId) => (dispatch) => {
   axios.post('/items', {
@@ -81,15 +81,23 @@ export const addItem = (item, category, quantity, userId, tripId) => (dispatch) 
 };
 
 
-export const togglePacked = id => ({
-  type: 'TOGGLE_PACKED',
-  id,
-});
+export const togglePacked = (id) => {
+  axios.patch(`/trip/items/${id}/packed`);
 
-export const deleteItem = id => ({
-  type: 'DELETE_ITEM',
-  id,
-});
+  return {
+    type: 'TOGGLE_PACKED',
+    id,
+  };
+};
+
+export const deleteItem = (id) => {
+  axios.delete(`/trip/items/${id}`);
+
+  return {
+    type: 'DELETE_ITEM',
+    id,
+  };
+};
 
 export const editItem = (id, item, category, quantity) => ({
   type: 'EDIT_ITEM',

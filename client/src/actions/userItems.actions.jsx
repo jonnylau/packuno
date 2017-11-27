@@ -31,7 +31,7 @@ export function userItemsFetchData(userId) {
   return (dispatch) => {
     dispatch(userItemsIsLoading(true));
 
-    axios.get(`/${userId}/userItems`)
+    axios.get(`/users/${userId}/items`)
       .then((response) => {
         dispatch(userItemsIsLoading(false));
         dispatch(userItemsFetchDataSuccess(response.data));
