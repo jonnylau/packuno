@@ -1,34 +1,38 @@
+const db = require('../models/index.js');
+
 const Sequelize = require('sequelize');
 const pg = require('pg');
-const db = require('../models/index.js');
 
 const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
   dialect: 'postgres',
 });
 
-
-// Uncomment sync line if you need to drop tables (i.e. if models change)
 sequelize.authenticate().then(() => {
   console.log('Success!');
-  // db.sequelize.sync({force: true});
 }).catch((err) => {
   console.log(err);
 });
 
+db.sequelize.sync({force:true});
+const createUser = (email, firstName, lastName, googleId) => {
+return db.User.findOrCreate({
+ where:
+      {
+ email,
+        first_name: firstName,
+        last_name: lastName,
+        googleId,
+      },
+  }).spread((user, create) => { user.get({ plain: true }); });
+}
 
-// Uncomment if seed data is needed
+const findUser = (googleId) => {
+  return db.User.findOne({ where: { googleId: googleId } })
+    .then(user => user);
+};
 
-// db.User.create({ email: 'test7email@gmail.com', first_name: 'Elena', last_name: 'Czubiak' }).then(user => user.get({
-//   plain: true,
-// })).then((user) => {
-//   return db.Trip.create({ destination: 'Mexico City', userId: user.id, start_date: new Date(), end_date: new Date() });
-// }).then((trip)=>{
-//   console.log(trip);
-// });
+module.exports.createUser = createUser;
+module.exports.findUser = findUser;
 
 
-const Project = sequelize.define('project', {
-  title: Sequelize.STRING,
-  description: Sequelize.STRING,
-});
 

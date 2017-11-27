@@ -1,6 +1,5 @@
 node_modules
 docs
-config
 *.DS_STORE
 bundle.js
 

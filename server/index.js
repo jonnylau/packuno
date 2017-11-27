@@ -2,7 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
+const session = require('express-session')
 const rp = require('request-promise');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const passport = require('passport');
+const Promise = require('bluebird');
 const itemsHelper = require('../database/itemsHelpers');
 const tripsHelper = require('../database/tripsHelpers');
 
@@ -10,12 +14,62 @@ const tripsHelper = require('../database/tripsHelpers');
 const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
-// FILL IN DATABASE FILE --> const connectionString = process.env.DATABASE_URL
+const port = process.env.PORT || 3000;
+const jsonParser = bodyParser.json();
+const urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+
+passport.use(new GoogleStrategy(
+  {
+    clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
+    clientSecret: 'NT4wXnxK6E8UBtEYopvP8M-h',
+    callbackURL: 'http://localhost:3000/auth/google/callback',
+    passReqToCallBack: true,
+  },
+  ((accessToken, refreshToken, profile, done) => {
+    database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then(() => {
+    done(null, profile);
+    });
+  })
+));
+
+const isAuthenticated =  (req, res, next) =>{
+  console.log(req.user);
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect('/');
+}
 
 const app = express();
-
+app.use(session({ secret: 'anything', resave: false, saveUninitialized: true }));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
-app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.serializeUser((user, done) => {
+  console.log('serialize User');
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done){
+  return new Promise((resolve, reject) => {
+  console.log('deserialize user');
+  resolve(database.findUser(id))
+  }).then((user) => {
+  done(null, user.dataValues);
+  });
+});
+
+app.get('/check/', (req, res) => {
+  if(req.isAuthenticated()){
+    res.send(true);
+  } else {
+  res.send(false);
+  }
+});
+
+
 
 // App pages
 
@@ -23,13 +77,43 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-app.get('/trip', (req, res) => {
+app.get('/trip', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+app.get('/trip#', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-app.get('/dashboard', (req, res) => {
+app.get('/login', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
+
+app.get('/dashboard', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+
+app.get('/home', isAuthenticated, (req, res) => {
+  res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
+});
+
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/user', (req, res) => {
+  console.log('user', req.user.googleId);
+  database.findUser(req.user.googleId).then((user) => {
+    (res.send(user));
+  });
+});
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', {
+    successRedirect: '/home',
+    failureRedirect: '/login',
+  })
+);
+
 
 // API Endpoints
 
@@ -98,7 +182,6 @@ app.patch('/trip/items/:id', (req, res) => {
     });
 });
 
-
 app.get('/weather/', (req, res) => {
   const tripStart = '20170827';
   const tripEnd = '20170905';
@@ -107,7 +190,6 @@ app.get('/weather/', (req, res) => {
     const startMonth = Number(tripStart.slice(4, 6)) - 1;
     const endMonth = Number(tripEnd.slice(4, 6)) - 1;
     const rendered = [[months[startMonth], result[startMonth]], [months[endMonth], result[endMonth]]];
-    console.log(rendered);
     res.body = JSON.stringify(rendered);
     res.send(res.body);
   });
@@ -116,18 +198,15 @@ app.get('/weather/', (req, res) => {
 app.get('/forecast/', (req, res) => {
   const options = {
     type: 'GET',
-    uri: `http://api.wunderground.com/api/1acaa967ad91ec5b/forecast10day/q/CA/San_Francisco.json`,
+    uri: 'http://api.wunderground.com/api/1acaa967ad91ec5b/forecast10day/q/CA/San_Francisco.json',
   };
   rp(options).then(result => result).then((result) => {
-    res.body= result;
+    res.body = result;
     res.send(res.body);
   });
 });
 
-
-const port = process.env.PORT || 3000;
-const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
 app.listen(port, () => {
   console.log(`Server running at port:${port}`);
 });
+
