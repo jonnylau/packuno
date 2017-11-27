@@ -47,10 +47,17 @@ export const trips = (state = defaultState, action) => {
     };
   }
 
-  if (action.type === 'SELECT_TRIP') {
+  if (action.type === 'UPDATE_PHOTO_URL') {
+    const { id, photoUrl } = action;
     return {
       ...state,
-      oldTripId: action.id,
+      byId: {
+        ...state.byId,
+        [id]: {
+          ...state.byId[id],
+          photoUrl,
+        },
+      },
     };
   }
 

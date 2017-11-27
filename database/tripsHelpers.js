@@ -5,6 +5,10 @@ const add = tripInfo => (
     .then(newTrip => newTrip.get('id'))
 );
 
+const getTrips = userId => (
+  db.Trip.findAll({ where: { userId } })
+);
+
 const addItemsToTrip = (tripsInfo) => {
   const { tripId, oldTripId } = tripsInfo;
 
@@ -23,3 +27,4 @@ const addItemsToTrip = (tripsInfo) => {
 
 module.exports.add = add;
 module.exports.addItemsToTrip = addItemsToTrip;
+module.exports.getTrips = getTrips;

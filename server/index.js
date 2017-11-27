@@ -33,6 +33,13 @@ app.get('/dashboard', (req, res) => {
 
 // API Endpoints
 
+app.get('/users/:userId/trips', (req, res) => {
+  tripsHelper.getTrips(req.params.userId)
+    .then((results) => {
+      res.send(results);
+    });
+});
+
 app.post('/trips', (req, res) => {
   tripsHelper.add(req.body)
     .then((results) => {

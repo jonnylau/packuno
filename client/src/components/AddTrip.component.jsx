@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import moment from 'moment';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
@@ -109,6 +110,11 @@ class AddTrip extends React.Component {
     selectedTrip: null,
   };
 
+  componentDidMount = () => {
+    const { fetchTrips, userId } = this.props;
+    fetchTrips(userId);
+  }
+
   onFormSubmit = (e) => {
     const { destination, startDate, endDate, selectedTrip } = this.state;
     const { onSubmit, userId } = this.props;
@@ -125,7 +131,7 @@ class AddTrip extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { trips, recentTrips, classes } = this.props;
 
 
     return (
@@ -183,8 +189,8 @@ class AddTrip extends React.Component {
           </div>
           <div className={classes.stepContent}>
             <div className={classes.tripsContainer}>
-              <div 
-                key={0} 
+              <div
+                key={0}
                 onClick={() => this.setState({selectedTrip: 0})}
                 className={(0 === this.state.selectedTrip) ? classes.selectedTripBox : classes.tripBox}
               >
@@ -192,35 +198,22 @@ class AddTrip extends React.Component {
                   Skip
                 </div>
               </div>
-              <div 
-                key={1} 
-                onClick={() => this.setState({selectedTrip: 1})}
-                className={(1 === this.state.selectedTrip) ? classes.selectedTripBox : classes.tripBox}
-              >
-                <img src="https://static.pexels.com/photos/6934/beach-vacation-water-summer.jpg" className={classes.photo} />
-                <h4>Destination</h4>
-                <span>{moment('2017-05-14').format('MMMM YYYY')}</span>
-              </div>
-              <div className={classes.tripBox}>
-                <img src="https://static.pexels.com/photos/6934/beach-vacation-water-summer.jpg" className={classes.photo} />
-                <h4>Destination</h4>
-                <span>{moment('2017-05-14').format('MMMM YYYY')}</span>
-              </div>
-              <div className={classes.tripBox}>
-                <img src="https://static.pexels.com/photos/6934/beach-vacation-water-summer.jpg" className={classes.photo} />
-                <h4>Destination</h4>
-                <span>{moment('2017-05-14').format('MMMM YYYY')}</span>
-              </div>
-              <div className={classes.tripBox}>
-                <img src="https://static.pexels.com/photos/6934/beach-vacation-water-summer.jpg" className={classes.photo} />
-                <h4>Destination</h4>
-                <span className={classes.tripDetail} >{moment('2017-05-14').format('MMMM YYYY')}</span>
-              </div>
+              {recentTrips.map(tripId => (
+                <div
+                  key={tripId}
+                  onClick={() => this.setState({ selectedTrip: tripId })}
+                  className={(this.state.selectedTrip === tripId) ? classes.selectedTripBox : classes.tripBox}
+                >
+                  <img src={ trips.byId[tripId].photoUrl} className={classes.photo} />
+                  <h4>{ trips.byId[tripId].destination }</h4>
+                  <span>{moment(trips.byId[tripId].startDate).format('MMMM YYYY')}</span>
+                </div>
+                ))}
             </div>
           </div>
-          <Button type="submit" raised color="primary" className={classes.saveButton}>
-            Save
-          </Button>
+            <Button type="submit" raised color="primary" className={classes.saveButton}>
+              Save
+            </Button>
         </form>
       </div>
       );
@@ -229,6 +222,9 @@ class AddTrip extends React.Component {
 
 AddTrip.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  fetchTrips: PropTypes.func.isRequired,
+  trips: PropTypes.object,
+  recentTrips: PropTypes.array,
   userId: PropTypes.number.isRequired,
   classes: PropTypes.object,
 };
