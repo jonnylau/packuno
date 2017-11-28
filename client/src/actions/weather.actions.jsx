@@ -32,7 +32,7 @@ export const setForecast = forecastArray => ({
 export const setForecastAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: 'http://packuno-staging.herokuapp.com/check/forecast',
+    uri: 'http://packuno-staging.herokuapp.com/forecast',
   };
   const attack = rp(options);
   return attack.then((result) => {
