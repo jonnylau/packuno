@@ -62,7 +62,7 @@ passport.deserializeUser(function(id, done){
   });
 });
 
-app.get('/check/', (req, res) => {
+app.get('/check', (req, res) => {
   if(req.isAuthenticated()){
     res.send(true);
   } else {
