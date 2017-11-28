@@ -15,7 +15,7 @@ export const currentUser = userID => ({
 export const currentUserAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: 'http://localhost:3000/user/',
+    uri: '/user/',
   };
   rp(options).then((result) => {
     const id = JSON.parse(result);
@@ -28,7 +28,7 @@ export const currentUserAsync = () => (dispatch, getState) => {
 export const loggedInAsync = bool => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: 'http://localhost:3000/check/',
+    uri: '/check/',
   };
   rp(options)
     .then((result) => {
