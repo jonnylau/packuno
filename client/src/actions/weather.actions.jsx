@@ -33,7 +33,7 @@ export const setForecastAsync = (city) => (dispatch, getState) => {
   const options = {
     type: 'POST',
     uri: 'http://packuno-staging.herokuapp.com/forecast',
-    data: user,
+    data: city,
   };
   const attack = rp(options);
   return attack.then((result) => {
