@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
-const session = require('express-session');
+const session = require('express-session')
 const rp = require('request-promise');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require('passport');
@@ -10,11 +10,10 @@ const Promise = require('bluebird');
 const itemsHelper = require('../database/itemsHelpers');
 const tripsHelper = require('../database/tripsHelpers');
 
-// FILL IN DATABASE FILE -->
+// FILL IN DATABASE FILE --> 
 const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
-
 const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -29,17 +28,18 @@ passport.use(new GoogleStrategy(
   },
   ((accessToken, refreshToken, profile, done) => {
     database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then(() => {
-      done(null, profile);
+    done(null, profile);
     });
-  }),
+  })
 ));
 
-const isAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
+const isAuthenticated =  (req, res, next) =>{
+  console.log(req.user);
+  if(req.isAuthenticated()){
     return next();
   }
   res.redirect('/');
-};
+}
 
 const app = express();
 app.use(session({ secret: 'anything', resave: false, saveUninitialized: true }));
@@ -53,7 +53,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser(function(id, done){
   return new Promise((resolve, reject) => {
   console.log('deserialize user');
   resolve(database.findUser(id))
@@ -63,12 +63,15 @@ passport.deserializeUser((id, done) => {
 });
 
 app.get('/check/', (req, res) => {
-  if (req.isAuthenticated()) {
+  if(req.isAuthenticated()){
     res.send(true);
   } else {
-    res.send(false);
+  res.send(false);
   }
 });
+
+
+
 // App pages
 
 app.get('/', (req, res) => {
@@ -94,9 +97,15 @@ app.get('/home', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
-app.get(
-'/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }),
+app.get('/auth/google', 
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get('/auth/google/callback',
+passport.authenticate('google', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/login',
+}),
 );
 
 app.get('/user', (req, res) => {
@@ -105,13 +114,13 @@ app.get('/user', (req, res) => {
   });
 });
 
-app.get(
-'/auth/google',
-  passport.authenticate('google', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-  }),
+app.get('/auth/google', 
+passport.authenticate('google', {
+  successRedirect: '/dashboard',
+  failureRedirect: '/login',
+}),
 );
+
 
 
 // API Endpoints
