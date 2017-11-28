@@ -103,7 +103,7 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback',
 passport.authenticate('google', {
-  successRedirect: '/dashboard',
+  successRedirect: '/home',
   failureRedirect: '/login',
 }),
 );
