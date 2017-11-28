@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-
+//google OAuth using passport
 passport.use(new GoogleStrategy(
   {
     clientID: process.env.clientid,
@@ -32,13 +32,12 @@ passport.use(new GoogleStrategy(
     });
   })
 ));
-
+//middleware that checks to see if a user has signed in before allowing them to access certain pages. 
 const isAuthenticated =  (req, res, next) =>{
-  console.log(req.user);
   if(req.isAuthenticated()){
     return next();
   }
-  res.redirect('/');
+  res.redirect('/login');
 }
 
 const app = express();
@@ -62,6 +61,7 @@ passport.deserializeUser(function(id, done){
   });
 });
 
+//returns a bool to see if a user is loggedin or not
 app.get('/check', (req, res) => {
   if(req.isAuthenticated()){
     res.send(true);
@@ -70,11 +70,9 @@ app.get('/check', (req, res) => {
   }
 });
 
-
-
 // App pages
 
-app.get('/', (req, res) => {
+app.get('/', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
@@ -97,17 +95,20 @@ app.get('/home', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
+//redirects to google auth page
 app.get('/auth/google', 
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+//redirects to /dashboard on successful login 
 app.get('/auth/google/callback',
-passport.authenticate('google', {
-  successRedirect: '/home',
-  failureRedirect: '/login',
-}),
+  passport.authenticate('google', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+  })
 );
 
+//gets user and sends it back to wherever this is called
 app.get('/user', (req, res) => {
   database.findUser(req.user.googleId).then((user) => {
     (res.send(user));
@@ -146,7 +147,7 @@ app.post('/items', (req, res) => {
 });
 
 app.get('/users/:userId/items', (req, res) => {
-  itemsHelper.getUserItems(req.params.userId)
+  itemsHelper.getUserItems(req.user.id)
     .then((results) => {
       res.send(results);
     });

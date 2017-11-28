@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { updateCurrentTrip } from '../actions/trips.actions';
 import { loggedInAsync as LoggedIn } from '../actions/login.actions';
 import AppMenu from '../components/AppMenu.component';
@@ -7,7 +6,7 @@ import AppMenu from '../components/AppMenu.component';
 
 const mapStateToProps = state => ({
   trips: state.trips,
-  isLoggedIn: state.login,
+  isLoggedIn: state.isLoggedIn,
 });
 
 const mapDispatchToProps = dispatch => ({

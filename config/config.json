@@ -4,3 +4,5 @@
       "dialect": "postgres"
   }
 }
+
+//set above up with own postgres information for use on local machine

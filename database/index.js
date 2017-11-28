@@ -3,18 +3,16 @@ const db = require('../models/index.js');
 const Sequelize = require('sequelize');
 const pg = require('pg');
 
-const sequelize = new Sequelize('packuno', 'packuno', 'packuno', {
-  dialect: 'postgres',
-});
-
-sequelize.authenticate().then(() => {
+db.sequelize.authenticate().then(() => {
   console.log('Success!');
 }).catch((err) => {
   console.log(err);
 });
 
-db.sequelize.sync({force:true});
+// db.sequelize.sync({force:true}); 
+//uncomment above to drop tables on npm start
 const createUser = (email, firstName, lastName, googleId) => {
+  
 return db.User.findOrCreate({
  where:
       {

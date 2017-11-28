@@ -7,10 +7,7 @@ import Weather from '../components/Weather.component';
 import { setHistoricalAsync as Historical, setForecastAsync as Forecast } from '../actions/weather.actions';
 
 export class WeatherContainer extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+  //grabs both historical and current forecast for the trip
   componentDidMount() {
     this.props.Forecast();    
     this.props.Historical();

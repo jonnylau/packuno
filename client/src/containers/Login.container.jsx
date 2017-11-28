@@ -29,21 +29,14 @@ const styles = theme => ({
 });
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+//checks to see if a user is loggeidn
   componentWillMount() {
     this.props.LoggedIn();
   }
-  componentDidMount() {
-    console.log(this.props.isLoggedIn);
-  }
 
   renderComponents() {
-    const { isLoggedIn, loggedIn, classes } = this.props;
-    console.log(loggedIn);
-    if (isLoggedIn === 'true') {
+    const { classes } = this.props;
+    if (this.props.isLoggedIn) {
       return (<h2>You've already logged in!</h2>);
     }
     return (
@@ -56,16 +49,14 @@ class Login extends React.Component {
     );
   }
 
-
   render() {
-    console.log(this.renderComponents());
     return (<div>{this.renderComponents()}</div>);
   }
 }
 
 const mapStateToProps = (state, ownProps) =>
   ({
-    isLoggedIn: state.login,
+    isLoggedIn: state.isLoggedIn,
   });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

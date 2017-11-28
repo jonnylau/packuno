@@ -1,8 +1,8 @@
-const login = (state = 'false', action) => {
+const isLoggedIn = (state = false, action) => {
   if (action.type === 'LOG_IN') {
-    return action.loggedIn;
+    return action.isLoggedInResult;
   }
   return state;
 };
 
-export default login;
+export default isLoggedIn;
