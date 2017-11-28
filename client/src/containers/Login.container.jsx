@@ -29,15 +29,14 @@ const styles = theme => ({
 });
 
 class Login extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+//checks to see if a user is loggeidn
   componentWillMount() {
     this.props.LoggedIn();
   }
+
   renderComponents() {
-    if (this.props.isLoggedIn === 'true') {
+    const { classes } = this.props;
+    if (this.props.isLoggedIn) {
       return (<h2>You've already logged in!</h2>);
     }
     return (
@@ -49,7 +48,6 @@ class Login extends React.Component {
       </div>
     );
   }
-
 
   render() {
     return (<div>{this.renderComponents()}</div>);

@@ -18,7 +18,7 @@ const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-
+//google OAuth using passport
 passport.use(new GoogleStrategy(
   {
     clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
@@ -32,13 +32,12 @@ passport.use(new GoogleStrategy(
     });
   })
 ));
-
+//middleware that checks to see if a user has signed in before allowing them to access certain pages. 
 const isAuthenticated =  (req, res, next) =>{
-  console.log(req.user);
   if(req.isAuthenticated()){
     return next();
   }
-  res.redirect('/');
+  res.redirect('/login');
 }
 
 const app = express();
@@ -62,15 +61,14 @@ passport.deserializeUser(function(id, done){
   });
 });
 
-app.get('/check/', (req, res) => {
+//returns a bool to see if a user is loggedin or not
+app.get('/check', (req, res) => {
   if(req.isAuthenticated()){
     res.send(true);
   } else {
   res.send(false);
   }
 });
-
-
 
 // App pages
 
@@ -97,10 +95,20 @@ app.get('/home', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 
+//redirects to google auth page
 app.get('/auth/google', 
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
+//redirects to /dashboard on successful login 
+app.get('/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/login',
+  })
+);
+
+//gets user and sends it back to wherever this is called
 app.get('/user', (req, res) => {
   console.log('user', req.user.googleId);
   database.findUser(req.user.googleId).then((user) => {
@@ -108,12 +116,6 @@ app.get('/user', (req, res) => {
   });
 });
 
-app.get('/auth/google/callback',
-  passport.authenticate('google', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/login',
-  }),
-);
 
 
 // API Endpoints
@@ -148,7 +150,7 @@ app.post('/items', (req, res) => {
 });
 
 app.get('/users/:userId/items', (req, res) => {
-  itemsHelper.getUserItems(req.params.userId)
+  itemsHelper.getUserItems(req.user.id)
     .then((results) => {
       res.send(results);
     });
@@ -183,6 +185,7 @@ app.patch('/trip/items/:id', (req, res) => {
     });
 });
 
+//gets historical weather from worldbank API. Searches by country. Dashboard will need to collect both city and country in order to call both. 
 app.get('/weather/', (req, res) => {
   const tripStart = '20170827';
   const tripEnd = '20170905';
@@ -196,6 +199,7 @@ app.get('/weather/', (req, res) => {
   });
 });
 
+//gets current weather from weather underground. Will need to be fixed depending on city
 app.get('/forecast/', (req, res) => {
   const options = {
     type: 'GET',

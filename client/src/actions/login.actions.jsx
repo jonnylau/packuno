@@ -11,10 +11,12 @@ export const currentUser = userID => ({
   userId: userID,
 });
 
+//async call using redux call. Async actions follow the below build.
 export const currentUserAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
-    uri: '/user/',
+    uri: 'http://localhost:3000/user',
+    //change localhost for deployment
   };
   rp(options).then((result) => {
     const id = JSON.parse(result);
@@ -25,10 +27,12 @@ export const currentUserAsync = () => (dispatch) => {
   });
 };
 
+//async call using redux call. Async actions follow the below build.
 export const loggedInAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
-    uri: '/check/',
+    uri: 'http://localhost:3000/check',
+        //change localhost for deployment
   };
   rp(options)
     .then((result) => {
