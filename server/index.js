@@ -195,6 +195,7 @@ app.get('/weather', (req, res) => {
 });
 
 app.get('/forecast', (req, res) => {
+  console.log(req);
   const options = {
     type: 'GET',
     uri: 'http://api.wunderground.com/api/1acaa967ad91ec5b/forecast10day/q/CA/San_Francisco.json',

@@ -29,10 +29,11 @@ export const setForecast = forecastArray => ({
   forecast: forecastArray,
 });
 
-export const setForecastAsync = () => (dispatch, getState) => {
+export const setForecastAsync = (city) => (dispatch, getState) => {
   const options = {
-    type: 'GET',
+    type: 'POST',
     uri: 'http://packuno-staging.herokuapp.com/forecast',
+    data: user,
   };
   const attack = rp(options);
   return attack.then((result) => {
