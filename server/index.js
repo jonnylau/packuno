@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy(
   {
     clientID: process.env.clientid,
     clientSecret: process.env.googlesecret2,
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: '/auth/google/callback',
     passReqToCallBack: true,
   },
   ((accessToken, refreshToken, profile, done) => {
