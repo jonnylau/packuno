@@ -36,12 +36,8 @@ class Login extends React.Component {
   componentWillMount() {
     this.props.LoggedIn();
   }
-
-
   renderComponents() {
-    const { isLoggedIn, classes } = this.props;
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
+    if (this.props.isLoggedIn === 'true') {
       return (<h2>You've already logged in!</h2>);
     }
     return (
@@ -56,7 +52,6 @@ class Login extends React.Component {
 
 
   render() {
-    console.log(this.renderComponents());
     return (<div>{this.renderComponents()}</div>);
   }
 }

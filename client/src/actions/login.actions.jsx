@@ -6,6 +6,15 @@ export const loggedIn = isLoggedInResult => ({
   isLoggedInResult,
 });
 
+export const loggedInAsync = () => (dispatch, getState) => {
+  const options = {
+    type: 'GET',
+    uri: 'http://localhost:3000/check/',
+  };
+  rp(options).then((result) => {
+    dispatch(loggedIn(result.toString()));
+  });
+};
 
 export const currentUser = userID => ({
   type: 'SET_CURRENT_USER',
