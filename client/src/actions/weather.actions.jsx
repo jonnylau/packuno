@@ -16,7 +16,7 @@ export const setHistorical = historicalArray => ({
 export const setHistoricalAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: '/weather',
+    uri: 'http://packuno-staging.herokuapp.com/weather',
   };
   const weather = rp(options);
   return weather.then((result) => {
@@ -32,7 +32,7 @@ export const setForecast = forecastArray => ({
 export const setForecastAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: '/forecast',
+    uri: 'http://packuno-staging.herokuapp.com/check/forecast',
   };
   const attack = rp(options);
   return attack.then((result) => {
