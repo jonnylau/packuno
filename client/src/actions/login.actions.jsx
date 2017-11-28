@@ -15,7 +15,7 @@ export const currentUser = userID => ({
 export const currentUserAsync = () => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: '/user',
+    uri: 'http://packuno-staging.herokuapp.com/user',
   };
   rp(options).then((result) => {
     const id = JSON.parse(result);
@@ -28,7 +28,7 @@ export const currentUserAsync = () => (dispatch, getState) => {
 export const loggedInAsync = bool => (dispatch, getState) => {
   const options = {
     type: 'GET',
-    uri: '/check',
+    uri: 'http://packuno-staging.herokuapp.com/check',
   };
   rp(options)
     .then((result) => {
