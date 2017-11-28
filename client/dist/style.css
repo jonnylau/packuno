@@ -1,0 +1,120 @@
+/*#sidebar {
+    position: absolute;
+    width: 21%;
+    height: 100%;
+    background-color: lightblue;
+    padding: 25px;
+    overflow: auto;
+}
+
+#content { 
+    overflow: auto;
+    position: absolute;
+    margin-left: 25%;
+    width: 100%;
+    height: 100%;
+    background-color: lightgrey;
+    padding: 25px;
+}*/
+html {
+  min-height:100%;
+}
+
+body {
+    margin:0;
+    font-family: 'Roboto', sans-serif;
+    height: 100%;
+}
+/*
+h2 {
+  font-size: 20px;
+}
+
+#openButton {
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-size: 30px;
+  display: inline;
+}
+
+#closeButton {
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  font-size: 30px;
+  float: right;
+}
+
+.submitButton {
+  font-size: 16px;
+}
+
+.destination {
+  font-size: 16px;
+}
+
+.departureDate {
+  font-size: 15px;
+}
+
+.returnDate {
+  font-size: 15px;
+}
+
+#upcoming ul li { 
+  padding: 15px 0px; 
+}
+
+#menu {
+   float: left;
+   width: 100%;
+   overflow: hidden;
+   position: relative;
+}
+
+#menu ul {
+   clear: left;
+   float: left;
+   position: relative;
+   text-align: center;
+}
+
+#menu ul li {
+   display: block;
+   float: left;
+   position: relative;
+}
+
+#menu ul li a {
+   display: block;
+   margin: 0 0 0 1px;
+   padding: 5px 20px;
+   color: #000;
+   text-decoration: none;
+}
+
+.image {
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+*/
+/*** Packing list ***/
+
+ div[class*="MuiListItem-container"] button{
+  visibility: hidden;
+}
+
+ div[class*="MuiListItem-container"]:hover button{
+  visibility: visible;
+}
+
+.changeHover: hover {
+   background: grey;
+}

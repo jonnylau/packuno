@@ -1,9 +1,14 @@
 node_modules
 docs
 *.DS_STORE
+bundle.js
 
 #Floobits
 .floo
 .floobit
 .floo
 .flooignore
+
+
+client/dist/bundle.js
+package-lock.json

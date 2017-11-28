@@ -10,6 +10,19 @@ module.exports = {
     path: DIST_DIR,
   },
   watch: true,
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: '#eval-source-map',
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty',
+  },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     loaders: [
       {
@@ -17,9 +30,10 @@ module.exports = {
         include: SRC_DIR,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015'],
+          presets: ['react', 'es2015', 'stage-2'],
         },
       },
+      { test: /\.json$/, loader: 'json-loader' },
     ],
   },
 };
