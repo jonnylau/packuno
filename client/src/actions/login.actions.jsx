@@ -6,25 +6,17 @@ export const loggedIn = isLoggedInResult => ({
   isLoggedInResult,
 });
 
-export const loggedInAsync = () => (dispatch, getState) => {
-  const options = {
-    type: 'GET',
-    uri: 'http://localhost:3000/check/',
-  };
-  rp(options).then((result) => {
-    dispatch(loggedIn(result.toString()));
-  });
-};
-
 export const currentUser = userID => ({
   type: 'SET_CURRENT_USER',
   userId: userID,
 });
 
+//async call using redux call. Async actions follow the below build.
 export const currentUserAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
-    uri: 'http://localhost:3000/user/',
+    uri: 'http://localhost:3000/user',
+    //change localhost for deployment
   };
   rp(options).then((result) => {
     const id = JSON.parse(result);
@@ -35,10 +27,12 @@ export const currentUserAsync = () => (dispatch) => {
   });
 };
 
+//async call using redux call. Async actions follow the below build.
 export const loggedInAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
-    uri: 'http://localhost:3000/check/',
+    uri: 'http://localhost:3000/check',
+        //change localhost for deployment
   };
   rp(options)
     .then((result) => {
