@@ -36,14 +36,12 @@ class Login extends React.Component {
   componentWillMount() {
     this.props.LoggedIn();
   }
-  componentDidMount() {
-    console.log(this.props.isLoggedIn);
-  }
+
 
   renderComponents() {
-    const { isLoggedIn, loggedIn, classes } = this.props;
-    console.log(loggedIn);
-    if (isLoggedIn === 'true') {
+    const { isLoggedIn, classes } = this.props;
+    console.log(isLoggedIn);
+    if (isLoggedIn) {
       return (<h2>You've already logged in!</h2>);
     }
     return (
@@ -65,7 +63,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state, ownProps) =>
   ({
-    isLoggedIn: state.login,
+    isLoggedIn: state.isLoggedIn,
   });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({

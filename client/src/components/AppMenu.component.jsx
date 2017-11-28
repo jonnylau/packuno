@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import classNames from 'classnames';
 import Drawer from 'material-ui/Drawer';
+import Button from 'material-ui/Button';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List from 'material-ui/List';
@@ -145,25 +146,24 @@ const styles = theme => ({
   },
   saveButton: {
     color: 'white',
-    float: 'right',
+    textAlign: 'center',
     position: 'relative',
     margin: 10,
   },
 });
 
-class PersistentDrawer extends React.Component {
+class AppMenu extends React.Component {
   state = {
     open: false,
   };
   
   UpcomingTrips = () => {
     const { trips, isLoggedIn, onTripClick, classes } = this.props;
-    if (isLoggedIn === 'true' && trips.allIds.length > 0) {
+    if (isLoggedIn && trips.allIds.length > 0) {
       return (
         <div className={classes.upcomingTripsContainer}>
           <h3>Upcoming trips</h3>
           {trips.allIds.map(tripId => (
-            <Link to="/trip">
             <div
               key={tripId}
               onClick={() => this.handleTripClick(tripId)}
@@ -173,7 +173,6 @@ class PersistentDrawer extends React.Component {
               <h4>{ trips.byId[tripId].destination }</h4>
               <span>{moment(trips.byId[tripId].startDate).format('MMMM YYYY')}</span>
             </div>
-            </Link>
             ))}
         </div>
       );
@@ -239,7 +238,9 @@ class PersistentDrawer extends React.Component {
               </div>
               <Divider />
               <div className={classes.createContainer} >
-                Create
+                <Button raised color="primary" className={classes.saveButton}>
+                  New Trip
+                </Button>
               </div>
               {this.UpcomingTrips()}
             </div>
@@ -258,7 +259,7 @@ class PersistentDrawer extends React.Component {
   }
 }
 
-PersistentDrawer.propTypes = {
+AppMenu.propTypes = {
   trips: PropTypes.object,
   isLoggedIn: PropTypes.bool.isRequired,
   onTripClick: PropTypes.func.isRequired,
@@ -266,4 +267,4 @@ PersistentDrawer.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(PersistentDrawer);
+export default withStyles(styles, { withTheme: true })(AppMenu);

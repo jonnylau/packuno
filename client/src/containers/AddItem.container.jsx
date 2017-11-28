@@ -17,7 +17,7 @@ const mapStateToProps = state => ({
   categories: state.items.categories,
   itemToEdit: getItemToEdit(state),
   userItems: state.userItems,
-  userId: state.setUser || null,
+  userId: state.userId || null,
   tripId: state.currentTripId || null,
 });
 

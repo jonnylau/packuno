@@ -74,7 +74,7 @@ app.get('/check/', (req, res) => {
 
 // App pages
 
-app.get('/', (req, res) => {
+app.get('/', isAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));
 });
 

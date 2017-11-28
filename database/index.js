@@ -13,7 +13,7 @@ sequelize.authenticate().then(() => {
   console.log(err);
 });
 
-db.sequelize.sync({force:true});
+// db.sequelize.sync({force:true});
 const createUser = (email, firstName, lastName, googleId) => {
 return db.User.findOrCreate({
  where:

@@ -113,11 +113,6 @@ class AddTrip extends React.Component {
     selectedTrip: null,
   };
 
-  componentDidMount = () => {
-    const { fetchTrips, userId } = this.props;
-    fetchTrips(userId);
-  }
-
   onFormSubmit = (e) => {
     const { destination, startDate, endDate, selectedTrip } = this.state;
     const { onSubmit, userId } = this.props;
@@ -131,9 +126,9 @@ class AddTrip extends React.Component {
       endDate: '',
       selectedTrip: null,
     });
-  }
+  };
 
-  render() {
+  render = () => {
     const { trips, recentTrips, classes } = this.props;
 
 
@@ -227,7 +222,6 @@ class AddTrip extends React.Component {
 
 AddTrip.propTypes = {
   onSubmit: PropTypes.func.isRequired,
-  fetchTrips: PropTypes.func.isRequired,
   trips: PropTypes.object,
   recentTrips: PropTypes.array,
   userId: PropTypes.number.isRequired,

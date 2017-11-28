@@ -1,9 +1,9 @@
-const request = require('request');
 const rp = require('request-promise');
+const { tripsFetchData } = require('./trips.actions');
 
-export const loggedIn = bool => ({
+export const loggedIn = isLoggedInResult => ({
   type: 'LOG_IN',
-  loggedIn: bool,
+  isLoggedInResult,
 });
 
 
@@ -12,7 +12,7 @@ export const currentUser = userID => ({
   userId: userID,
 });
 
-export const currentUserAsync = () => (dispatch, getState) => {
+export const currentUserAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
     uri: 'http://localhost:3000/user/',
@@ -22,20 +22,22 @@ export const currentUserAsync = () => (dispatch, getState) => {
     return id.id;
   }).then((id) => {
     dispatch(currentUser(id));
+    dispatch(tripsFetchData(id));
   });
 };
 
-export const loggedInAsync = bool => (dispatch, getState) => {
+export const loggedInAsync = () => (dispatch) => {
   const options = {
     type: 'GET',
     uri: 'http://localhost:3000/check/',
   };
   rp(options)
     .then((result) => {
-      console.log('dispatch', result);
-      dispatch(loggedIn(result.toString()));
-      if (result) {
-        dispatch(currentUserAsync())
+      const isLoggedInResult = (result === 'true');
+
+      dispatch(loggedIn(isLoggedInResult));
+      if (isLoggedInResult) {
+        dispatch(currentUserAsync());
       }
     });
 };
