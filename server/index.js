@@ -181,7 +181,7 @@ app.patch('/trip/items/:id', (req, res) => {
     });
 });
 
-app.get('/weather/', (req, res) => {
+app.get('/weather', (req, res) => {
   const tripStart = '20170827';
   const tripEnd = '20170905';
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -194,7 +194,7 @@ app.get('/weather/', (req, res) => {
   });
 });
 
-app.get('/forecast/', (req, res) => {
+app.get('/forecast', (req, res) => {
   const options = {
     type: 'GET',
     uri: 'http://api.wunderground.com/api/1acaa967ad91ec5b/forecast10day/q/CA/San_Francisco.json',
