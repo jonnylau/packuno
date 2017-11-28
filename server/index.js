@@ -114,15 +114,6 @@ app.get('/user', (req, res) => {
   });
 });
 
-app.get('/auth/google', 
-passport.authenticate('google', {
-  successRedirect: '/dashboard',
-  failureRedirect: '/login',
-}),
-);
-
-
-
 // API Endpoints
 
 app.get('/users/:userId/trips', (req, res) => {
