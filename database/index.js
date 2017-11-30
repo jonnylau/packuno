@@ -9,7 +9,7 @@ db.sequelize.authenticate().then(() => {
   console.log(err);
 });
 
-// db.sequelize.sync({force:true}); 
+db.sequelize.sync({force:true}); 
 //uncomment above to drop tables on npm start
 const createUser = (email, firstName, lastName, googleId) => {
   
