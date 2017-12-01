@@ -1,0 +1,6 @@
+{
+	"India": ["Cholera", "Hepatitis A", "Hepatitis B", "Typhoid", "Yellow Fever"],
+	"Morroco": ["Yellow Fever", "Malaria", "Typhoid", "Hepatitis A"],
+	"Peru": ["Hepatitis A", " Typhoid", "Yellow Fever"],
+	"Egypt": ["Hepatitis A", "Hepatitis B","Rabies", "Typhoid", "Yellow Fever"],
+},	
