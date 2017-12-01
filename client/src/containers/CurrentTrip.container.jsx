@@ -29,4 +29,9 @@ function mapStateToProps(state) {
   };
 }
 
+CurrentTrip.propTypes = {
+  currentTrip: PropTypes.number.isRequired,
+  trips: PropTypes.object.isRequired,
+};
+
 export default connect(mapStateToProps)(CurrentTrip);

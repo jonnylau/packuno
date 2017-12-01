@@ -29,12 +29,17 @@ const Trip = (props) => {
   <div>
     <Paper className={classes.root} elevation={4}>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <CurrentTrip />
       <VisaInfo />
       <Vaccines />
 =======
       <CurrentTrip/>
 >>>>>>> Added moment.js formatting for dates
+=======
+      <CurrentTrip />
+      <Vaccines />
+>>>>>>> Added card: pulling the correct vaccine information
       <AddItem />
       <VisibleItemList />
       <Footer />

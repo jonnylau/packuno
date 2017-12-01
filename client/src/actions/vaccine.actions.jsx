@@ -1,5 +1,4 @@
 import vaccines from '../vaccines.json';
-
 // need to get the current country we're in the trip page
 
 export default function getVaccines() {
