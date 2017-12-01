@@ -1,6 +1,49 @@
 {
-	"India": ["Cholera", "Hepatitis A", "Hepatitis B", "Typhoid", "Yellow Fever"],
-	"Morroco": ["Yellow Fever", "Malaria", "Typhoid", "Hepatitis A"],
-	"Peru": ["Hepatitis A", " Typhoid", "Yellow Fever"],
-	"Egypt": ["Hepatitis A", "Hepatitis B","Rabies", "Typhoid", "Yellow Fever"],
+	"India": {
+		"vaccines" : [
+			"Cholera", 
+			"Hepatitis A", 
+			"Hepatitis B", 
+			"Typhoid", 
+			"Yellow Fever"
+		],
+		"warnings" : "Pregnant women should not travel to Niger because Zika infection during pregnancy can cause serious birth defects"
+	},
+	"Morroco": {
+		"warnings": "None",
+		"vaccines": [
+			"Yellow Fever",
+			"Malaria", 
+			"Typhoid", 
+			"Hepatitis A"
+		]
+	},
+	"Peru": {
+		"warnings": "",
+		"vaccines": [
+			"Hepatitis A",
+			"Typhoid",
+			 "Yellow Fever"
+			]
+	},
+	"Egypt": {
+		"vaccines": [
+			"Hepatitis A", 
+			"Hepatitis B",
+			"Rabies", 
+			"Typhoid", 
+			"Yellow Fever"
+		],
+		"warnings": ""
+	},
+	"Tokyo": {
+		"vaccines": [
+			"Hepatitis A",
+			"Hepatitis B",
+			"Rabies",
+			"Typhoid",
+			"Yellow Fever"
+		],
+		"warnings": "No current CDC warnings"
+	}
 }
