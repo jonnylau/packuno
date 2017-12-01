@@ -6,9 +6,9 @@ import Footer from '../components/Footer.component';
 import AddItem from '../containers/AddItem.container';
 import VisibleItemList from '../containers/VisibleItemList.container';
 import WeatherCont from '../containers/Weather.container';
+import CurrentTrip from '../containers/CurrentTrip.container'; //why does this work.  I didn't export CurrentTrip          
+import Vaccines from '../containers/Vaccines.container';
 import VisaInfo from '../containers/VisaInfo.container';
-import CurrentTrip from '../containers/CurrentTrip.container';
-
 
 const styles = theme => ({
   root: theme.mixins.gutters({
@@ -21,20 +21,21 @@ const styles = theme => ({
 
 
 const Trip = (props) => {
+
   const { classes } = props;
+
   return (
-    <div>
-      <Paper className={classes.root} elevation={4}>
-        <CurrentTrip />
-        <VisaInfo />
-        <AddItem />
-        <VisibleItemList />
-        <Footer />
-      </Paper>
-      <WeatherCont />
-    </div>
-  );
-};
+  <div>
+    <Paper className={classes.root} elevation={4}>
+      <CurrentTrip />
+      <Vaccines />
+      <AddItem />
+      <VisibleItemList />
+      <Footer />
+    </Paper>
+    <WeatherCont />
+  </div>
+)};
 
 Trip.propTypes = {
   classes: PropTypes.object.isRequired,
