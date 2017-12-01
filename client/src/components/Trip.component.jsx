@@ -10,6 +10,7 @@ import CurrentTrip from '../containers/CurrentTrip.container'; //why does this w
 import Vaccines from '../containers/Vaccines.container';
 import VisaInfo from '../containers/VisaInfo.container';
 
+
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
@@ -27,8 +28,12 @@ const Trip = (props) => {
   return (
   <div>
     <Paper className={classes.root} elevation={4}>
+<<<<<<< HEAD
       <CurrentTrip />
       <Vaccines />
+=======
+      <CurrentTrip/>
+>>>>>>> Added moment.js formatting for dates
       <AddItem />
       <VisibleItemList />
       <Footer />
