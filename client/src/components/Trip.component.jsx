@@ -18,20 +18,20 @@ const styles = theme => ({
 });
 
 
-const Trip = (props) => {
-
+const Trip = (...props) => {
+  console.log(...props);
   const { classes } = props;
-
   return (
-  <div>
-    <Paper className={classes.root} elevation={4}>
-      <AddItem />
-      <VisibleItemList />
-      <Footer />
-    </Paper>
-    <WeatherCont />
-  </div>
-)};
+    <div>
+      <Paper className={classes.root} elevation={4}>
+        <AddItem />
+        <VisibleItemList />
+        <Footer />
+      </Paper>
+      <WeatherCont />
+    </div>
+  );
+};
 
 Trip.propTypes = {
   classes: PropTypes.object.isRequired,

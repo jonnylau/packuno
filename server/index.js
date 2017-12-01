@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const isoCode = require('../client/src/utils/weatherHelper.js');
 const request = require('request');
-const session = require('express-session')
+const session = require('express-session');
 const rp = require('request-promise');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require('passport');
@@ -10,10 +10,11 @@ const Promise = require('bluebird');
 const itemsHelper = require('../database/itemsHelpers');
 const tripsHelper = require('../database/tripsHelpers');
 
-// FILL IN DATABASE FILE --> 
+// FILL IN DATABASE FILE -->
 const database = require('../database/index.js');
 const path = require('path');
 const pg = require('pg');
+
 const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -28,17 +29,17 @@ passport.use(new GoogleStrategy(
   },
   ((accessToken, refreshToken, profile, done) => {
     database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then(() => {
-    done(null, profile);
+      done(null, profile);
     });
-  })
+  }),
 ));
 //middleware that checks to see if a user has signed in before allowing them to access certain pages. 
-const isAuthenticated =  (req, res, next) =>{
-  if(req.isAuthenticated()){
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
     return next();
   }
   res.redirect('/login');
-}
+};
 
 const app = express();
 app.use(session({ secret: 'anything', resave: false, saveUninitialized: true }));
@@ -63,10 +64,10 @@ passport.deserializeUser(function(id, done){
 
 //returns a bool to see if a user is loggedin or not
 app.get('/check', (req, res) => {
-  if(req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     res.send(true);
   } else {
-  res.send(false);
+    res.send(false);
   }
 });
 
@@ -96,7 +97,7 @@ app.get('/home', isAuthenticated, (req, res) => {
 });
 
 //redirects to google auth page
-app.get('/auth/google', 
+app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
@@ -105,7 +106,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     successRedirect: '/dashboard',
     failureRedirect: '/login',
-  })
+  }),
 );
 
 //gets user and sends it back to wherever this is called
@@ -115,7 +116,6 @@ app.get('/user', (req, res) => {
     (res.send(user));
   });
 });
-
 
 
 // API Endpoints

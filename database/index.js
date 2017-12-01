@@ -12,11 +12,10 @@ db.sequelize.authenticate().then(() => {
 db.sequelize.sync({force:true}); 
 //uncomment above to drop tables on npm start
 const createUser = (email, firstName, lastName, googleId) => {
-  
-return db.User.findOrCreate({
- where:
+  return db.User.findOrCreate({
+    where:
       {
- email,
+        email,
         first_name: firstName,
         last_name: lastName,
         googleId,
@@ -31,6 +30,3 @@ const findUser = (googleId) => {
 
 module.exports.createUser = createUser;
 module.exports.findUser = findUser;
-
-
-
