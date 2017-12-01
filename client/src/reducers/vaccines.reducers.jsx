@@ -5,6 +5,6 @@ const vaccines = (state = [], action) =>{
 		}
 	}	
 	return state;
-}
+
 
 export default vaccines;
