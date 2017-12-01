@@ -6,6 +6,7 @@ import Footer from '../components/Footer.component';
 import AddItem from '../containers/AddItem.container';
 import VisibleItemList from '../containers/VisibleItemList.container';
 import WeatherCont from '../containers/Weather.container';
+import VisaInfo from '../containers/VisaInfo.container';
 
 
 const styles = theme => ({
@@ -19,11 +20,11 @@ const styles = theme => ({
 
 
 const Trip = (...props) => {
-  console.log(...props);
   const { classes } = props;
   return (
     <div>
       <Paper className={classes.root} elevation={4}>
+        <VisaInfo />
         <AddItem />
         <VisibleItemList />
         <Footer />
