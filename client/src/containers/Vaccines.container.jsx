@@ -11,10 +11,9 @@ import HealthList from '../../../vaccines.json';
 import IconButton from 'material-ui/IconButton';
 import ExpandMoreIcon from 'material-ui-icons/ExpandMore';
 
-
 const styles = theme => ({
   card: {
-    maxWidth: 400,
+    maxWidth: 350,
   },
   media: {
     height: 194,
@@ -41,11 +40,11 @@ class Vaccines extends Component {
     this.setState({ expanded: !this.state.expanded });
   };
   render() {
-    const currentCity = this.props.trips[this.props.currentTrip].destination;
-    const currentVaccines = HealthList[currentCity] ? HealthList[currentCity].vaccines : [];
-    const currentWarning = HealthList[currentCity] ? HealthList[currentCity].warnings : '';
+    const currentCountry = this.props.trips[this.props.currentTrip].country;
+    const currentVaccines = HealthList[currentCountry] ? HealthList[currentCountry].vaccines : [];
+    const currentWarning = HealthList[currentCountry] ? HealthList[currentCountry].warnings : '';
     const { classes } = this.props;
-    console.log(currentCity);
+    console.log(currentCountry);
     let vaccineRows = currentVaccines.map((vaccine) => {
       return <li>{vaccine}</li>;
     });
@@ -57,6 +56,7 @@ class Vaccines extends Component {
             <Typography
               type="headline"
               component="h6"
+              dense color="primary"
             >
               Health Recommendations
             </Typography>
@@ -64,7 +64,7 @@ class Vaccines extends Component {
               {currentWarning}
             </Typography>
             <Typography component="p">
-            There are several CDC recommended vaccines:
+            CDC recommended vaccines for most travellers:
             </Typography>
             <CardActions >
               <IconButton
@@ -86,8 +86,7 @@ class Vaccines extends Component {
               </CardContent>
             </Collapse>
             <Button
-              dense
-              color="primary"
+              dense color="primary"
             >
               Add Vaccines to List
             </Button>
