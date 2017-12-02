@@ -47,28 +47,26 @@ class CategoryDropdown extends Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} autoComplete="off">
-        <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="categoryDropdown">Category</InputLabel>
-          <Select
-            displayEmpty
-            input={<Input name="category" id="categoryDropdown" />}
-            value={this.state.value}
-            onChange={this.handleChange}
-          >
-            {categories.data.map((category) => {
-              return (
-                <MenuItem
-                  key={category.id}
-                  value={category.name}
-                >
-                  {category.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </form>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="categoryDropdown">Category</InputLabel>
+        <Select
+          displayEmpty
+          input={<Input name="category" id="categoryDropdown" />}
+          value={this.state.value}
+          onChange={this.handleChange}
+        >
+          {categories.data.map((category) => {
+            return (
+              <MenuItem
+                key={category.id}
+                value={category.name}
+              >
+                {category.name}
+              </MenuItem>
+            );
+          })}
+        </Select>
+      </FormControl>
     );
   }
 }
