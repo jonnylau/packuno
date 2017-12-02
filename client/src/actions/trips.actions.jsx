@@ -64,11 +64,12 @@ export const tripsFetchData = (userId) => (dispatch) => {
       };
 
       response.data.forEach((trip) => {
-        const { id, destination, start_date, end_date} = trip;
+        const { id, destination, country, start_date, end_date } = trip;
 
         trips.byId[id] = {
           id,
           destination,
+          country,
           startDate: start_date,
           endDate: end_date,
           photoUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Whitsunday_Island_-_Whitehaven_Beach_05.jpg/1280px-Whitsunday_Island_-_Whitehaven_Beach_05.jpg',
@@ -86,9 +87,10 @@ export const tripsFetchData = (userId) => (dispatch) => {
 
 // Add trip
 
-export const addTrip = (destination, startDate, endDate, oldTripId, userId) => (dispatch) => {
+export const addTrip = (destination, country, startDate, endDate, oldTripId, userId) => (dispatch) => {
   axios.post('/trips', {
     destination,
+    country,
     start_date: startDate,
     end_date: endDate,
     userId,
@@ -98,6 +100,7 @@ export const addTrip = (destination, startDate, endDate, oldTripId, userId) => (
         type: 'ADD_TRIP_SUCCESS',
         id: response.data.id,
         destination,
+        country,
         startDate,
         endDate,
         oldTripId,

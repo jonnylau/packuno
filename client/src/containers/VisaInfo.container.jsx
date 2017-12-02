@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import visaRequirement from '../../visa';
+import PropTypes from 'prop-types';
+import visaRequirement from '../../../visa.json';
 
 class VisaInfo extends Component {
   renderInfo() {
-    const tripDestination = this.props.trips[this.props.tripId].country;
-    const message = visaRequirement[tripDestination];
+    const tripCountry = this.props.trips[this.props.tripId].country;
+    const message = visaRequirement[tripCountry.toLowerCase()];
+    console.log(message);
     if (message) {
       return message;
     }
@@ -24,5 +26,10 @@ const mapStateToProps = state => ({
   tripId: state.currentTripId,
   trips: state.trips.byId,
 });
+
+VisaInfo.propTypes = {
+  trips: PropTypes.object,
+  tripId: PropTypes.number,
+};
 
 export default connect(mapStateToProps)(VisaInfo);

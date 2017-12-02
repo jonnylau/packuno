@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Trip = sequelize.define('Trip', {
     destination: DataTypes.STRING,
+    country: DataTypes.STRING,
     start_date: {
       type: DataTypes.DATE,
       allowNull: false,

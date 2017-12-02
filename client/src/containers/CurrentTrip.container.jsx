@@ -5,7 +5,7 @@ import moment from 'moment';
 class CurrentTrip extends Component {
 	
 	render(){
-		console.log('CHECK REDUX STATE', this.props.trips[this.props.currentTrip]);
+		console.log('CHECK REDUX STATE', this.props.trips);
 		let currentCity = this.props.trips[this.props.currentTrip].destination;
 		let departureDate = moment(this.props.trips[this.props.currentTrip].startDate).format('l');
 		let returnDate = moment(this.props.trips[this.props.currentTrip].endDate).format('l');

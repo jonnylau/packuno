@@ -115,11 +115,11 @@ class AddTrip extends React.Component {
   };
 
   onFormSubmit = (e) => {
-    const { destination, startDate, endDate, selectedTrip } = this.state;
+    const { destination, country, startDate, endDate, selectedTrip } = this.state;
     const { onSubmit, userId } = this.props;
     e.preventDefault();
 
-    onSubmit(destination, startDate, endDate, selectedTrip, userId);
+    onSubmit(destination, country, startDate, endDate, selectedTrip, userId);
 
     this.setState({
       destination: '',

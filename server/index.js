@@ -19,7 +19,7 @@ const port = process.env.PORT || 3000;
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 
-//google OAuth using passport
+// google OAuth using passport
 passport.use(new GoogleStrategy(
   {
     clientID: '701084384568-cfgkqkmh3th8usnokt4aqle9am77ei0f.apps.googleusercontent.com',
@@ -31,9 +31,11 @@ passport.use(new GoogleStrategy(
     database.createUser(profile.emails[0].value, profile.name.givenName, profile.name.familyName, profile.id.toString()).then(() => {
       done(null, profile);
     });
-  }),
+  })
 ));
-//middleware that checks to see if a user has signed in before allowing them to access certain pages. 
+
+// middleware that checks to see if a user has signed
+// in before allowing them to access certain pages.
 const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
@@ -62,7 +64,7 @@ passport.deserializeUser(function(id, done){
   });
 });
 
-//returns a bool to see if a user is loggedin or not
+// returns a bool to see if a user is loggedin or not
 app.get('/check', (req, res) => {
   if (req.isAuthenticated()) {
     res.send(true);
@@ -106,7 +108,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google', {
     successRedirect: '/dashboard',
     failureRedirect: '/login',
-  }),
+  })
 );
 
 //gets user and sends it back to wherever this is called

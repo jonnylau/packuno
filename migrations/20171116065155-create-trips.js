@@ -11,6 +11,7 @@ module.exports = {
       },
     },
     Destination: Sequelize.STRING,
+    country: Sequelize.STRING,
     start_date: {
       type: Sequelize.DATE,
       allowNull: false,
