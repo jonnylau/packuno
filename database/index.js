@@ -21,10 +21,10 @@ const createUser = (email, firstName, lastName, googleId) => {
         googleId,
       },
   }).spread((user, create) => { user.get({ plain: true }); });
-}
+};
 
 const findUser = (googleId) => {
-  return db.User.findOne({ where: { googleId: googleId } })
+  return db.User.findOne({ where: { googleId } })
     .then(user => user);
 };
 

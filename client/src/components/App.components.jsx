@@ -1,42 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Trip from '../components/Trip.component';
-import Dashboard from '../components/Dashboard.component';
-import LoginCont from '../containers/Login.container';
+import { withStyles } from 'material-ui/styles';
+import Paper from 'material-ui/Paper';
+import Footer from '../components/Footer.component';
+import AddItem from '../containers/AddItem.container';
+import VisibleItemList from '../containers/VisibleItemList.container';
+import WeatherCont from '../containers/Weather.container';
+import VisaInfo from '../containers/VisaInfo.container';
+import CurrentTrip from '../containers/CurrentTrip.container';
 
 
-export class AppContainer extends React.Component {
-  render() {
-    console.log('this.props in app component', this.props);
-    if (this.props.isLoggedIn) {
-      return (
-        <Router>
-          <div>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/trip" component={Trip} />
-          </div>
-        </Router>
-      );
-    }
-    return (
-      <LoginCont />
-    );
-  }
-}
+const styles = theme => ({
+  root: theme.mixins.gutters({
+    paddingTop: 16,
+    paddingBottom: 16,
+    marginTop: theme.spacing.unit * 3,
+    width: 600,
+  }),
+});
 
-const mapStateToProps = state =>
-  ({
-    isLoggedIn: state.isLoggedIn,
-  });
 
-AppContainer.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
+const Trip = (props) => {
+  const { classes } = props;
+  return (
+    <div>
+      <Paper className={classes.root} elevation={4}>
+        <CurrentTrip />
+        <VisaInfo />
+        <AddItem />
+        <VisibleItemList />
+        <Footer />
+      </Paper>
+      <WeatherCont />
+    </div>
+  );
+};
+
+Trip.propTypes = {
+  classes: PropTypes.object.isRequired,
 };
 
 
-const App = connect(mapStateToProps, null)(AppContainer);
-
-export default App;
-
+export default withStyles(styles)(Trip);

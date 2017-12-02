@@ -69,14 +69,15 @@ export const addItem = (item, category, quantity, userId, tripId) => (dispatch) 
     tripId,
   })
     .then((response) => {
+      console.log('action response: ', response);
       dispatch({
         type: 'ADD_ITEM_SUCCESS',
-        id: response.id,
+        id: response.data.id,
         item,
         category,
         quantity,
         packed: false,
-        itemId: response.itemId,
+        itemId: response.data.itemId,
       });
     });
 };

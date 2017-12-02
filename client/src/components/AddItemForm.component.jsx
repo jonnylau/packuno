@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { MenuItem } from 'material-ui/Menu';
 import AutocompleteField from '../components/AutocompleteField.component';
+import CategoryDropdown from '../components/CategoryDropdown.component';
 
 
 const styles = theme => ({
@@ -57,7 +59,7 @@ class AddItemForm extends React.Component {
       onEditSubmit(itemToEdit.id, itemInput, categoryInput, quantityInput, itemToEdit.itemId);
       exitEditItemMode();
     } else {
-      onSubmit(itemInput, categoryInput || 'Other', quantityInput || null, tripId, userId);
+      onSubmit(itemInput, categoryInput, quantityInput || null, tripId, userId);
     }
 
     this.setState({
@@ -88,8 +90,8 @@ class AddItemForm extends React.Component {
 
 
   render() {
-    const { userItems, categories, classes, itemToEdit } = this.props;
-    const { itemInput, categoryInput } = this.state;
+    const { userItems, classes, itemToEdit } = this.props;
+    const { itemInput, categoryInput, quantityInput } = this.state;
 
     return (
 
@@ -101,7 +103,7 @@ class AddItemForm extends React.Component {
           <TextField
             id="number"
             type="number"
-            value={this.state.quantityInput || ''}
+            value={quantityInput || ''}
             placeholder="Number"
             onChange={this.handleQuantityInputChange}
             className={classes.textField}
@@ -116,9 +118,8 @@ class AddItemForm extends React.Component {
             updateInput={this.handleItemInputChange}
             defaultVal={itemInput}
           />
-          <AutocompleteField
+          <CategoryDropdown
             placeholderText="Category"
-            suggestions={categories}
             updateInput={this.handleCategoryInputChange}
             defaultVal={categoryInput}
           />
@@ -134,7 +135,6 @@ class AddItemForm extends React.Component {
 
 AddItemForm.propTypes = {
   userItems: PropTypes.object.isRequired,
-  categories: PropTypes.array.isRequired,
   itemToEdit: PropTypes.object,
   onSubmit: PropTypes.func.isRequired,
   onEditSubmit: PropTypes.func.isRequired,
