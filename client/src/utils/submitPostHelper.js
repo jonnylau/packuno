@@ -2,9 +2,10 @@ const $ = require('jquery');
 
 //send a post request to the server to submit destination, dep date and return date info
 
-const submitPost = (destination, departureDate, returnDate) => {
+const submitPost = (destination, country, departureDate, returnDate) => {
   $.post('url of server', {
     destination: destination,
+    country: country,
     departureDate: departureDate,
     returnDate: returnDate,
   },

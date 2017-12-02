@@ -35,7 +35,7 @@ export const trips = (state = defaultState, action) => {
   }
 
   if (action.type === 'ADD_TRIP_SUCCESS') {
-    const { id, destination, startDate, endDate } = action;
+    const { id, destination, country, startDate, endDate } = action;
     return {
       ...state,
       byId: {
@@ -43,6 +43,7 @@ export const trips = (state = defaultState, action) => {
         [id]: {
           id,
           destination,
+          country,
           startDate,
           endDate,
         },

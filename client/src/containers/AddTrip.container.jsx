@@ -14,8 +14,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSubmit: (destination, startDate, endDate, oldTripId, userId) => {
-    dispatch(addTrip(destination, startDate, endDate, oldTripId, userId));
+  onSubmit: (destination, country, startDate, endDate, oldTripId, userId) => {
+    dispatch(addTrip(destination, country, startDate, endDate, oldTripId, userId));
   },
 });
 

@@ -108,20 +108,22 @@ const styles = theme => ({
 class AddTrip extends React.Component {
   state = {
     destination: '',
+    country: '',
     startDate: moment().format('YYYY-MM-DD'),
     endDate: moment().format('YYYY-MM-DD'),
     selectedTrip: null,
   };
 
   onFormSubmit = (e) => {
-    const { destination, startDate, endDate, selectedTrip } = this.state;
+    const { destination, country, startDate, endDate, selectedTrip } = this.state;
     const { onSubmit, userId } = this.props;
     e.preventDefault();
 
-    onSubmit(destination, startDate, endDate, selectedTrip, userId);
+    onSubmit(destination, country, startDate, endDate, selectedTrip, userId);
 
     this.setState({
       destination: '',
+      country: '',
       startDate: '',
       endDate: '',
       selectedTrip: null,
@@ -148,6 +150,14 @@ class AddTrip extends React.Component {
               className={classes.textField}
               value={this.state.destination}
               onChange={e => this.setState({ destination: e.target.value })}
+              margin="normal"
+            />
+            <TextField
+              id="country"
+              label="Country"
+              className={classes.textField}
+              value={this.state.country}
+              onChange={e => this.setState({ country: e.target.value })}
               margin="normal"
             />
           </div>

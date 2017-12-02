@@ -1,30 +1,34 @@
 const seedState = {
   currentUserId: 1,
   currentTripId: 1,
-// ID of old trip selected in dashboard
+  // ID of old trip selected in dashboard
   trips: {
     byId: {
       1: {
         id: 1,
         destination: 'Hong Kong',
+        country: 'China',
         departureDate: '2017-9-29',
         returnDate: '2017-11-01',
       },
       2: {
         id: 2,
         destination: 'Mexico City',
+        country: 'Mexico',
         departureDate: '2018-01-07',
         returnDate: '2018-01-16',
       },
       3: {
         id: 3,
         destination: 'Greenland',
+        country: 'Greenland',
         departureDate: '2018-06-15',
         returnDate: '2018-07-01',
       },
       4: {
         id: 4,
         destination: 'Tokyo',
+        country: 'Japan',
         departureDate: '2018-08-13',
         returnDate: '2018-08-29',
       },
