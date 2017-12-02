@@ -2,6 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
+import { withStyles } from 'material-ui/styles';
+import Typography from 'material-ui/Typography';
+
+const styles = theme => ({
+});
 
 class CurrentTrip extends Component {
   render() {
@@ -10,9 +16,13 @@ class CurrentTrip extends Component {
     const returnDate = moment(this.props.trips[this.props.currentTrip].endDate).format('l');
     return (
       <div>
-        <div className="Destination Intro">
+        <Typography 
+        type="headline"
+        component="h6"
+        dense color="primary"
+        >
           {`${currentCity}`}
-        </div>
+        </Typography>
         <div>
           {`${departureDate} to ${returnDate}`}
         </div>
@@ -32,6 +42,7 @@ function mapStateToProps(state) {
 CurrentTrip.propTypes = {
   currentTrip: PropTypes.number.isRequired,
   trips: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
 
-export default connect(mapStateToProps)(CurrentTrip);
+export default connect(mapStateToProps)(withStyles(styles)(CurrentTrip));

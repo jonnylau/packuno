@@ -7,10 +7,10 @@
 			"Typhoid", 
 			"Yellow Fever"
 		],
-		"warnings" : "Pregnant women should not travel to Niger because Zika infection during pregnancy can cause serious birth defects"
+		"warnings" : "Zika virus is a risk in India."
 	},
 	"Morroco": {
-		"warnings": "None",
+		"warnings": "No current CDC warnings",
 		"vaccines": [
 			"Yellow Fever",
 			"Malaria", 
@@ -19,7 +19,7 @@
 		]
 	},
 	"Peru": {
-		"warnings": "",
+		"warnings": "Zika virus is a risk in Peru",
 		"vaccines": [
 			"Hepatitis A",
 			"Typhoid",
@@ -34,15 +34,11 @@
 			"Typhoid", 
 			"Yellow Fever"
 		],
-		"warnings": ""
+		"warnings": "No current CDC warnings"
 	},
-	"Tokyo": {
+	"Japan": {
 		"vaccines": [
-			"Hepatitis A",
-			"Hepatitis B",
-			"Rabies",
-			"Typhoid",
-			"Yellow Fever"
+			"Japanese Encephalitis"
 		],
 		"warnings": "No current CDC warnings"
 	}
