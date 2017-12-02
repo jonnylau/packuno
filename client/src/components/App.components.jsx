@@ -12,12 +12,7 @@ export class AppContainer extends React.Component {
     console.log('this.props in app component', this.props);
     if (this.props.isLoggedIn) {
       return (
-        <Router>
-          <div>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/trip" component={Trip} />
-          </div>
-        </Router>
+       <div></div>
       );
     }
     return (

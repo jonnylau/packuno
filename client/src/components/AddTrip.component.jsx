@@ -99,7 +99,7 @@ const styles = theme => ({
   saveButton: {
     color: 'white',
     float: 'right',
-    // position: 'relative',
+    position: 'relative',
     margin: 10,
   },
 });
@@ -202,8 +202,10 @@ class AddTrip extends React.Component {
                 onClick={() => this.setState({selectedTrip: 0})}
                 className={(0 === this.state.selectedTrip) ? classes.selectedTripBox : classes.tripBox}
               >
-                <div className={classes.skip}>
+                <div className={classes.skip} >
+                  <Link to="/trip">
                   Skip
+                  </Link>
                 </div>
               </div>
               {recentTrips.map(tripId => (
@@ -213,7 +215,9 @@ class AddTrip extends React.Component {
                   className={(this.state.selectedTrip === tripId) ? classes.selectedTripBox : classes.tripBox}
                 >
                   <img src={ trips.byId[tripId].photoUrl} className={classes.photo} />
-                  <h4>{ trips.byId[tripId].destination }</h4>
+                  {/* <Link to="/trips/:tripId/items" > */}
+                    <h4>{ trips.byId[tripId].destination }</h4>
+                  {/* </Link>  */}
                   <span>{moment(trips.byId[tripId].startDate).format('MMMM YYYY')}</span>
                 </div>
                 ))}
