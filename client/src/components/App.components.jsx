@@ -29,7 +29,6 @@ AppContainer.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
 };
 
-
 const App = connect(mapStateToProps, null)(AppContainer);
 
 export default App;
