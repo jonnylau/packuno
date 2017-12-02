@@ -44,7 +44,7 @@ class Vaccines extends Component {
     const currentVaccines = HealthList[currentCountry] ? HealthList[currentCountry].vaccines : [];
     const currentWarning = HealthList[currentCountry] ? HealthList[currentCountry].warnings : '';
     const { classes } = this.props;
-    console.log(currentCountry);
+    console.log(currentVaccines);
     let vaccineRows = currentVaccines.map((vaccine) => {
       return <li>{vaccine}</li>;
     });
@@ -60,9 +60,12 @@ class Vaccines extends Component {
             >
               Health Recommendations
             </Typography>
-            <Typography component="p">
+            <Typography component="span">
               {currentWarning}
             </Typography>
+            <Typography component="p">
+            </Typography>
+            <hr></hr>
             <Typography component="p">
             CDC recommended vaccines for most travellers:
             </Typography>
@@ -85,11 +88,6 @@ class Vaccines extends Component {
               </Typography>
               </CardContent>
             </Collapse>
-            <Button
-              dense color="primary"
-            >
-              Add Vaccines to List
-            </Button>
           </CardContent>
         </Card>
       </div>

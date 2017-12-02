@@ -31,11 +31,11 @@ const Trip = (props) => {
     <Paper className={classes.root} elevation={4}>
       <CurrentTrip />
       <VisaInfo />
-      <Vaccines />
       <AddItem />
       <VisibleItemList />
-      <Footer />
+      <Footer />  
     </Paper>
+    <Vaccines />
     <WeatherCont />
   </div>
 )};
