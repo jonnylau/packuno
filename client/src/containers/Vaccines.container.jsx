@@ -107,5 +107,4 @@ Vaccines.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-//withStyles(styles)(Vaccines);
 export default connect(mapStateToProps)(withStyles(styles)(Vaccines));

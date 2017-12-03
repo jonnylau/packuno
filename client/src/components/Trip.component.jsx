@@ -7,7 +7,7 @@ import Footer from '../components/Footer.component';
 import AddItem from '../containers/AddItem.container';
 import VisibleItemList from '../containers/VisibleItemList.container';
 import WeatherCont from '../containers/Weather.container';
-import CurrentTrip from '../containers/CurrentTrip.container'; //why does this work.  I didn't export CurrentTrip          
+import CurrentTrip from '../containers/CurrentTrip.container';
 import Vaccines from '../containers/Vaccines.container';
 import VisaInfo from '../containers/VisaInfo.container';
 import Grid from 'material-ui/Grid';

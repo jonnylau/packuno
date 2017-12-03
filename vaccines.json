@@ -41,5 +41,12 @@
 			"Japanese Encephalitis"
 		],
 		"warnings": "No current CDC warnings"
+	},
+	"china": {
+		"vaccines": [
+			"Hepatitis A",
+			"Typhoid"
+		],
+		"warnings": "No current CDC warnings"
 	}
 }
