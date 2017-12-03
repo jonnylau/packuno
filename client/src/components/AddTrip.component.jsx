@@ -203,7 +203,7 @@ class AddTrip extends React.Component {
                 className={(0 === this.state.selectedTrip) ? classes.selectedTripBox : classes.tripBox}
               >
                 <div className={classes.skip} >
-                  <Link to="/trip">
+                  <Link to="/trip" style={{ color: 'black', textDecoration: 'none' }}>
                   Skip
                   </Link>
                 </div>

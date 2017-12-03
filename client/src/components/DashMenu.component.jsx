@@ -240,7 +240,7 @@ class DashMenu extends React.Component {
               <Divider />
               <div className={classes.createContainer} >
                 <Button raised color="primary" className={classes.saveButton} >
-                  <Link to="/dashboard" >
+                  <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none' }}>
                     New Trip
                   </Link>
                 </Button>
