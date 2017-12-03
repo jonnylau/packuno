@@ -6,10 +6,8 @@ import visaRequirement from '../../../visa.json';
 class VisaInfo extends Component {
   renderInfo() {
     const destination = this.props.trips[this.props.tripId];
-    const message = visaRequirement[destination.destination.toLowerCase()] || visaRequirement[destination.country.toLowerCase()] || '';
-    if (message) {
-      return message;
-    }
+    const message = visaRequirement[destination.destination.toLowerCase()] || destination.country ? visaRequirement[destination.country.toLowerCase()] : '';
+    return message;
   }
 
   render() {
