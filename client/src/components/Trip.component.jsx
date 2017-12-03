@@ -28,6 +28,7 @@ const Trip = (props) => {
   <div>
     <Paper className={classes.root} elevation={4}>
       <CurrentTrip />
+      <VisaInfo />
       <Vaccines />
       <AddItem />
       <VisibleItemList />
