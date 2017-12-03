@@ -10,7 +10,7 @@ import WeatherCont from '../containers/Weather.container';
 import CurrentTrip from '../containers/CurrentTrip.container'; //why does this work.  I didn't export CurrentTrip          
 import Vaccines from '../containers/Vaccines.container';
 import VisaInfo from '../containers/VisaInfo.container';
-
+import Grid from 'material-ui/Grid';
 
 const styles = theme => ({
   root: theme.mixins.gutters({

@@ -40,14 +40,13 @@ class Vaccines extends Component {
     this.setState({ expanded: !this.state.expanded });
   };
   render() {
-    const currentCountry = this.props.trips[this.props.currentTrip].country;
+    const currentCountry = this.props.trips[this.props.currentTrip].country.toLowerCase();
     const currentVaccines = HealthList[currentCountry] ? HealthList[currentCountry].vaccines : [];
     const currentWarning = HealthList[currentCountry] ? HealthList[currentCountry].warnings : '';
-    const { classes } = this.props;
-    console.log(currentVaccines);
-    let vaccineRows = currentVaccines.map((vaccine) => {
+    const vaccineRows = currentVaccines.map((vaccine) => {
       return <li>{vaccine}</li>;
     });
+    const { classes } = this.props;
 
     return (
       <div>

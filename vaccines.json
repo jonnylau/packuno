@@ -1,5 +1,5 @@
 {
-	"India": {
+	"india": {
 		"vaccines" : [
 			"Cholera", 
 			"Hepatitis A", 
@@ -9,7 +9,7 @@
 		],
 		"warnings" : "Zika virus is a risk in India."
 	},
-	"Morroco": {
+	"morroco": {
 		"warnings": "No current CDC warnings",
 		"vaccines": [
 			"Yellow Fever",
@@ -18,7 +18,7 @@
 			"Hepatitis A"
 		]
 	},
-	"Peru": {
+	"peru": {
 		"warnings": "Zika virus is a risk in Peru",
 		"vaccines": [
 			"Hepatitis A",
@@ -26,7 +26,7 @@
 			 "Yellow Fever"
 			]
 	},
-	"Egypt": {
+	"egypt": {
 		"vaccines": [
 			"Hepatitis A", 
 			"Hepatitis B",
@@ -36,7 +36,7 @@
 		],
 		"warnings": "No current CDC warnings"
 	},
-	"Japan": {
+	"japan": {
 		"vaccines": [
 			"Japanese Encephalitis"
 		],
